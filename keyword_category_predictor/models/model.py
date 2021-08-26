@@ -2,7 +2,7 @@ import json
 import torch
 from torch import nn
 from transformers import BertTokenizer
-from bert_multilingual import KeywordCategorizer
+from .bert_multilingual import KeywordCategorizer
 
 with open("config.json") as json_file:
     config = json.load(json_file)
@@ -14,7 +14,7 @@ class Model:
         self.tokenizer = BertTokenizer.from_pretrained(config["MODEL"])
         category_predictor = KeywordCategorizer(len(config["CLASS_NAMES"]))
         category_predictor.load_from_checkpoint(
-            config["PRE_TRAINED_MODEL"],
+            config["PRETRAINED_MODEL"],
             n_classes=len(config["CLASS_NAMES"])
         )
         self.category_predictor = category_predictor.to(self.device)
