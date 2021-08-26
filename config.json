@@ -1,6 +1,6 @@
 {
   "MODEL": "bert-base-multilingual-cased",
-  "PRETRAINED_MODEL": "assets/model_best_checkpoint.bin",
+  "PRETRAINED_MODEL": "assets/model_best_checkpoint.ckpt",
   "CLASS_NAMES": [
     "Health",
     "Vehicles",
