@@ -11,9 +11,9 @@ class KeywordRequest(BaseModel):
 
 
 class KeywordResponse(BaseModel):
-    probabilities: Dict[str, float]
-    top_category: str
+    # top_category: str
     confidence: float
+    probabilities: Dict[str, float]
 
 
 @app.post("/predict", response_model=KeywordResponse)
@@ -24,7 +24,7 @@ def predict(request: KeywordRequest, model: Model = Depends(get_model)):
         confidence=confidence,
         probabilities=probabilities
 
-        # dict(
+        # probabilities = dict(
         #     health=0.0987362191081047,
         #     vehicles=0.038122113794088364,
         #     hobbies_and_leisure=0.03911390155553818,

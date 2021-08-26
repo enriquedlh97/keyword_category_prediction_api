@@ -18,6 +18,8 @@ class Model:
             config["PRETRAINED_MODEL"],
             n_classes=len(config["CLASS_NAMES"])
         )
+        category_predictor.eval()
+        category_predictor.freeze()
         self.category_predictor = category_predictor.to(self.device)
 
     def predict(self, text):
