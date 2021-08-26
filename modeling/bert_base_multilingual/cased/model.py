@@ -1,7 +1,10 @@
 import pytorch_lightning as pl
+import numpy as np
 import torch
 import torch.nn as nn
 from transformers import BertModel, AdamW, get_linear_schedule_with_warmup
+from torchmetrics import AveragePrecision
+from pytorch_lightning.metrics.functional import auroc
 
 
 class KeywordCategorizer(pl.LightningModule):
@@ -61,10 +64,24 @@ class KeywordCategorizer(pl.LightningModule):
                 predictions.append(out_predictions)
         labels = torch.stack(labels).int()
         predictions = torch.stack(predictions)
-        # @TODO: Compute Mean Average Precision
+        # Compute ROC AUC
+        roc_auc = []
         for i, name in enumerate(self.label_columns):
             class_roc_auc = auroc(predictions[:, i], labels[:, i])
             self.logger.experiment.add_scalar(f"{name}_roc_auc/Train", class_roc_auc, self.current_epoch)
+            roc_auc.append(class_roc_auc.reshape(-1).numpy()[0])
+        # Compute Mean ROC AUC
+        self.logger.experiment.add_scalar(f"epoch_mean_roc_auc/Train", np.array(roc_auc).mean(), self.current_epoch)
+        # Compute Average Precision
+        avg_precision = []
+        average_precision = AveragePrecision(pos_label=1)
+        for i, name in enumerate(self.label_columns):
+            class_avg_precision = average_precision(predictions[:, i], labels[:, i])
+            self.logger.experiment.add_scalar(f"{name}_avg_precision/Train", class_avg_precision, self.current_epoch)
+            avg_precision.append(class_avg_precision.reshape(-1).numpy()[0])
+        # Compute Mean Average Precision
+        self.logger.experiment.add_scalar(f"epoch_avg_precision/Train", np.array(class_avg_precision).mean(),
+                                          self.current_epoch)
 
     def configure_optimizers(self):
         optimizer = AdamW(self.parameters(), lr=2e-5)
