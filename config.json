@@ -23,7 +23,7 @@
     "Apparel",
     "Beauty & Personal Care",
     "Family & Community",
-    "Real Estate",
+    "Real Estate"
   ],
   "MAX_SEQUENCE_LEN": 40
 }
