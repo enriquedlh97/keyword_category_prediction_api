@@ -2,8 +2,10 @@ import pandas as pd
 
 
 def get_train_test_data(train=True, test=True,
-                        train_path="drive/MyDrive/graphite/dataset/keyword_categories/keyword_categories/keyword_categories.train.jsonl",
-                        test_path="drive/MyDrive/graphite/dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl"):
+                        train_path="dataset/keyword_categories/keyword_categories/keyword_categories.train.jsonl",
+                        test_path="dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl"):
+                        # train_path="drive/MyDrive/graphite/dataset/keyword_categories/keyword_categories/keyword_categories.train.jsonl",
+                        # test_path="drive/MyDrive/graphite/dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl"):
     if train:
         pd_train = pd.read_json(path_or_buf=train_path, lines=True)
     if test:
