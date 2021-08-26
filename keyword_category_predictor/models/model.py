@@ -34,12 +34,12 @@ class Model:
         input_ids = encoded_text["input_ids"].to(self.device)
         attention_mask = encoded_text["attention_mask"].to(self.device)
 
-        confidence, prediction = self.category_predictor(input_ids, attention_mask)
-        prediction = prediction.flatten().numpy()
+        confidence, probabilities = self.category_predictor(input_ids, attention_mask)
+        probabilities = probabilities.flatten().numpy()
 
         return (
             confidence,
-            dict(zip(config["CLASS_NAMES"], prediction)),
+            dict(zip(config["CLASS_NAMES"], probabilities)),
         )
 
 
