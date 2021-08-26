@@ -1,7 +1,7 @@
 from typing import Dict
 from fastapi import FastAPI, Depends
 from pydantic import BaseModel
-from .models.model import Model, get_model
+from keyword_category_predictor.models.model import Model, get_model
 
 app = FastAPI()
 
