@@ -13,7 +13,6 @@ class KeywordCategorizer(pl.LightningModule):
                  model_name='bert-base-multilingual-cased'):
         super().__init__()
         self.bert = BertModel.from_pretrained(model_name, return_dict=True)
-        # self.dropout = nn.Dropout(.12)
         self.classifier = nn.Linear(self.bert.config.hidden_size, n_classes)
         self.n_training_steps = n_training_steps
         self.n_warmup_steps = n_warmup_steps
@@ -22,7 +21,6 @@ class KeywordCategorizer(pl.LightningModule):
 
     def forward(self, input_ids, attention_mask, labels=None):
         output = self.bert(input_ids, attention_mask=attention_mask)
-        # output = self.dropout(output)
         output = self.classifier(output.pooler_output)
         output = torch.sigmoid(output)
         loss = 0
