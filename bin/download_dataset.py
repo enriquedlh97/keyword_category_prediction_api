@@ -9,7 +9,7 @@ def download_data():
     if not os.path.exists('dataset'):
         os.makedirs('dataset')
 
-    print("\nDownloading dataset\n", flush=True)
+    print("\nDownloading dataset...\n", flush=True)
 
     gdown.download(
         "https://drive.google.com/uc?id=1LtrGndz9P766BRPf-jWkRw0_gzDuVCVo",
@@ -24,7 +24,7 @@ def main():
     thread.join()
 
     # Extract dataset
-    print("\nDownloading dataset\n", flush=True)
+    print("\nExtracting files...\n", flush=True)
     tar = tarfile.open("dataset/keyword_categories.tar.gz", "r:gz")
     tar.extractall("dataset/keyword_categories/")
     tar.close()
