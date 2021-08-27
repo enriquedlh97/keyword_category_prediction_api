@@ -10,7 +10,7 @@ from pytorch_lightning.metrics.functional import auroc
 class KeywordCategorizer(pl.LightningModule):
 
     def __init__(self, n_classes: int, label_columns: list, n_training_steps=None, n_warmup_steps=None,
-                 model_name='bert-base-multilingual-cased'):
+                 model_name='bert-base-multilingual-cased', learning_rate=2e-5):
         super().__init__()
         self.bert = BertModel.from_pretrained(model_name, return_dict=True)
         self.classifier = nn.Linear(self.bert.config.hidden_size, n_classes)
@@ -18,6 +18,7 @@ class KeywordCategorizer(pl.LightningModule):
         self.n_warmup_steps = n_warmup_steps
         self.criterion = nn.BCELoss()
         self.label_columns = label_columns
+        self.learning_rate = learning_rate
 
     def forward(self, input_ids, attention_mask, labels=None):
         output = self.bert(input_ids, attention_mask=attention_mask)
@@ -111,7 +112,7 @@ class KeywordCategorizer(pl.LightningModule):
                                           self.current_epoch)
 
     def configure_optimizers(self):
-        optimizer = AdamW(self.parameters(), lr=2e-5)
+        optimizer = AdamW(self.parameters(), lr=self.learning_rate)
         scheduler = get_linear_schedule_with_warmup(
             optimizer,
             num_warmup_steps=self.n_warmup_steps,
