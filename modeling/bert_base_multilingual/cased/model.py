@@ -44,7 +44,8 @@ class KeywordCategorizer(pl.LightningModule):
         labels = batch["labels"]
         loss, outputs = self(input_ids, attention_mask, labels)
         self.log("val_loss", loss, prog_bar=True, logger=True)
-        return loss
+        #return loss
+        return {"loss": loss, "predictions": outputs, "labels": labels}
 
     def test_step(self, batch, batch_idx):
         input_ids = batch["input_ids"]
@@ -111,6 +112,33 @@ class KeywordCategorizer(pl.LightningModule):
         # Compute Mean Average Precision
         self.logger.experiment.add_scalar(f"epoch_avg_precision/Validation", np.array(class_avg_precision).mean(),
                                           self.current_epoch)
+        # labels = []
+        # predictions = []
+        # for output in outputs:
+        #     for out_labels in output["labels"].detach().cpu():
+        #         labels.append(out_labels)
+        #     for out_predictions in output["predictions"].detach().cpu():
+        #         predictions.append(out_predictions)
+        # labels = torch.stack(labels).int()
+        # predictions = torch.stack(predictions)
+        # # Compute ROC AUC
+        # roc_auc = []
+        # for i, name in enumerate(self.label_columns):
+        #     class_roc_auc = auroc(predictions[:, i], labels[:, i])
+        #     self.logger.experiment.add_scalar(f"{name}_roc_auc/Validation", class_roc_auc, self.current_epoch)
+        #     roc_auc.append(class_roc_auc.reshape(-1).numpy()[0])
+        # # Compute Mean ROC AUC
+        # self.logger.experiment.add_scalar(f"epoch_mean_roc_auc/Validation", np.array(roc_auc).mean(), self.current_epoch)
+        # # Compute Average Precision
+        # avg_precision = []
+        # average_precision = AveragePrecision(pos_label=1)
+        # for i, name in enumerate(self.label_columns):
+        #     class_avg_precision = average_precision(predictions[:, i], labels[:, i])
+        #     self.logger.experiment.add_scalar(f"{name}_avg_precision/Validation", class_avg_precision, self.current_epoch)
+        #     avg_precision.append(class_avg_precision.reshape(-1).numpy()[0])
+        # # Compute Mean Average Precision
+        # self.logger.experiment.add_scalar(f"epoch_avg_precision/Validation", np.array(class_avg_precision).mean(),
+        #                                   self.current_epoch)
 
     def configure_optimizers(self):
         optimizer = AdamW(self.parameters(), lr=2e-5)
