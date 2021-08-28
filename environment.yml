@@ -7,6 +7,7 @@ channels:
 dependencies:
   - absl-py=0.13.0=pyhd8ed1ab_0
   - aiohttp=3.7.4.post0=py37hcc03f2d_0
+  - asgiref=3.4.1=pyhd8ed1ab_0
   - async-timeout=3.0.1=py_1000
   - attrs=21.2.0=pyhd8ed1ab_0
   - blas=1.0=mkl
@@ -32,6 +33,7 @@ dependencies:
   - google-auth=1.35.0=pyh6c4a22f_0
   - google-auth-oauthlib=0.4.5=pyhd8ed1ab_0
   - grpcio=1.38.1=py37h04d2302_0
+  - h11=0.12.0=pyhd8ed1ab_0
   - idna=3.1=pyhd3deb0d_0
   - importlib-metadata=4.7.1=py37h03978a9_1
   - intel-openmp=2021.3.0=haa95532_3372
@@ -100,6 +102,7 @@ dependencies:
   - typing-extensions=3.10.0.0=hd3eb1b0_0
   - typing_extensions=3.10.0.0=pyh06a4308_0
   - urllib3=1.26.6=pyhd8ed1ab_0
+  - uvicorn=0.15.0=py37h03978a9_0
   - vc=14.2=h21ff451_1
   - vs2015_runtime=14.27.29016=h5e58377_2
   - werkzeug=2.0.1=pyhd8ed1ab_0

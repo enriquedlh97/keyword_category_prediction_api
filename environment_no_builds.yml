@@ -7,6 +7,7 @@ channels:
 dependencies:
   - absl-py=0.13.0
   - aiohttp=3.7.4.post0
+  - asgiref=3.4.1
   - async-timeout=3.0.1
   - attrs=21.2.0
   - blas=1.0
@@ -32,6 +33,7 @@ dependencies:
   - google-auth=1.35.0
   - google-auth-oauthlib=0.4.5
   - grpcio=1.38.1
+  - h11=0.12.0
   - idna=3.1
   - importlib-metadata=4.7.1
   - intel-openmp=2021.3.0
@@ -100,6 +102,7 @@ dependencies:
   - typing-extensions=3.10.0.0
   - typing_extensions=3.10.0.0
   - urllib3=1.26.6
+  - uvicorn=0.15.0
   # - vc=14.2
   # - vs2015_runtime=14.27.29016
   - werkzeug=2.0.1
