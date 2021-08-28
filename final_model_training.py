@@ -37,8 +37,8 @@ pd_train = add_category_columns(pd_train, categories_dict)
 pd_test = add_category_columns(pd_test, categories_dict)
 
 # Temporary sampling
-pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
-pd_test = pd_test.sample(round(pd_test.shape[0] * .01))
+# pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
+# pd_test = pd_test.sample(round(pd_test.shape[0] * .01))
 
 # GLOBAL VARIABLES AND PARAMETERS
 
@@ -159,7 +159,7 @@ print("Mean Average Precision:", mean_avg_prec, "\n\nAverage Precision per categ
 # Save Mean Average Precision metrics
 file_object.write('\n\n\n\nMean Average Precision:{0}'.format(mean_avg_prec))
 file_object.write('\n\nAverage Precision per category::\n\n')
-for key, value in avg_prec_class.items(): 
+for key, value in avg_prec_class.items():
     file_object.write('%s:%s\n' % (key, value))
 file_object.close()
 
