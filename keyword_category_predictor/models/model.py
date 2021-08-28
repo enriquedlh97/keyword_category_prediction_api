@@ -9,7 +9,8 @@ with open("config.json") as json_file:
 
 class Model:
     def __init__(self):
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        #self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cpu")
         self.tokenizer = BertTokenizer.from_pretrained(config["MODEL"])
         category_predictor = KeywordCategorizer(len(config["CLASS_NAMES"]))
         category_predictor.load_from_checkpoint(
@@ -36,7 +37,7 @@ class Model:
         attention_mask = encoded_text["attention_mask"].to(self.device)
 
         confidence, probabilities = self.category_predictor(input_ids, attention_mask)
-        probabilities = probabilities.flatten().deatch().cpu().clone().numpy()
+        probabilities = probabilities.flatten().numpy()
 
         return (
             confidence,
