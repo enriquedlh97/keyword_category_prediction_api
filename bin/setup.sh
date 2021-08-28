@@ -10,5 +10,5 @@ elif [ "$1" == "w" ]; then
 fi
 
 if [ "$2" == "d" ]; then
-  python bin/download_dataset ;
+  python bin/download_dataset.py ;
 fi
