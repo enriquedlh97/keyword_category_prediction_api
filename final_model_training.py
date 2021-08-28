@@ -70,7 +70,7 @@ model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STE
 # Checkpoints and early stopping
 
 checkpoint_callback = ModelCheckpoint(
-    dirpath="checkpoints",
+    dirpath="assets",
     filename="best-checkpoint",
     save_top_k=1,
     verbose=True,
@@ -105,7 +105,7 @@ trainer.test()
 
 # Load model
 trained_model = KeywordCategorizer.load_from_checkpoint(
-    'checkpoints/best-checkpoint.ckpt',
+    'assets/best-checkpoint.ckpt',
     n_classes=len(LABEL_COLUMNS),
     label_columns=LABEL_COLUMNS
 )
