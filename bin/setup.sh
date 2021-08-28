@@ -14,6 +14,6 @@ if [ "$2" == "d" ]; then
   python bin/download_dataset.py ;
 fi
 
-if [ "$2" == "m" ]; then
+if [ "$3" == "m" ]; then
   python bin/download_model.py ;
 fi
