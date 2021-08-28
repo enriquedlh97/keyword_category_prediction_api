@@ -10,6 +10,5 @@ elif [ "$1" == "w" ]; then
 fi
 
 if [ "$2" == "d" ]; then
-  echo Downlaoding dataset...
   python download_dataset ;
 fi
