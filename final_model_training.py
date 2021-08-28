@@ -37,7 +37,7 @@ pd_train = add_category_columns(pd_train, categories_dict)
 pd_test = add_category_columns(pd_test, categories_dict)
 
 # Temporary sampling
-pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
+# pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
 # pd_test = pd_test.sample(round(pd_test.shape[0] * .01))
 
 # GLOBAL VARIABLES AND PARAMETERS
@@ -46,7 +46,7 @@ pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
 MAX_TOKEN_COUNT = 40
-N_EPOCHS = 1
+N_EPOCHS = 42
 BATCH_SIZE = 64  # batch sizes: 8, 16, 32, 64, 128
 LEARNING_RATE = 2e-5  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
 
