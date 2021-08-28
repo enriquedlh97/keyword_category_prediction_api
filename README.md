@@ -212,8 +212,83 @@ to also test the uncased version as well as other models such as xlm roberta. Wi
 
 #### Hardware
 
-#### Mean Average Precision after tuning
+The mode was fine-tuned for about 28 hours on a server with the following characteristics. 
+```text
+2 x Intel Xeon Gold 5122 Processor @3.6Ghz (2s, 4c/s, 2t/c = 16 logical CPUs) with 128 GB RAM
+1 x Tesla V100-PCIE 32 GB GPU RAM
+```
+#### AUC ROC
+As a reference, after the first epoch the results for this metric were the following.
+```text
+Mean AUC ROC:0.9118656516075134
 
+AUC ROC per category:
+
+    Health:0.92984116
+    Vehicles:0.9358579
+    Hobbies & Leisure:0.8849387
+    Food & Groceries:0.94045573
+    Retailers & General Merchandise:0.8963138
+    Arts & Entertainment:0.90174246
+    Jobs & Education:0.9257699
+    Law & Government:0.91081136
+    Home & Garden:0.92352605
+    Finance:0.9282235
+    Computers & Consumer Electronics:0.9246343
+    Internet & Telecom:0.9001928
+    Sports & Fitness:0.9006619
+    Dining & Nightlife:0.9466539
+    Business & Industrial:0.8585652
+    Occasions & Gifts:0.9190705
+    Travel & Tourism:0.92542875
+    News, Media & Publications:0.8619314
+    Apparel:0.9306651
+    Beauty & Personal Care:0.91301185
+    Family & Community:0.86807954
+    Real Estate:0.9346674
+```
+
+The final results after the complete tuning for 42 epochs are the following. 
+```text
+
+```
+
+#### Mean Average Precision
+
+As a reference, after the first epoch the results for this metric were the following.
+```
+Mean Average Precision:0.686751127243042
+
+Average Precision per category::
+
+    Health:0.7492238
+    Vehicles:0.75872535
+    Hobbies & Leisure:0.7025987
+    Food & Groceries:0.72701
+    Retailers & General Merchandise:0.5111446
+    Arts & Entertainment:0.8015246
+    Jobs & Education:0.7462203
+    Law & Government:0.6179674
+    Home & Garden:0.7230513
+    Finance:0.64043856
+    Computers & Consumer Electronics:0.744525
+    Internet & Telecom:0.60483825
+    Sports & Fitness:0.67073786
+    Dining & Nightlife:0.694178
+    Business & Industrial:0.7201561
+    Occasions & Gifts:0.6067921
+    Travel & Tourism:0.7442349
+    News, Media & Publications:0.70804906
+    Apparel:0.7202701
+    Beauty & Personal Care:0.63098514
+    Family & Community:0.5900509
+    Real Estate:0.6958019
+```
+
+The final results after the complete tuning for 42 epochs are the following. 
+```text
+
+```
 
 ## Training a model
 
