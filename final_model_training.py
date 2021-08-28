@@ -17,6 +17,9 @@ from modeling.bert_base_multilingual.cased.metrics import mean_auc_roc, mean_avg
 # General
 import torch
 from tqdm.auto import tqdm
+import time
+
+start_time = time.time()
 
 # DATA
 
@@ -43,7 +46,7 @@ pd_test = pd_test.sample(round(pd_test.shape[0] * .01))
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
 MAX_TOKEN_COUNT = 40
-N_EPOCHS = 2
+N_EPOCHS = 10
 BATCH_SIZE = 64  # batch sizes: 8, 16, 32, 64, 128
 LEARNING_RATE = 2e-5  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
 
@@ -145,3 +148,5 @@ print("Mean AUC ROC:", mean_aucroc, "\n\nAUC ROC per category:", auc_roc_class, 
 mean_avg_prec, avg_prec_class = mean_avg_precision(predictions, labels, LABEL_COLUMNS)
 
 print("Mean Average Precision:", mean_avg_prec, "\n\nAverage Precision per category:", avg_prec_class, flush=True)
+
+print("--- %s seconds ---" % (time.time() - start_time), flush=True)
