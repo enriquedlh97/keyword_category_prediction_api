@@ -147,8 +147,8 @@ print("Mean AUC ROC:", mean_aucroc, "\n\nAUC ROC per category:", auc_roc_class, 
 file_object = open('final_metrics.txt', 'a')
 file_object.write('Mean AUC ROC:{0}'.format(mean_aucroc))
 file_object.write('\n\nAUC ROC per category:\n\n')
-file_object.write(str(auc_roc_class))
-file_object.write(auc_roc_class)
+for key, value in auc_roc_class.items():
+    file_object.write('%s:%s\n' % (key, value))
 
 # Compute Mean Average Precision
 
@@ -158,8 +158,9 @@ print("Mean Average Precision:", mean_avg_prec, "\n\nAverage Precision per categ
 
 # Save Mean Average Precision metrics
 file_object.write('\n\n\n\nMean Average Precision:{0}'.format(mean_avg_prec))
-file_object.write('\n\nAAverage Precision per category::\n\n')
-file_object.write(str(avg_prec_class))
+file_object.write('\n\nAverage Precision per category::\n\n')
+for key, value in avg_prec_class.items(): 
+    file_object.write('%s:%s\n' % (key, value))
 file_object.close()
 
 print("--- %s seconds ---" % (time.time() - start_time), flush=True)
