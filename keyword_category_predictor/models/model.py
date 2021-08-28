@@ -9,7 +9,7 @@ with open("config.json") as json_file:
 
 class Model:
     def __init__(self):
-        #self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        # self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.device = torch.device("cpu")
         self.tokenizer = BertTokenizer.from_pretrained(config["MODEL"])
         category_predictor = KeywordCategorizer(len(config["CLASS_NAMES"]))
