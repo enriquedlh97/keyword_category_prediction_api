@@ -6,7 +6,7 @@
 # website: http://jupyter.org/
 
 assets/
-lightning_logs/
+# lightning_logs/
 checkpoints/
 dataset/
 
