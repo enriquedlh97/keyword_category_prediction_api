@@ -5,6 +5,11 @@
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
 
+assets/
+# lightning_logs/
+checkpoints/
+dataset/
+
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 
