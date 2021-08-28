@@ -4,7 +4,7 @@ API for predicting categories from batches of words
 ## Getting Started
 
 To set up a working project there are two possibilities. The automatic easy way and the manual way. Both of them are 
-described below. 
+described below. Before starting make sure you have `Anaconda` installed, you can download it from [here](https://www.anaconda.com/products/individual).
 
 1. Automatic set up. 
 
