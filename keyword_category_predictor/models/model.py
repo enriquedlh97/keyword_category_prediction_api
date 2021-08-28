@@ -36,7 +36,7 @@ class Model:
         attention_mask = encoded_text["attention_mask"].to(self.device)
 
         confidence, probabilities = self.category_predictor(input_ids, attention_mask)
-        probabilities = probabilities.flatten().numpy()
+        probabilities = probabilities.flatten().deatch().cpu().clone().numpy()
 
         return (
             confidence,
