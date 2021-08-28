@@ -1,3 +1,4 @@
+import json
 import pandas as pd
 
 
@@ -5,9 +6,13 @@ def get_train_test_data(train=True, test=True,
                         train_path="dataset/keyword_categories/keyword_categories/keyword_categories.train.jsonl",
                         test_path="dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl"):
     if train:
-        pd_train = pd.read_json(path_or_buf=train_path, lines=True)
+        with open(train_path) as f:
+            pd_train = pd.DataFrame([json.loads(l) for l in f.readlines()])
+        # pd_train = pd.read_json(path_or_buf=train_path, lines=True)
     if test:
-        pd_test = pd.read_json(path_or_buf=test_path, lines=True)
+        with open(test_path) as f:
+            pd_test = pd.DataFrame([json.loads(l) for l in f.readlines()])
+        # pd_test = pd.read_json(path_or_buf=test_path, lines=True)
 
     if train and test:
         return pd_train, pd_test
