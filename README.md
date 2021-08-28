@@ -4,7 +4,7 @@ API for predicting categories from batches of words
 ## Getting Started
 
 To set up a working project there are two possibilities. The automatic easy way and the manual way. Both of them are 
-described below. 
+described below. Before starting make sure you have `Anaconda` installed, you can download it from [here](https://www.anaconda.com/products/individual).
 
 1. Automatic set up. 
 
@@ -144,12 +144,81 @@ Then, select the `Try it out` button on the top right. Finally, substitute the `
 try and click on `Execute`. 
 
 ## Project structure
+This project has the following structure
+```text
+/keyword_category_prediction_api
+|-- assets *
+|   |-- best-checkpoint.ckpt
+|-- bin
+|   |-- download_dataset.py
+|   |-- download_model.py
+|   |-- setup.sh
+|   |-- start_server.sh
+|-- dataset *
+|   |-- keyword_categories
+|       |-- keyword_categories
+|          |-- keyword_categories.test.jsonl
+|          |-- keyword_categories.train.jsonl
+|-- keyword_category_predictor
+|   |-- models
+|   |   |-- __init__.py
+|   |   |-- bert_multilingual.py
+|   |   |-- model.py
+|   |-- __init__.py
+|   |-- api.py
+|-- modeling
+|   |-- bert_base_multilingual
+|   |   |-- cased
+|   |   |   |-- __init__.py
+|   |   |   |-- data_module.py
+|   |   |   |-- metrics.py
+|   |   |   |-- model.py
+|   |   |   |-- preprocessing.py
+|   |   |   |-- text_dataset.py
+|   |   |-- __init__.py
+|   |-- __init__.py
+|-- .gitattributes
+|-- .gitignore
+|-- bert_final_model_training.ipynb
+|-- config.json
+|-- environment.yml
+|-- environment_no_builds.yml
+|-- final_model_training.py
+|-- README.md
+```
+Note: The directories marked with `*` are directories that are ignored by git. They will only appear after the set up
+script is run. They correspond to the pre-trained model (`assets` directory) and the dataset (`dataset` directory).
+
+Under the `bin` directory are al the scripts necessary for setting up the project and testing the API. 
+
+The `keyword_category_predictor` contains the actual implementation of the API, specifically within the `api.py` file. 
+The `keyword_category_predictor/models/bert_multilingual.py` file contains the actual implementation of the model 
+instance and the `keyword_category_predictor/models/model.py` file is a wrapper over the model instance to be easily 
+used by the API within `api.py` file.
+
+The `modeling` contains the implementation of the actual model that was trained. This directory is structured in such a 
+way that more models can be added. Here, the cased version of the bert multilingual model was used, but the intention was 
+to also test the uncased version as well as other models such as xlm roberta. Within the `cased` directory, 
 
 ## Pre-trained model details
+
+### Model used
+
+### Fine-tuning
+
+#### Methodology
+
+#### Hyperparameters
+
+#### Hardware
+
+#### Mean Average Precision after tuning
+
 
 ## Training a model
 
 ## Hyper-parameter optimization
+include other models
 
 
 ## Updating environment files
