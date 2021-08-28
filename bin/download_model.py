@@ -8,6 +8,6 @@ if not os.path.exists('assets'):
 print("\nThe model is about 2GB and will take some time to be downloaded\n", flush=True)
 
 gdown.download(
-    "https://drive.google.com/uc?id=1JX5B6ctdzTSq97ddKMQZKOVegFJCk2tg",
+    "https://drive.google.com/uc?id=1q7RRFrNkw_7tHwZX3_Gu_QnwKB75Iauh",
     "assets/best-checkpoint.ckpt",
 )
