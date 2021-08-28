@@ -13,3 +13,7 @@ if [ "$2" == "d" ]; then
   conda activate keyword_api ;
   python bin/download_dataset.py ;
 fi
+
+if [ "$2" == "m" ]; then
+  python bin/download_model.py ;
+fi
