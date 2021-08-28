@@ -180,7 +180,7 @@ $ conda activate keyword_api
 Then, after you have updated the environment with some packages, save the new updated environment and override the 
 previous .yml file. To do this, run the following.
 ```bash
-$ conda env export -n stanford_algos -f environment_no_builds.yml --no-builds
+$ conda env export -n keyword_api -f environment_no_builds.yml --no-builds
 ```
 Finally, go into the `environment_no_builds.yml` and look for the following packages.
 ```
