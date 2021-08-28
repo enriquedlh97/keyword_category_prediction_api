@@ -1,12 +1,19 @@
 # keyword_category_prediction_api
-API for predicting categories from batches of word
+API for predicting categories from batches of words
 
 ## Getting Started
 
-To get a working environment there are two possible options. 
+To set up a working project there are two possibilities. The automatic easy way and the manual way. Both of them are 
+described below. 
 
-1. Create a conda environment with the listed pre-requisites
-2. Create a conda environment from the .yml file
+1. Automatic set up. 
+
+Go into the project directory.
+```bash
+$ cd keyword_category_prediction_api
+```
+
+
 
 
 ### Pre-requisites
