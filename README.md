@@ -143,6 +143,8 @@ http://127.0.0.1:8000/docs#/default/predict_predict_post
 Then, select the `Try it out` button on the top right. Finally, substitute the `"string"` by the actual text you want to 
 try and click on `Execute`. 
 
+## Project structure
+
 ## Pre-trained model details
 
 ## Training a model
