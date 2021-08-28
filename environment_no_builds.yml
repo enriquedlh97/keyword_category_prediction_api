@@ -12,9 +12,9 @@ dependencies:
   - blas=1.0
   - blinker=1.4
   - brotlipy=0.7.0
-  - ca-certificates=2020.10.14
+  - ca-certificates=2021.5.30
   - cachetools=4.2.2
-  - certifi=2020.6.20
+  - certifi=2021.5.30
   - cffi=1.14.6
   - chardet=4.0.0
   - charset-normalizer=2.0.0
@@ -28,6 +28,7 @@ dependencies:
   - freetype=2.10.4
   - fsspec=2021.7.0
   - future=0.18.2
+  - gdown=3.13.0
   - google-auth=1.35.0
   - google-auth-oauthlib=0.4.5
   - grpcio=1.38.1
