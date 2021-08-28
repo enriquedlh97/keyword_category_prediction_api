@@ -18,7 +18,7 @@ from modeling.bert_base_multilingual.cased.metrics import mean_auc_roc, mean_avg
 import torch
 from tqdm.auto import tqdm
 import time
-# import json
+import _pickle as pickle
 
 start_time = time.time()
 
@@ -148,7 +148,7 @@ print("Mean AUC ROC:", mean_aucroc, "\n\nAUC ROC per category:", auc_roc_class, 
 file_object = open('final_metrics.txt', 'a')
 file_object.write('Mean AUC ROC:{0}'.format(mean_aucroc))
 file_object.write('\n\nAUC ROC per category:\n\n')
-#file_object.write(json.dumps(auc_roc_class))
+file_object.write(pickle.dumps(auc_roc_class))
 file_object.write(auc_roc_class)
 
 # Compute Mean Average Precision
@@ -160,8 +160,7 @@ print("Mean Average Precision:", mean_avg_prec, "\n\nAverage Precision per categ
 # Save Mean Average Precision metrics
 file_object.write('\n\n\n\nMean Average Precision:{0}'.format(mean_avg_prec))
 file_object.write('\n\nAAverage Precision per category::\n\n')
-#file_object.write(json.dumps(auc_roc_class))
-file_object.write(auc_roc_class)
+file_object.write(pickle.dumps(avg_prec_class))
 file_object.close()
 
 print("--- %s seconds ---" % (time.time() - start_time), flush=True)
