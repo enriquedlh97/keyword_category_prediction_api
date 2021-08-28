@@ -202,6 +202,19 @@ to also test the uncased version as well as other models such as xlm roberta. Wi
 
 ## Pre-trained model details
 
+### Model used
+
+### Fine-tuning
+
+#### Methodology
+
+#### Hyperparameters
+
+#### Hardware
+
+#### Mean Average Precision after tuning
+
+
 ## Training a model
 
 ## Hyper-parameter optimization
