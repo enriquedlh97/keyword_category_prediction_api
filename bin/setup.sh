@@ -10,6 +10,6 @@ elif [ "$1" == "w" ]; then
 fi
 
 if [ "$2" == "d" ]; then
-  source activate keyword_api ;
+  conda activate keyword_api ;
   python bin/download_dataset.py ;
 fi
