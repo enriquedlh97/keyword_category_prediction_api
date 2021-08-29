@@ -47,18 +47,18 @@ pd_test = add_category_columns(pd_test, categories_dict)
 
 # Temporary sampling
 pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
-pd_test = pd_test.sample(round(pd_test.shape[0] * .01))
+pd_test = pd_test.sample(round(pd_test.shape[0] * .1))
 
 # GLOBAL VARIABLES AND PARAMETERS
 
 # Finetune for 4 epochs is recommended
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
-MAX_TOKEN_COUNT = args.t # 40
-N_EPOCHS = args.e #1
-BATCH_SIZE = args.b #64  # batch sizes: 8, 16, 32, 64, 128
-LEARNING_RATE = args.l #2e-5  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
-DROPOUT = args.d #.12
+MAX_TOKEN_COUNT = args.t
+N_EPOCHS = args.e
+BATCH_SIZE = args.b  # batch sizes: 8, 16, 32, 64, 128
+LEARNING_RATE = args.l  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
+DROPOUT = args.d
 
 # Optimizer scheduler
 STEPS_PER_EPOCH = len(pd_train) // BATCH_SIZE
