@@ -37,8 +37,8 @@ pd_train = add_category_columns(pd_train, categories_dict)
 pd_test = add_category_columns(pd_test, categories_dict)
 
 # Temporary sampling
-# pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
-# pd_test = pd_test.sample(round(pd_test.shape[0] * .01))
+pd_train = pd_train.sample(round(pd_train.shape[0] * .0001))
+pd_test = pd_test.sample(round(pd_test.shape[0] * .0001))
 
 # GLOBAL VARIABLES AND PARAMETERS
 
@@ -46,7 +46,7 @@ pd_test = add_category_columns(pd_test, categories_dict)
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
 MAX_TOKEN_COUNT = 40
-N_EPOCHS = 35
+N_EPOCHS = 1
 BATCH_SIZE = 64  # batch sizes: 8, 16, 32, 64, 128
 LEARNING_RATE = 2e-5  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
 
@@ -71,7 +71,8 @@ model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STE
 
 checkpoint_callback = ModelCheckpoint(
     dirpath="assets",
-    filename="{epoch}-{val_loss:.5f}-best-checkpoint",
+    #filename="dropout/{epoch}-{val_loss:.5f}-best-checkpoint",
+    filename="dropout/best-checkpoint",
     save_top_k=-1,
     verbose=True,
     monitor="val_loss",
@@ -105,7 +106,7 @@ trainer.test()
 
 # Load model
 trained_model = KeywordCategorizer.load_from_checkpoint(
-    'assets/best-checkpoint.ckpt',
+    'assets/dropout/best-checkpoint.ckpt',
     n_classes=len(LABEL_COLUMNS),
     label_columns=LABEL_COLUMNS
 )
