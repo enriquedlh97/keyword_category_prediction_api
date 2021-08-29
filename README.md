@@ -1,4 +1,4 @@
-# keyword_category_prediction_api
+cle# keyword_category_prediction_api
 API for predicting most likely category tags out of 22 different categories from batches of words in 104 different languages. The model has a 76.33% mean average precision and a 93.89% mean AUC ROC.
 
 ## Getting Started
@@ -239,8 +239,8 @@ learning rate of `2e-5`. No hyperparameter tuning was done due to the time limit
 was to use Bayesian Optimization to tune the hyperparameters following a 10-fold cross validation scheme. 
 
 The model achieved a Mean Average Precision of 76.33%. This result is most likely explained by the fact that no 
-hyperparameter tuning was done. Since the model was stopped early at epoch 8 when it had been set up to train for 35 
-epochs, clearly it started overfitting after tha epoch. 
+hyperparameter tuning was done. Since the model was stopped early at epoch 8 even though it had been set up to train for 35 
+epochs, it clearly started overfitting after that epoch. 
 
 #### Hardware
 
