@@ -198,8 +198,14 @@ used by the API within `api.py` file.
 
 The `modeling` contains the implementation of the actual model that was trained. This directory is structured in such a 
 way that more models can be added. Here, the cased version of the bert multilingual model was used, but the intention was 
-to also test the uncased version as well as other models such as xlm roberta. Within the `cased` directory, 
-
+to also test the uncased version as well as other models such as xlm roberta. Within the `cased` directory, the 
+`data_module.py` contains the pytorch-lightning wrapper for managing the training, validation and testing datasets via 
+the corresponding dataloaders. The `metrics.py` contains the functions for computing the Mean Average Precision of 
+the model, the Average Precision for each category, the Mean AUC ROC and the AUC ROC for every category. The `model.py`
+file contains the actual implementation of the transformer model as an instance of the pre-trained 
+`bert-base-multilingual-cased` model. The `preprocessing.py` file contains all the functions necessary for reading the 
+data sets and processing into the input expected by the Dataset module. Finally, the text_dataset contains the logic for
+processing the dataset after being preprocessed and tuning it into the input expected by the model. 
 ## Pre-trained model details
 
 ### Model used
@@ -212,7 +218,7 @@ to also test the uncased version as well as other models such as xlm roberta. Wi
 
 #### Hardware
 
-The mode was fine-tuned for about 28 hours on a server with the following characteristics. 
+The mode was fine-tuned for about 20 hours on a server with the following characteristics. 
 ```text
 2 x Intel Xeon Gold 5122 Processor @3.6Ghz (2s, 4c/s, 2t/c = 16 logical CPUs) with 128 GB RAM
 1 x Tesla V100-PCIE 32 GB GPU RAM
@@ -259,7 +265,7 @@ As a reference, after the first epoch the results for this metric were the follo
 ```
 Mean Average Precision:0.686751127243042
 
-Average Precision per category::
+Average Precision per category:
 
     Health:0.7492238
     Vehicles:0.75872535
