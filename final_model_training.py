@@ -37,8 +37,8 @@ pd_train = add_category_columns(pd_train, categories_dict)
 pd_test = add_category_columns(pd_test, categories_dict)
 
 # Temporary sampling
-pd_train = pd_train.sample(round(pd_train.shape[0] * .0001))
-pd_test = pd_test.sample(round(pd_test.shape[0] * .0001))
+pd_train = pd_train.sample(round(pd_train.shape[0] * .001))
+pd_test = pd_test.sample(round(pd_test.shape[0] * .001))
 
 # GLOBAL VARIABLES AND PARAMETERS
 
