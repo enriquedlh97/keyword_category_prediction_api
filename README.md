@@ -1,5 +1,5 @@
 # keyword_category_prediction_api
-API for predicting categories from batches of words
+API for predicting categories from batches of words. Works with 104 different languages. 
 
 ## Getting Started
 
@@ -389,7 +389,7 @@ DROPOUT = 0.12
 ```
 Each of these parameters can be specified to the `final_model_training.py` script with the flags `--t=MAX_TOKEN_COUNT`, 
 `--e=N_EPOCHS`, `--b=BATCH_SIZE`, `--l=LEARNING_RATE` and `--d=DROPOUT`. If no flags are specified the script will run 
-with the above mentioned default values. To specified values for these parameters just run something like this example.
+with the above mentioned default values. To specify values for these parameters just run something like this example.
 ```bash
 $ python final_model_training.py --t=40 --e=20 --b=64 --l=2e-5 --d=0.12
 ```
@@ -452,6 +452,7 @@ The following is a list of some resources used to do this project.
 - [Deploy ML models with FastAPI](https://www.youtube.com/watch?v=b5F667g1yCk)
 - [Mean Average Precision](https://www.youtube.com/watch?v=FppOzcDvaDI)
 - [Mean Average Precision](https://www.youtube.com/watch?v=oz2dDzsbXr8&list=PL1GQaVhO4f_jE5pnXU_Q4MSrIQx4wpFLM&index=7)
+- [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf)
 
 ## Note on .gitignore
 
