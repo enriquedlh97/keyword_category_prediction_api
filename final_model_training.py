@@ -18,6 +18,15 @@ from modeling.bert_base_multilingual.cased.metrics import mean_auc_roc, mean_avg
 import torch
 from tqdm.auto import tqdm
 import time
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--t', type=int, default=40, help="Set max token count")
+parser.add_argument('--e', type=int, default=35, help="Set number of epochs")
+parser.add_argument('--b', type=int, default=64, help="Set batch size")
+parser.add_argument('--l', type=float, default=2e-5, help="Set learning rate")
+parser.add_argument('--d', type=float, default=0.12, help="Set dropout rate")
+args = parser.parse_args()
 
 start_time = time.time()
 
@@ -45,11 +54,11 @@ pd_test = pd_test.sample(round(pd_test.shape[0] * .01))
 # Finetune for 4 epochs is recommended
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
-MAX_TOKEN_COUNT = 40
-N_EPOCHS = 1
-BATCH_SIZE = 64  # batch sizes: 8, 16, 32, 64, 128
-LEARNING_RATE = 2e-5  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
-DROPOUT = .12
+MAX_TOKEN_COUNT = args.t # 40
+N_EPOCHS = args.e #1
+BATCH_SIZE = args.b #64  # batch sizes: 8, 16, 32, 64, 128
+LEARNING_RATE = args.l #2e-5  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
+DROPOUT = args.d #.12
 
 # Optimizer scheduler
 STEPS_PER_EPOCH = len(pd_train) // BATCH_SIZE
