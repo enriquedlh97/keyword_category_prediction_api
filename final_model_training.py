@@ -49,6 +49,7 @@ MAX_TOKEN_COUNT = 40
 N_EPOCHS = 1
 BATCH_SIZE = 64  # batch sizes: 8, 16, 32, 64, 128
 LEARNING_RATE = 2e-5  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
+DROPOUT = .12
 
 # Optimizer scheduler
 STEPS_PER_EPOCH = len(pd_train) // BATCH_SIZE
@@ -63,7 +64,7 @@ data_module = KeywordDataModule(pd_train, pd_test, BertTokenizer.from_pretrained
 # MODEL
 
 model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STEPS, WARMUP_STEPS, MODEL_NAME,
-                           LEARNING_RATE)
+                           LEARNING_RATE, DROPOUT)
 
 # TRAINING
 

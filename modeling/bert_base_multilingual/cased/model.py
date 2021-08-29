@@ -10,14 +10,14 @@ from pytorch_lightning.metrics.functional import auroc
 class KeywordCategorizer(pl.LightningModule):
 
     def __init__(self, n_classes: int, label_columns: list, n_training_steps=None, n_warmup_steps=None,
-                 model_name='bert-base-multilingual-cased', learning_rate=2e-5):
+                 model_name='bert-base-multilingual-cased', learning_rate=2e-5, dropout=.12):
         super().__init__()
         self.bert = BertModel.from_pretrained(model_name, return_dict=True)
         self.classifier = nn.Linear(self.bert.config.hidden_size, n_classes)
         self.n_training_steps = n_training_steps
         self.n_warmup_steps = n_warmup_steps
         self.criterion = nn.BCELoss()
-        self.dropout = nn.Dropout(.12)
+        self.dropout = nn.Dropout(dropout)
         self.label_columns = label_columns
         self.learning_rate = learning_rate
 
