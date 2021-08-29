@@ -18,6 +18,15 @@ from modeling.bert_base_multilingual.cased.metrics import mean_auc_roc, mean_avg
 import torch
 from tqdm.auto import tqdm
 import time
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--t', type=int, default=40, help="Set max token count")
+parser.add_argument('--e', type=int, default=20, help="Set number of epochs")
+parser.add_argument('--b', type=int, default=64, help="Set batch size")
+parser.add_argument('--l', type=float, default=2e-5, help="Set learning rate")
+parser.add_argument('--d', type=float, default=0.12, help="Set dropout rate")
+args = parser.parse_args()
 
 start_time = time.time()
 
@@ -38,17 +47,18 @@ pd_test = add_category_columns(pd_test, categories_dict)
 
 # Temporary sampling
 # pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
-# pd_test = pd_test.sample(round(pd_test.shape[0] * .01))
+# pd_test = pd_test.sample(round(pd_test.shape[0] * .1))
 
 # GLOBAL VARIABLES AND PARAMETERS
 
 # Finetune for 4 epochs is recommended
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
-MAX_TOKEN_COUNT = 40
-N_EPOCHS = 35
-BATCH_SIZE = 64  # batch sizes: 8, 16, 32, 64, 128
-LEARNING_RATE = 2e-5  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
+MAX_TOKEN_COUNT = args.t
+N_EPOCHS = args.e
+BATCH_SIZE = args.b  # batch sizes: 8, 16, 32, 64, 128
+LEARNING_RATE = args.l  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
+DROPOUT = args.d
 
 # Optimizer scheduler
 STEPS_PER_EPOCH = len(pd_train) // BATCH_SIZE
@@ -63,7 +73,7 @@ data_module = KeywordDataModule(pd_train, pd_test, BertTokenizer.from_pretrained
 # MODEL
 
 model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STEPS, WARMUP_STEPS, MODEL_NAME,
-                           LEARNING_RATE)
+                           LEARNING_RATE, DROPOUT)
 
 # TRAINING
 
@@ -71,12 +81,14 @@ model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STE
 
 checkpoint_callback = ModelCheckpoint(
     dirpath="assets",
-    filename="{epoch}-{val_loss:.5f}-best-checkpoint",
+    filename="b64_l5e-5/{epoch}-{val_loss:.5f}-best-checkpoint",
     save_top_k=-1,
     verbose=True,
     monitor="val_loss",
     mode="min"
 )
+
+# b64_l5e-5
 
 logger = TensorBoardLogger("lightning_logs", name="keyword-categories")
 
@@ -105,7 +117,7 @@ trainer.test()
 
 # Load model
 trained_model = KeywordCategorizer.load_from_checkpoint(
-    'assets/best-checkpoint.ckpt',
+    'assets/dropout/best-checkpoint.ckpt',
     n_classes=len(LABEL_COLUMNS),
     label_columns=LABEL_COLUMNS
 )
