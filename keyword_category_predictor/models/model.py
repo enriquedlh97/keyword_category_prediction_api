@@ -12,8 +12,12 @@ class Model:
         # self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.device = torch.device("cpu")
         self.tokenizer = BertTokenizer.from_pretrained(config["MODEL"])
-        category_predictor = KeywordCategorizer(len(config["CLASS_NAMES"]))
-        category_predictor.load_from_checkpoint(
+        # category_predictor = KeywordCategorizer(len(config["CLASS_NAMES"]))
+        # category_predictor.load_from_checkpoint(
+        #     config["PRETRAINED_MODEL"],
+        #     n_classes=len(config["CLASS_NAMES"])
+        # )
+        category_predictor = KeywordCategorizer.load_from_checkpoint(
             config["PRETRAINED_MODEL"],
             n_classes=len(config["CLASS_NAMES"])
         )
@@ -33,8 +37,8 @@ class Model:
             return_tensors='pt',
         )
 
-        input_ids = encoded_text["input_ids"].to(self.device)
-        attention_mask = encoded_text["attention_mask"].to(self.device)
+        input_ids = encoded_text["input_ids"].unsqueeze(dim=0).to(self.device)
+        attention_mask = encoded_text["attention_mask"].unsqueeze(dim=0).to(self.device)
 
         confidence, probabilities = self.category_predictor(input_ids, attention_mask)
         probabilities = probabilities.flatten().numpy()
