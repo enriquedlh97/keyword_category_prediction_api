@@ -233,7 +233,7 @@ Furthermore, a maximum sequence length of 40 tokens was used since the actual ma
 is 33 tokens. 
 
 <p align="center">
-  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/token_count.JPG" width="150">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/token_count.JPG" width="400">
 
 The model was trained for 35 epochs with a batch size of 64 and a learning rate of `2e-5`. No hyperparameter tuning was 
 done due to the time limitations. However, a branch named `hyperparam-opt` was created where a hyperparameter optimization 
