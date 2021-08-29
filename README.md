@@ -1,5 +1,5 @@
 # keyword_category_prediction_api
-API for predicting categories from batches of words. Works with 104 different languages. The model has a 76.33% mean average precision and a 93.89% mean AUC ROC.
+API for predicting most likely category tags out of 22 different categories from batches of words in 104 different languages. The model has a 76.33% mean average precision and a 93.89% mean AUC ROC.
 
 ## Getting Started
 
