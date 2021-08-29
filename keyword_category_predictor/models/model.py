@@ -37,8 +37,8 @@ class Model:
             return_tensors='pt',
         )
 
-        input_ids = encoded_text["input_ids"].unsqueeze(dim=0).to(self.device)
-        attention_mask = encoded_text["attention_mask"].unsqueeze(dim=0).to(self.device)
+        input_ids = encoded_text["input_ids"].to(self.device)
+        attention_mask = encoded_text["attention_mask"].to(self.device)
 
         confidence, probabilities = self.category_predictor(input_ids, attention_mask)
         probabilities = probabilities.flatten().numpy()
