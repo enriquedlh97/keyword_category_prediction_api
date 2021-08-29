@@ -224,10 +224,7 @@ trained on the top 104 languages with the largest Wikipedia using a masked langu
 
 The model was fine-tuned for this specific task by training it on 
 [this](https://drive.google.com/uc?id=1LtrGndz9P766BRPf-jWkRw0_gzDuVCVo) dataset for 35 epochs (around 20 hours). A final
-linear layer and a sigmoid activation function was added on top of the pre-trained bert model. 
-
-BATCH_SIZE = 64  
-LEARNING_RATE = 2e-5 
+linear layer and a sigmoid activation function was added on top of the pre-trained bert model.
 
 Furthermore, a maximum sequence length of 40 tokens was used since the actual maximum length of a sequence in the dataset 
 is 33 tokens. 
@@ -278,7 +275,7 @@ AUC ROC per category:
     Real Estate:0.9346674
 ```
 
-The final results after the complete tuning for 42 epochs are the following. 
+The final results after the complete tuning for 35 epochs are the following. 
 ```text
 
 ```
@@ -315,7 +312,7 @@ Average Precision per category:
     Real Estate:0.6958019
 ```
 
-The final results after the complete tuning for 42 epochs are the following. 
+The final results after the complete tuning for 35 epochs are the following. 
 ```text
 
 ```
@@ -323,7 +320,7 @@ The final results after the complete tuning for 42 epochs are the following.
 ## Training a model
 
 To train a model from scratch all you have to do is make sure you have the conda environment activated and run the 
-`final_model_training.py` script. This script will save the trained model to the assets folder (It will be created if it 
+`final_model_training.py` script. This script will save the trained model to the assets folder (it will be created if it 
 does not already exist). 
 ```bash
 $ python final_model_training.py
@@ -335,7 +332,7 @@ N_EPOCHS = 35
 BATCH_SIZE = 64  
 LEARNING_RATE = 2e-5 
 ```
-This can be changed directly in the `final_model_training.py` script.
+These can be changed directly in the `final_model_training.py` script.
 
 ## Hyper-parameter optimization
 _To be done_
@@ -389,13 +386,14 @@ Then, add a `#` before each of them. They should end up looking like this.
 
 The following is a list of some resources used to do this project.
 
-- 
--
--
--
--
--
+- [Venelin Valkov](https://github.com/curiousily)
+- [huggingface](https://huggingface.co/)
+- [Analizing multilingual data - Kaggle](https://www.kaggle.com/rtatman/analyzing-multilingual-data)
+- [Deploy ML models with FastAPI](https://www.youtube.com/watch?v=b5F667g1yCk)
+- [Mean Average Precision](https://www.youtube.com/watch?v=FppOzcDvaDI)
+- [Mean Average Precision](https://www.youtube.com/watch?v=oz2dDzsbXr8&list=PL1GQaVhO4f_jE5pnXU_Q4MSrIQx4wpFLM&index=7)
 
 ## Note on .gitignore
 
-The ``` .gitignore ``` file was generated with [gitignore.io](https://www.toptal.com/developers/gitignore) adding the tags for ```python```, ```jupyternotebooks``` and ```pycharm```.
+The ``` .gitignore ``` file was generated with [gitignore.io](https://www.toptal.com/developers/gitignore) adding the 
+tags for ```python```, ```jupyternotebooks``` and ```pycharm```.
