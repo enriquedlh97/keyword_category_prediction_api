@@ -12,8 +12,12 @@ class Model:
         # self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.device = torch.device("cpu")
         self.tokenizer = BertTokenizer.from_pretrained(config["MODEL"])
-        category_predictor = KeywordCategorizer(len(config["CLASS_NAMES"]))
-        category_predictor.load_from_checkpoint(
+        # category_predictor = KeywordCategorizer(len(config["CLASS_NAMES"]))
+        # category_predictor.load_from_checkpoint(
+        #     config["PRETRAINED_MODEL"],
+        #     n_classes=len(config["CLASS_NAMES"])
+        # )
+        category_predictor = KeywordCategorizer.load_from_checkpoint(
             config["PRETRAINED_MODEL"],
             n_classes=len(config["CLASS_NAMES"])
         )
