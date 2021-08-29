@@ -96,7 +96,7 @@ $ bin/start_server.sh
 ```
 After this you will see that the server is running at `http://127.0.0.1:8000`. To test the actual API there are two 
 possibilities. The first one is to test it from the terminal. To do this just use the following command and substitute
-`string` after the `-d` flag for the actual text you want to predict categories. 
+`string` after the `-d` flag for the actual text you want to predict categories for. 
 ```bash
 $ curl -X 'POST' \
   'http://127.0.0.1:8000/predict' \
