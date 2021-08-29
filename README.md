@@ -218,7 +218,8 @@ The first one is a jupyter notebook, and the script version. The actual model wa
 
 The pre-trained model that was fine-tuned for this specific task was the `bert-base-multilingual-cased`, all the details
 about this model can be found [here](https://huggingface.co/bert-base-multilingual-cased). In summary, the model was 
-trained on the top 104 languages with the largest Wikipedia using a masked language modeling (MLM) objective. 
+trained on the top 104 languages with the largest Wikipedia using a masked language modeling (MLM) objective. See the 
+[list of languages](#list-of-languages) that the Multilingual model supports.
 
 ### Fine-tuning
 
@@ -453,6 +454,115 @@ The following is a list of some resources used to do this project.
 - [Mean Average Precision](https://www.youtube.com/watch?v=FppOzcDvaDI)
 - [Mean Average Precision](https://www.youtube.com/watch?v=oz2dDzsbXr8&list=PL1GQaVhO4f_jE5pnXU_Q4MSrIQx4wpFLM&index=7)
 - [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf)
+   
+## List of Languages
+
+The multilingual model supports the following languages. 
+
+*   Afrikaans
+*   Albanian
+*   Arabic
+*   Aragonese
+*   Armenian
+*   Asturian
+*   Azerbaijani
+*   Bashkir
+*   Basque
+*   Bavarian
+*   Belarusian
+*   Bengali
+*   Bishnupriya Manipuri
+*   Bosnian
+*   Breton
+*   Bulgarian
+*   Burmese
+*   Catalan
+*   Cebuano
+*   Chechen
+*   Chinese (Simplified)
+*   Chinese (Traditional)
+*   Chuvash
+*   Croatian
+*   Czech
+*   Danish
+*   Dutch
+*   English
+*   Estonian
+*   Finnish
+*   French
+*   Galician
+*   Georgian
+*   German
+*   Greek
+*   Gujarati
+*   Haitian
+*   Hebrew
+*   Hindi
+*   Hungarian
+*   Icelandic
+*   Ido
+*   Indonesian
+*   Irish
+*   Italian
+*   Japanese
+*   Javanese
+*   Kannada
+*   Kazakh
+*   Kirghiz
+*   Korean
+*   Latin
+*   Latvian
+*   Lithuanian
+*   Lombard
+*   Low Saxon
+*   Luxembourgish
+*   Macedonian
+*   Malagasy
+*   Malay
+*   Malayalam
+*   Marathi
+*   Minangkabau
+*   Nepali
+*   Newar
+*   Norwegian (Bokmal)
+*   Norwegian (Nynorsk)
+*   Occitan
+*   Persian (Farsi)
+*   Piedmontese
+*   Polish
+*   Portuguese
+*   Punjabi
+*   Romanian
+*   Russian
+*   Scots
+*   Serbian
+*   Serbo-Croatian
+*   Sicilian
+*   Slovak
+*   Slovenian
+*   South Azerbaijani
+*   Spanish
+*   Sundanese
+*   Swahili
+*   Swedish
+*   Tagalog
+*   Tajik
+*   Tamil
+*   Tatar
+*   Telugu
+*   Turkish
+*   Ukrainian
+*   Urdu
+*   Uzbek
+*   Vietnamese
+*   Volapük
+*   Waray-Waray
+*   Welsh
+*   West Frisian
+*   Western Punjabi
+*   Yoruba
+*   Thai
+*   Mongolian
 
 ## Note on .gitignore
 
