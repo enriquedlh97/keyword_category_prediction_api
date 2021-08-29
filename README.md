@@ -395,4 +395,5 @@ The following is a list of some resources used to do this project.
 
 ## Note on .gitignore
 
-The ``` .gitignore ``` file was generated with [gitignore.io](https://www.toptal.com/developers/gitignore) adding the tags for ```python```, ```jupyternotebooks``` and ```pycharm```.
+The ``` .gitignore ``` file was generated with [gitignore.io](https://www.toptal.com/developers/gitignore) adding the 
+tags for ```python```, ```jupyternotebooks``` and ```pycharm```.
