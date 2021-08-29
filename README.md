@@ -232,14 +232,18 @@ is 33 tokens.
 <p align="center">
   <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/token_count.JPG" width="600">
 
-The model was trained for 35 epochs with a batch size of 64 and a learning rate of `2e-5`. No hyperparameter tuning was 
-done due to the time limitations. However, a branch named `hyperparam-opt` was created where a hyperparameter optimization 
-subroutine was started to being set up. The intention was to use Bayesian Optimization to tune the hyperparameters 
-following a 10-fold cross validation scheme. 
+The model was trained for 35 epochs with early stopping (training stopped at epoch 8), a batch size of 64 and a 
+learning rate of `2e-5`. No hyperparameter tuning was done due to the time limitations. However, a branch named 
+`hyperparam-opt` was created where a hyperparameter optimization subroutine was started to being set up. The intention 
+was to use Bayesian Optimization to tune the hyperparameters following a 10-fold cross validation scheme. 
+
+The model achieved a Mean Average Precision of 76.33%. This result is most likely explained by the fact that no 
+hyperparameter tuning was done. Since the model was stopped early at epoch 8 when it had been set up to train for 35 
+epochs, clearly it started overfitting after tha epoch. 
 
 #### Hardware
 
-The mode was fine-tuned for about 20 hours on a server with the following characteristics. 
+The mode was fine-tuned for about 5 hours on a server with the following characteristics. 
 ```text
 2 x Intel Xeon Gold 5122 Processor @3.6Ghz (2s, 4c/s, 2t/c = 16 logical CPUs) with 128 GB RAM
 1 x Tesla V100-PCIE 32 GB GPU RAM
@@ -275,9 +279,34 @@ AUC ROC per category:
     Real Estate:0.9346674
 ```
 
-The final results after the complete tuning for 35 epochs are the following. 
+The final results after the complete tuning for 8 epochs are the following. 
 ```text
+Mean AUC ROC:0.9389623999595642
 
+AUC ROC per category:
+
+Health:0.95061696
+Vehicles:0.9570166
+Hobbies & Leisure:0.9193139
+Food & Groceries:0.9607837
+Retailers & General Merchandise:0.9425981
+Arts & Entertainment:0.924951
+Jobs & Education:0.9459585
+Law & Government:0.9363848
+Home & Garden:0.94838923
+Finance:0.95139754
+Computers & Consumer Electronics:0.9469222
+Internet & Telecom:0.9271123
+Sports & Fitness:0.93298805
+Dining & Nightlife:0.96544385
+Business & Industrial:0.89647937
+Occasions & Gifts:0.9483903
+Travel & Tourism:0.94743305
+News, Media & Publications:0.8890147
+Apparel:0.9584558
+Beauty & Personal Care:0.9441371
+Family & Community:0.9070463
+Real Estate:0.9563372
 ```
 
 #### Mean Average Precision
@@ -312,9 +341,34 @@ Average Precision per category:
     Real Estate:0.6958019
 ```
 
-The final results after the complete tuning for 35 epochs are the following. 
+The final results after the complete tuning for 8 epochs are the following. 
 ```text
+Mean Average Precision:0.7633433938026428
 
+Average Precision per category:
+
+Health:0.8023483
+Vehicles:0.8293877
+Hobbies & Leisure:0.78291553
+Food & Groceries:0.79903966
+Retailers & General Merchandise:0.65486777
+Arts & Entertainment:0.8438803
+Jobs & Education:0.7987087
+Law & Government:0.68738794
+Home & Garden:0.7966564
+Finance:0.7317461
+Computers & Consumer Electronics:0.8122689
+Internet & Telecom:0.69790566
+Sports & Fitness:0.75740767
+Dining & Nightlife:0.7746685
+Business & Industrial:0.79147625
+Occasions & Gifts:0.69419265
+Travel & Tourism:0.8009785
+News, Media & Publications:0.7586461
+Apparel:0.8092545
+Beauty & Personal Care:0.7334262
+Family & Community:0.6742519
+Real Estate:0.7621378
 ```
 
 ## Training a model
