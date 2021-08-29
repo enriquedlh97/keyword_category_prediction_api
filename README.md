@@ -244,7 +244,7 @@ epochs, it clearly started overfitting after that epoch.
 
 #### Hardware
 
-The mode was fine-tuned for about 5 hours on a server with the following characteristics. 
+The model was fine-tuned for about 5 hours on a server with the following characteristics. 
 ```text
 2 x Intel Xeon Gold 5122 Processor @3.6Ghz (2s, 4c/s, 2t/c = 16 logical CPUs) with 128 GB RAM
 1 x Tesla V100-PCIE 32 GB GPU RAM
@@ -380,7 +380,7 @@ does not already exist).
 ```bash
 $ python final_model_training.py
 ```
-Currently, the only parameters and their default values for the training subroutine are the following ones.
+Currently, the only parameters (and their default values) that can be sepcified for the training subroutine are the following ones.
 ```text
 MAX_TOKEN_COUNT = 40
 N_EPOCHS = 20
