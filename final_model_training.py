@@ -22,7 +22,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--t', type=int, default=40, help="Set max token count")
-parser.add_argument('--e', type=int, default=100, help="Set number of epochs")
+parser.add_argument('--e', type=int, default=20, help="Set number of epochs")
 parser.add_argument('--b', type=int, default=64, help="Set batch size")
 parser.add_argument('--l', type=float, default=2e-5, help="Set learning rate")
 parser.add_argument('--d', type=float, default=0.12, help="Set dropout rate")
@@ -46,8 +46,8 @@ pd_train = add_category_columns(pd_train, categories_dict)
 pd_test = add_category_columns(pd_test, categories_dict)
 
 # Temporary sampling
-pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
-pd_test = pd_test.sample(round(pd_test.shape[0] * .1))
+# pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
+# pd_test = pd_test.sample(round(pd_test.shape[0] * .1))
 
 # GLOBAL VARIABLES AND PARAMETERS
 
@@ -81,17 +81,14 @@ model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STE
 
 checkpoint_callback = ModelCheckpoint(
     dirpath="assets",
-    #filename="dropout/{epoch}-{val_loss:.5f}-best-checkpoint",
-    filename="b48_l2e-5/best-checkpoint",
+    filename="b32_l5e-5/{epoch}-{val_loss:.5f}-best-checkpoint",
     save_top_k=-1,
     verbose=True,
     monitor="val_loss",
     mode="min"
 )
 
-# b64_l5e-5
-# b32_l5e-4
-# b48_l2e-5
+# b32_l5e-5
 
 logger = TensorBoardLogger("lightning_logs", name="keyword-categories")
 
