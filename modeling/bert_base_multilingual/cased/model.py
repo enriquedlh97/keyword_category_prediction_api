@@ -17,11 +17,13 @@ class KeywordCategorizer(pl.LightningModule):
         self.n_training_steps = n_training_steps
         self.n_warmup_steps = n_warmup_steps
         self.criterion = nn.BCELoss()
+        # self.dropout = nn.Dropout(.12)
         self.label_columns = label_columns
         self.learning_rate = learning_rate
 
     def forward(self, input_ids, attention_mask, labels=None):
         output = self.bert(input_ids, attention_mask=attention_mask)
+        # output.pooler_output =  self.dropout(output.pooler_output)
         output = self.classifier(output.pooler_output)
         output = torch.sigmoid(output)
         loss = 0
