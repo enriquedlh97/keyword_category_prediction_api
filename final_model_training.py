@@ -46,7 +46,7 @@ pd_test = add_category_columns(pd_test, categories_dict)
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
 MAX_TOKEN_COUNT = 40
-N_EPOCHS = 42
+N_EPOCHS = 35
 BATCH_SIZE = 64  # batch sizes: 8, 16, 32, 64, 128
 LEARNING_RATE = 2e-5  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
 
@@ -71,8 +71,8 @@ model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STE
 
 checkpoint_callback = ModelCheckpoint(
     dirpath="assets",
-    filename="best-checkpoint",
-    save_top_k=1,
+    filename="{epoch}-{val_loss:.5f}-best-checkpoint",
+    save_top_k=-1,
     verbose=True,
     monitor="val_loss",
     mode="min"
@@ -80,7 +80,7 @@ checkpoint_callback = ModelCheckpoint(
 
 logger = TensorBoardLogger("lightning_logs", name="keyword-categories")
 
-early_stopping_callback = EarlyStopping(monitor='val_loss', patience=2)
+early_stopping_callback = EarlyStopping(monitor='val_loss', patience=35)
 
 # Initialize trainer - Requires GPU
 
