@@ -61,11 +61,11 @@ are using windows you can just run the following.
 ```bash
 $ conda env create -f environment.yml
 ```
-If you are not working on Windows then you should use the ```environment_bo_builds.yml``` file instead of the 
+If you are not working on Windows then you should use the ```environment_no_builds.yml``` file instead of the 
 ```environment.yml```  file for creating the environment because it excludes platform-specific builds. To do this just
 run the following. 
 ```bash
-$ conda env create -f environment_bo_builds.yml
+$ conda env create -f environment_no_builds.yml
 ```
 Make sure you activate the environment. 
 ```bash
