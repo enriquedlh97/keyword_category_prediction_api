@@ -117,7 +117,7 @@ trainer.test()
 
 # Load model
 trained_model = KeywordCategorizer.load_from_checkpoint(
-    'assets/dropout/best-checkpoint.ckpt',
+    'assets/best-checkpoint.ckpt',
     n_classes=len(LABEL_COLUMNS),
     label_columns=LABEL_COLUMNS
 )
