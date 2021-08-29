@@ -325,14 +325,20 @@ does not already exist).
 ```bash
 $ python final_model_training.py
 ```
-Currently, the only parameters for the training subroutine that can be changed are the following ones.
+Currently, the only parameters and their default values for the training subroutine are the following ones.
 ```text
 MAX_TOKEN_COUNT = 40
-N_EPOCHS = 35
+N_EPOCHS = 20
 BATCH_SIZE = 64  
 LEARNING_RATE = 2e-5 
+DROPOUT = 0.12
 ```
-These can be changed directly in the `final_model_training.py` script.
+Each of these parameters can be specified to the `final_model_training.py` script with the flags `--t=MAX_TOKEN_COUNT`, 
+`--e=N_EPOCHS`, `--b=BATCH_SIZE`, `--l=LEARNING_RATE` and `--d=DROPOUT`. If no flags are specified the script will run 
+with the above mentioned default values. To specified values for these parameters just run something like this example.
+```bash
+$ python final_model_training.py --t=40 --e=20 --b=64 --l=2e-5 --d=0.12
+```
 
 ## Hyper-parameter optimization
 _To be done_
