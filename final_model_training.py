@@ -81,14 +81,14 @@ model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STE
 
 checkpoint_callback = ModelCheckpoint(
     dirpath="assets",
-    filename="b32_l5e-5/{epoch}-{val_loss:.5f}-best-checkpoint",
+    filename="b64_l5e-5/{epoch}-{val_loss:.5f}-best-checkpoint",
     save_top_k=-1,
     verbose=True,
     monitor="val_loss",
     mode="min"
 )
 
-# b32_l5e-5
+# b64_l5e-5
 
 logger = TensorBoardLogger("lightning_logs", name="keyword-categories")
 
