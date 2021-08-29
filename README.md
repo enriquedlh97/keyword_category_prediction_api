@@ -206,15 +206,39 @@ file contains the actual implementation of the transformer model as an instance 
 `bert-base-multilingual-cased` model. The `preprocessing.py` file contains all the functions necessary for reading the 
 data sets and processing into the input expected by the Dataset module. Finally, the text_dataset contains the logic for
 processing the dataset after being preprocessed and tuning it into the input expected by the model. 
+
+The `config.json` file contains the values needed for configuring the pre-trained model when being used by the actual 
+API. 
+
+The `bert_final_model_training.ipynb` and `final_model_training.py` contain the logic por actually training the model. 
+The first one is a jupyter notebook, and the script version. The actual model was trained with the script version. 
 ## Pre-trained model details
 
 ### Model used
 
+The pre-trained model that was fine-tuned for this specific task was the `bert-base-multilingual-cased`, all the details
+about this model can be found [here](https://huggingface.co/bert-base-multilingual-cased). In summary, the model was 
+trained on the top 104 languages with the largest Wikipedia using a masked language modeling (MLM) objective. 
+
 ### Fine-tuning
 
-#### Methodology
+The model was fine-tuned for this specific task by training it on 
+[this](https://drive.google.com/uc?id=1LtrGndz9P766BRPf-jWkRw0_gzDuVCVo) dataset for 35 epochs (around 20 hours). A final
+linear layer and a sigmoid activation function was added on top of the pre-trained bert model. 
 
-#### Hyperparameters
+BATCH_SIZE = 64  
+LEARNING_RATE = 2e-5 
+
+Furthermore, a maximum sequence length of 40 tokens was used since the actual maximum length of a sequence in the dataset 
+is 33 tokens. 
+
+<p align="center">
+  <img src="" width="150">
+
+The model was trained for 35 epochs with a batch size of 64 and a learning rate of `2e-5`. No hyperparameter tuning was 
+done due to the time limitations. However, a branch named `hyperparam-opt` was created where a hyperparameter optimization 
+subroutine was started to being set up. The intention was to use Bayesian Optimization to tune the hyperparameters 
+following a 10-fold cross validation scheme. 
 
 #### Hardware
 
@@ -298,9 +322,23 @@ The final results after the complete tuning for 42 epochs are the following.
 
 ## Training a model
 
-## Hyper-parameter optimization
-include other models
+To train a model from scratch all you have to do is make sure you have the conda environment activated and run the 
+`final_model_training.py` script. This script will save the trained model to the assets folder (It will be created if it 
+does not already exist). 
+```bash
+$ python final_model_training.py
+```
+Currently, the only parameters for the training subroutine that can be changed are the following ones.
+```text
+MAX_TOKEN_COUNT = 40
+N_EPOCHS = 35
+BATCH_SIZE = 64  
+LEARNING_RATE = 2e-5 
+```
+This can be changed directly in the `final_model_training.py` script.
 
+## Hyper-parameter optimization
+_To be done_
 
 ## Updating environment files
 There are two environment files available, the first one is for creating an environment on Windows and the file name is 
