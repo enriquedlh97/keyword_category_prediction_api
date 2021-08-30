@@ -394,6 +394,9 @@ with the above mentioned default values. To specify values for these parameters 
 ```bash
 $ python final_model_training.py --t=40 --e=20 --b=64 --l=2e-5 --d=0.12
 ```
+After each epoch, a model is going to be saved in the `assets` folder with the name structure as 
+`epoch=EPOCH-val_loss=VALIDATION_LOSS-best-checkpoint.ckpt`. To use one of these models just put the model file name in the config.json
+file in the `PRETRAINED_MODEL` field. The API will automatically load this model when the server is started. 
 
 ## Hyper-parameter optimization
 _To be done_
