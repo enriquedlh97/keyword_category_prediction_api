@@ -10,7 +10,7 @@ from pytorch_lightning.metrics.functional import auroc
 class KeywordCategorizer(pl.LightningModule):
 
     def __init__(self, n_classes: int, label_columns: list, n_training_steps=None, n_warmup_steps=None,
-                 model_name='bert-base-multilingual-cased', learning_rate=2e-5, dropout=.12):
+                 model_name='bert-base-multilingual-cased', learning_rate=2e-5, dropout=.12, hyperparam_opt=False):
         super().__init__()
         self.bert = BertModel.from_pretrained(model_name, return_dict=True)
         self.classifier = nn.Linear(self.bert.config.hidden_size, n_classes)
@@ -20,6 +20,7 @@ class KeywordCategorizer(pl.LightningModule):
         self.dropout = nn.Dropout(dropout)
         self.label_columns = label_columns
         self.learning_rate = learning_rate
+        self.hyperparam_opt = hyperparam_opt
 
     def forward(self, input_ids, attention_mask, labels=None):
         output = self.bert(input_ids, attention_mask=attention_mask)
@@ -56,62 +57,64 @@ class KeywordCategorizer(pl.LightningModule):
         return loss
 
     def training_epoch_end(self, outputs):
-        labels = []
-        predictions = []
-        for output in outputs:
-            for out_labels in output["labels"].detach().cpu():
-                labels.append(out_labels)
-            for out_predictions in output["predictions"].detach().cpu():
-                predictions.append(out_predictions)
-        labels = torch.stack(labels).int()
-        predictions = torch.stack(predictions)
-        # Compute ROC AUC
-        roc_auc = []
-        for i, name in enumerate(self.label_columns):
-            class_roc_auc = auroc(predictions[:, i], labels[:, i])
-            self.logger.experiment.add_scalar(f"{name}_roc_auc/Train", class_roc_auc, self.current_epoch)
-            roc_auc.append(class_roc_auc.reshape(-1).numpy()[0])
-        # Compute Mean ROC AUC
-        self.logger.experiment.add_scalar(f"epoch_mean_roc_auc/Train", np.array(roc_auc).mean(), self.current_epoch)
-        # Compute Average Precision
-        avg_precision = []
-        average_precision = AveragePrecision(pos_label=1)
-        for i, name in enumerate(self.label_columns):
-            class_avg_precision = average_precision(predictions[:, i], labels[:, i])
-            self.logger.experiment.add_scalar(f"{name}_avg_precision/Train", class_avg_precision, self.current_epoch)
-            avg_precision.append(class_avg_precision.reshape(-1).numpy()[0])
-        # Compute Mean Average Precision
-        self.logger.experiment.add_scalar(f"epoch_avg_precision/Train", np.array(class_avg_precision).mean(),
-                                          self.current_epoch)
+        if not self.hyperparam_opt:
+            labels = []
+            predictions = []
+            for output in outputs:
+                for out_labels in output["labels"].detach().cpu():
+                    labels.append(out_labels)
+                for out_predictions in output["predictions"].detach().cpu():
+                    predictions.append(out_predictions)
+            labels = torch.stack(labels).int()
+            predictions = torch.stack(predictions)
+            # Compute ROC AUC
+            roc_auc = []
+            for i, name in enumerate(self.label_columns):
+                class_roc_auc = auroc(predictions[:, i], labels[:, i])
+                self.logger.experiment.add_scalar(f"{name}_roc_auc/Train", class_roc_auc, self.current_epoch)
+                roc_auc.append(class_roc_auc.reshape(-1).numpy()[0])
+            # Compute Mean ROC AUC
+            self.logger.experiment.add_scalar(f"epoch_mean_roc_auc/Train", np.array(roc_auc).mean(), self.current_epoch)
+            # Compute Average Precision
+            avg_precision = []
+            average_precision = AveragePrecision(pos_label=1)
+            for i, name in enumerate(self.label_columns):
+                class_avg_precision = average_precision(predictions[:, i], labels[:, i])
+                self.logger.experiment.add_scalar(f"{name}_avg_precision/Train", class_avg_precision, self.current_epoch)
+                avg_precision.append(class_avg_precision.reshape(-1).numpy()[0])
+            # Compute Mean Average Precision
+            self.logger.experiment.add_scalar(f"epoch_avg_precision/Train", np.array(class_avg_precision).mean(),
+                                              self.current_epoch)
 
     def validation_epoch_end(self, outputs):
-        labels = []
-        predictions = []
-        for output in outputs:
-            for out_labels in output["labels"].detach().cpu():
-                labels.append(out_labels)
-            for out_predictions in output["predictions"].detach().cpu():
-                predictions.append(out_predictions)
-        labels = torch.stack(labels).int()
-        predictions = torch.stack(predictions)
-        # Compute ROC AUC
-        roc_auc = []
-        for i, name in enumerate(self.label_columns):
-            class_roc_auc = auroc(predictions[:, i], labels[:, i])
-            self.logger.experiment.add_scalar(f"{name}_roc_auc/Validation", class_roc_auc, self.current_epoch)
-            roc_auc.append(class_roc_auc.reshape(-1).numpy()[0])
-        # Compute Mean ROC AUC
-        self.logger.experiment.add_scalar(f"epoch_mean_roc_auc/Validation", np.array(roc_auc).mean(), self.current_epoch)
-        # Compute Average Precision
-        avg_precision = []
-        average_precision = AveragePrecision(pos_label=1)
-        for i, name in enumerate(self.label_columns):
-            class_avg_precision = average_precision(predictions[:, i], labels[:, i])
-            self.logger.experiment.add_scalar(f"{name}_avg_precision/Validation", class_avg_precision, self.current_epoch)
-            avg_precision.append(class_avg_precision.reshape(-1).numpy()[0])
-        # Compute Mean Average Precision
-        self.logger.experiment.add_scalar(f"epoch_avg_precision/Validation", np.array(class_avg_precision).mean(),
-                                          self.current_epoch)
+        if not self.hyperparam_opt:
+            labels = []
+            predictions = []
+            for output in outputs:
+                for out_labels in output["labels"].detach().cpu():
+                    labels.append(out_labels)
+                for out_predictions in output["predictions"].detach().cpu():
+                    predictions.append(out_predictions)
+            labels = torch.stack(labels).int()
+            predictions = torch.stack(predictions)
+            # Compute ROC AUC
+            roc_auc = []
+            for i, name in enumerate(self.label_columns):
+                class_roc_auc = auroc(predictions[:, i], labels[:, i])
+                self.logger.experiment.add_scalar(f"{name}_roc_auc/Validation", class_roc_auc, self.current_epoch)
+                roc_auc.append(class_roc_auc.reshape(-1).numpy()[0])
+            # Compute Mean ROC AUC
+            self.logger.experiment.add_scalar(f"epoch_mean_roc_auc/Validation", np.array(roc_auc).mean(), self.current_epoch)
+            # Compute Average Precision
+            avg_precision = []
+            average_precision = AveragePrecision(pos_label=1)
+            for i, name in enumerate(self.label_columns):
+                class_avg_precision = average_precision(predictions[:, i], labels[:, i])
+                self.logger.experiment.add_scalar(f"{name}_avg_precision/Validation", class_avg_precision, self.current_epoch)
+                avg_precision.append(class_avg_precision.reshape(-1).numpy()[0])
+            # Compute Mean Average Precision
+            self.logger.experiment.add_scalar(f"epoch_avg_precision/Validation", np.array(class_avg_precision).mean(),
+                                              self.current_epoch)
 
     def configure_optimizers(self):
         optimizer = AdamW(self.parameters(), lr=self.learning_rate)
