@@ -1,14 +1,6 @@
-# MAX_TOKEN_COUNT
-# N_EPOCHS
-# BATCH_SIZE
-# LEARNING_RATE
-# DROPOUT
-# LEARNING_RATE_SCHEDULE
-# Data reading and preprocessing
+# Preprocessing
 from modeling.bert_base_multilingual.cased.preprocessing import get_train_test_data, get_categories, \
     add_category_columns
-# Datset
-from modeling.bert_base_multilingual.cased.text_dataset import KeywordDataset
 from modeling.bert_base_multilingual.cased.data_module import KeywordDataModule
 # Model
 from modeling.bert_base_multilingual.cased.model import KeywordCategorizer
@@ -20,17 +12,15 @@ from transformers import get_constant_schedule_with_warmup, get_cosine_schedule_
     get_polynomial_decay_schedule_with_warmup
 # Logging and saving
 import pytorch_lightning as pl
-#from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-#from pytorch_lightning.loggers import TensorBoardLogger
 # Other
-from sklearn.model_selection import StratifiedKFold
-from tqdm.notebook import tqdm
+from sklearn.model_selection import KFold
+import numpy as np
 
 
 def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule, k_folds,
                      verbose):
     # Set k-fold cross validation scheme
-    kfold = StratifiedKFold(n_splits=k_folds, shuffle=True, random_state=69)
+    cv = KFold(n_splits=k_folds, shuffle=True, random_state=69)
 
     # Get data
     pd_train = get_train_test_data(
@@ -41,17 +31,16 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
     # Get categories
     categories_dict = get_categories(pd_train, pd_train)
 
-    # Temporary sampling
-    pd_train = pd_train.sample(round(pd_train.shape[0] * .01))
-
     # Add category columns and fill them
     pd_train = add_category_columns(pd_train, categories_dict)
 
+    # Temporary sampling
+    pd_train = pd_train.sample(round(pd_train.shape[0] * .05))
 
     MODEL_NAME = 'bert-base-multilingual-cased'
     LABEL_COLUMNS = list(categories_dict.keys())
 
-    #Hyperparameters
+    # Hyperparameters
     MAX_TOKEN_COUNT = max_token_count
     N_EPOCHS = epochs
     BATCH_SIZE = batch_size
@@ -64,27 +53,62 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
     TOTAL_TRAINING_STEPS = STEPS_PER_EPOCH * N_EPOCHS
     WARMUP_STEPS = TOTAL_TRAINING_STEPS // 5
 
+    # For fold validation loss results
+    fold_validation_results = []
 
+    # K-fold Cross Validation model evaluation
+    for fold, (train_ids, test_ids) in enumerate(cv.split(pd_train)):
+        if verbose >= 1:
+            # Print
+            print(f'FOLD {fold + 1} - epochs:{epochs}')
+            print('--------------------------------')
 
+        # DATASET
+        data_module = KeywordDataModule(pd_train.filter(items=train_ids, axis=0),
+                                        pd_train.filter(items=test_ids, axis=0),
+                                        BertTokenizer.from_pretrained(MODEL_NAME),
+                                        LABEL_COLUMNS,
+                                        BATCH_SIZE,
+                                        MAX_TOKEN_COUNT)
 
-    # DATASET
+        # MODEL
 
-    # data_module = KeywordDataModule(pd_train, pd_test, BertTokenizer.from_pretrained(MODEL_NAME), LABEL_COLUMNS,
-    #                                 BATCH_SIZE,
-    #                                 MAX_TOKEN_COUNT)
+        model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STEPS, WARMUP_STEPS,
+                                   MODEL_NAME, LEARNING_RATE, DROPOUT, True)
 
-    # MODEL
+        # Initialize trainer - Requires GPU
 
-    model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STEPS, WARMUP_STEPS, MODEL_NAME,
-                               LEARNING_RATE, DROPOUT)
+        trainer = pl.Trainer(
+            # logger=logger,
+            # checkpoint_callback=True,
+            # callbacks=[checkpoint_callback, early_stopping_callback],
+            max_epochs=N_EPOCHS,
+            gpus=1,  # If no GPU available comment this line
+            progress_bar_refresh_rate=10
+        )
 
-    # Start training
+        # TRAIN
 
-    # trainer.fit(model, data_module)
+        trainer.fit(model, data_module)
 
-    # TESTING
+        # VALIDATE
 
-    # trainer.test()
+        fold_validation_loss = trainer.validate(model, data_module)
+
+        if verbose >= 2:
+            # Print accuracy
+            # print('Validation loss for fold %d: %d %%' % (fold + 1, fold_validation_loss[0]['val_loss']))
+            print(f"Validation loss for fold {fold + 1}: {fold_validation_loss[0]['val_loss']}%")
+            print('--------------------------------')
+
+        # Save validation loss for current fold
+        fold_validation_results.append(fold_validation_loss[0]['val_loss'])
+
+    if verbose >= 1:
+        print(f'Average validation loss: {np.array(fold_validation_results).mean()} %',
+              f'Std dev of validation loss: {np.array(fold_validation_results).std()} %')
+
+    return np.array(fold_validation_results).mean()
 
 
 def evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule, k_folds=10,
@@ -122,8 +146,8 @@ def get_schedule(schedule):
 
 if __name__ == "__main__":
     max_token_count = 40
-    epochs = 2
-    batch_size = 64
+    epochs = 1
+    batch_size = 1
     learning_rate = 2e-5
     dropout = 0.12
     learning_rate_schedule = 0.7  # Should select get_linear_schedule_with_warmup
