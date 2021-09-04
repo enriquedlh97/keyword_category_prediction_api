@@ -55,6 +55,7 @@ torchvision 0.10.0+cu102
 fastapi 0.68.1
 pydantic 1.8.2
 uvicorn 0.15.0
+bayesian-optimization=1.1.0
 ```
 To do this you can create the conda environment and install them directly, or you can just use the .yml files. If you 
 are using windows you can just run the following.
