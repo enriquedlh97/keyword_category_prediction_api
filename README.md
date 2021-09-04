@@ -435,14 +435,14 @@ $ conda env export -n keyword_api -f environment_no_builds.yml --no-builds
 Finally, go into the `environment_no_builds.yml` and look for the following packages.
 ```
 - vc=14.2
-- v22015_runtime=14.27.29016
+- vs2015_runtime=14.27.29016
 - win_inet_pton=1.1.0
 - wincertstore=0.2
 ```
 Then, add a `#` before each of them. They should end up looking like this. 
 ```
 # - vc=14.2
-# - v22015_runtime=14.27.29016
+# - vs2015_runtime=14.27.29016
 # - win_inet_pton=1.1.0
 # - wincertstore=0.2
 ```
