@@ -1,7 +1,6 @@
 import json
 import torch
 from transformers import BertTokenizer
-# from keyword_category_predictor.models.bert_multilingual import KeywordCategorizer
 from modeling.bert_base_multilingual.cased.model import KeywordCategorizer
 
 with open("config.json") as json_file:
