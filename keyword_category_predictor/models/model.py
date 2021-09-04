@@ -1,7 +1,8 @@
 import json
 import torch
 from transformers import BertTokenizer
-from keyword_category_predictor.models.bert_multilingual import KeywordCategorizer
+# from keyword_category_predictor.models.bert_multilingual import KeywordCategorizer
+from modeling.bert_base_multilingual.cased.model import KeywordCategorizer
 
 with open("config.json") as json_file:
     config = json.load(json_file)
@@ -12,15 +13,13 @@ class Model:
         # self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.device = torch.device("cpu")
         self.tokenizer = BertTokenizer.from_pretrained(config["MODEL"])
-        # category_predictor = KeywordCategorizer(len(config["CLASS_NAMES"]))
-        # category_predictor.load_from_checkpoint(
-        #     config["PRETRAINED_MODEL"],
-        #     n_classes=len(config["CLASS_NAMES"])
-        # )
+
         category_predictor = KeywordCategorizer.load_from_checkpoint(
             config["PRETRAINED_MODEL"],
-            n_classes=len(config["CLASS_NAMES"])
+            n_classes=len(config["CLASS_NAMES"]),
+            label_columns=config["CLASS_NAMES"]
         )
+
         category_predictor.eval()
         category_predictor.freeze()
         self.category_predictor = category_predictor.to(self.device)
