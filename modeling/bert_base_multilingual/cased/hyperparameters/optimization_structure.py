@@ -114,7 +114,7 @@ def evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, 
     cv_loss = model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule,
                                k_folds, verbose)
 
-    return cv_loss
+    return -cv_loss
 
 
 def get_schedule(schedule):
@@ -132,14 +132,14 @@ def get_schedule(schedule):
     return schedule
 
 
-if __name__ == "__main__":
-    max_token_count = 40
-    epochs = 1
-    batch_size = 1
-    learning_rate = 2e-5
-    dropout = 0.12
-    learning_rate_schedule = 0.7  # Should select get_linear_schedule_with_warmup
-
-    cv_loss = evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule)
-
-    print(cv_loss)
+# if __name__ == "__main__":
+#     max_token_count = 40
+#     epochs = 1
+#     batch_size = 1
+#     learning_rate = 2e-5
+#     dropout = 0.12
+#     learning_rate_schedule = 0.7  # Should select get_linear_schedule_with_warmup
+#
+#     cv_loss = evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule)
+#
+#     print(cv_loss)
