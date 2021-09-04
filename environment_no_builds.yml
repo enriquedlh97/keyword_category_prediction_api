@@ -10,6 +10,7 @@ dependencies:
   - asgiref=3.4.1
   - async-timeout=3.0.1
   - attrs=21.2.0
+  - bayesian-optimization=1.1.0
   - blas=1.0
   - blinker=1.4
   - brotlipy=0.7.0
@@ -115,7 +116,7 @@ dependencies:
   - urllib3=1.26.6
   - uvicorn=0.15.0
   # - vc=14.2
-  - vs2015_runtime=14.27.29016
+  # - vs2015_runtime=14.27.29016
   - werkzeug=2.0.1
   - wheel=0.37.0
   # - win_inet_pton=1.1.0
