@@ -7,9 +7,8 @@ from modeling.bert_base_multilingual.cased.model import KeywordCategorizer
 # Transformer imports
 from transformers import BertTokenizer
 # Transformer learning rate schedulers
-from transformers import get_constant_schedule_with_warmup, get_cosine_schedule_with_warmup, \
-    get_cosine_with_hard_restarts_schedule_with_warmup, get_linear_schedule_with_warmup, \
-    get_polynomial_decay_schedule_with_warmup
+from transformers import get_cosine_schedule_with_warmup, get_cosine_with_hard_restarts_schedule_with_warmup, \
+    get_linear_schedule_with_warmup, get_polynomial_decay_schedule_with_warmup
 # Logging and saving
 import pytorch_lightning as pl
 # Other
@@ -124,15 +123,13 @@ def evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, 
 def get_schedule(schedule):
 
     # set schedule
-    if schedule <= 1.0 / 5:
-        schedule = get_constant_schedule_with_warmup
-    elif 2.0 / 5 >= schedule > 1.0 / 5:
+    if schedule <= 1.0 / 4:
         schedule = get_cosine_schedule_with_warmup
-    elif 3.0 / 5 >= schedule > 2.0 / 5:
+    elif 2.0 / 4 >= schedule > 1.0 / 4:
         schedule = get_cosine_with_hard_restarts_schedule_with_warmup
-    elif 4.0 / 5 >= schedule > 3.0 / 5:
+    elif 3.0 / 4 >= schedule > 2.0 / 4:
         schedule = get_linear_schedule_with_warmup
-    elif 5.0 / 5 >= schedule > 4.0 / 5:
+    elif 4.0 / 4 >= schedule > 3.0 / 4:
         schedule = get_polynomial_decay_schedule_with_warmup
 
     return schedule
