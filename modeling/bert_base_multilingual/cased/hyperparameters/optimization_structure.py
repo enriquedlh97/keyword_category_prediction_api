@@ -40,9 +40,6 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
     model_name = 'bert-base-multilingual-cased'
     label_columns = list(categories_dict.keys())
 
-    # Hyperparameters
-    LEARNING_RATE_SCHEDULE = learning_rate_schedule
-
     # Optimizer scheduler
     steps_per_epoch = len(pd_train) // batch_size
     total_training_steps = steps_per_epoch * epochs
@@ -69,7 +66,7 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
         # MODEL
 
         model = KeywordCategorizer(len(label_columns), label_columns, total_training_steps, warmup_steps,
-                                   model_name, learning_rate, dropout, True)
+                                   model_name, learning_rate, dropout, True, learning_rate_schedule)
 
         # Initialize trainer - Requires GPU
 
