@@ -37,21 +37,17 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
     # Temporary sampling
     pd_train = pd_train.sample(round(pd_train.shape[0] * .05))
 
-    MODEL_NAME = 'bert-base-multilingual-cased'
-    LABEL_COLUMNS = list(categories_dict.keys())
+    # Model details
+    model_name = 'bert-base-multilingual-cased'
+    label_columns = list(categories_dict.keys())
 
     # Hyperparameters
-    MAX_TOKEN_COUNT = max_token_count
-    N_EPOCHS = epochs
-    BATCH_SIZE = batch_size
-    LEARNING_RATE = learning_rate
-    DROPOUT = dropout
     LEARNING_RATE_SCHEDULE = learning_rate_schedule
 
     # Optimizer scheduler
-    STEPS_PER_EPOCH = len(pd_train) // BATCH_SIZE
-    TOTAL_TRAINING_STEPS = STEPS_PER_EPOCH * N_EPOCHS
-    WARMUP_STEPS = TOTAL_TRAINING_STEPS // 5
+    steps_per_epoch = len(pd_train) // batch_size
+    total_training_steps = steps_per_epoch * epochs
+    warmup_steps = total_training_steps // 5
 
     # For fold validation loss results
     fold_validation_results = []
@@ -66,23 +62,22 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
         # DATASET
         data_module = KeywordDataModule(pd_train.filter(items=train_ids, axis=0),
                                         pd_train.filter(items=test_ids, axis=0),
-                                        BertTokenizer.from_pretrained(MODEL_NAME),
-                                        LABEL_COLUMNS,
-                                        BATCH_SIZE,
-                                        MAX_TOKEN_COUNT)
+                                        BertTokenizer.from_pretrained(model_name),
+                                        label_columns,
+                                        batch_size,
+                                        max_token_count)
 
         # MODEL
 
-        model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STEPS, WARMUP_STEPS,
-                                   MODEL_NAME, LEARNING_RATE, DROPOUT, True)
+        model = KeywordCategorizer(len(label_columns), label_columns, total_training_steps, warmup_steps,
+                                   model_name, learning_rate, dropout, True)
 
         # Initialize trainer - Requires GPU
 
         trainer = pl.Trainer(
-            # logger=logger,
-            # checkpoint_callback=True,
-            # callbacks=[checkpoint_callback, early_stopping_callback],
-            max_epochs=N_EPOCHS,
+            logger=False,
+            checkpoint_callback=False,
+            max_epochs=epochs,
             gpus=1,  # If no GPU available comment this line
             progress_bar_refresh_rate=10
         )
@@ -97,7 +92,6 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
 
         if verbose >= 2:
             # Print accuracy
-            # print('Validation loss for fold %d: %d %%' % (fold + 1, fold_validation_loss[0]['val_loss']))
             print(f"Validation loss for fold {fold + 1}: {fold_validation_loss[0]['val_loss']}%")
             print('--------------------------------')
 
