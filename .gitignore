@@ -9,6 +9,7 @@ assets/
 lightning_logs/
 checkpoints/
 dataset/
+logs/
 
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
