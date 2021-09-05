@@ -46,3 +46,13 @@ def test_models(pd_data, models, vectorizers, label_columns):
         pd_auc_roc_results.rename(columns={'Average precision': f"Average precision - {category}"}, inplace=True)
 
     return pd_avg_precision_results.transpose(), pd_auc_roc_results.transpose()
+
+
+def initialize_models(models, hyperparameters):
+    initialized_models = []
+
+    for model, hyperparams in zip(models, hyperparameters):
+        model_init = model[1](hyperparams)
+        initialized_models.append([model[0], model_init])
+
+    return initialized_models
