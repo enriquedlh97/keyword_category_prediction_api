@@ -12,8 +12,8 @@ import time
 
 # Parse arguments
 parser = argparse.ArgumentParser()
-parser.add_argument('--i', type=int, default=1, help="Set number of steps for random exploration")
-parser.add_argument('--n', type=int, default=2, help="Set number of steps for bayesian optimization")
+parser.add_argument('--i', type=int, default=2, help="Set number of steps for random exploration")
+parser.add_argument('--n', type=int, default=5, help="Set number of steps for bayesian optimization")
 args = parser.parse_args()
 
 start_time = time.time()
@@ -33,7 +33,7 @@ n_iter = args.n
 # Bounded region of parameter space
 pbounds = {
     'max_token_count': (33, 60),
-    'epochs': (1, 1.1),
+    'epochs': (2, 2.1),
     'batch_size': (8, 128),
     'learning_rate': (5e-5, 1e-4),
     'dropout': (0, 1),

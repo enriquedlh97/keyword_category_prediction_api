@@ -101,7 +101,7 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
     return np.array(fold_validation_results).mean()
 
 
-def evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule, k_folds=5,
+def evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule, k_folds=2,
                    verbose=1):
     # Fix hyperparameters
     max_token_count = round(max_token_count)
