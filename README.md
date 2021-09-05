@@ -438,6 +438,11 @@ Finally, go into the `environment_no_builds.yml` and look for the following pack
 - vs2015_runtime=14.27.29016
 - win_inet_pton=1.1.0
 - wincertstore=0.2
+- m2w64-libwinpthread-git=5.0.0.4634.697f757
+- msys2-conda-epoch=20160418
+- m2w64-gmp=6.1.0
+- m2w64-gcc-libgfortran=5.3.0
+- m2w64-gcc-libs-core=5.3.0
 ```
 Then, add a `#` before each of them. They should end up looking like this. 
 ```
@@ -445,6 +450,12 @@ Then, add a `#` before each of them. They should end up looking like this.
 # - vs2015_runtime=14.27.29016
 # - win_inet_pton=1.1.0
 # - wincertstore=0.2
+# - m2w64-libwinpthread-git=5.0.0.4634.697f757
+# - msys2-conda-epoch=20160418
+# - m2w64-gmp=6.1.0
+# - m2w64-gcc-libgfortran=5.3.0
+# - m2w64-gcc-libs-core=5.3.0
+# - m2w64-gcc-libs=5.3.0
 ```
 
 ## Resources
