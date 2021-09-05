@@ -43,7 +43,7 @@ def build_category_datasets(pd_data):
 def remove_alphanumeric():
     """ Removes numbers that have letters attached
 
-    :return:
+    :return: function instance for removing numbers that have letters attached
     """
     return lambda x: re.sub('\w*\d\w*', ' ', x)
 
@@ -51,7 +51,7 @@ def remove_alphanumeric():
 def process_punctuation_and_lower_cased():
     """ Sets all strings to lower case and replaces punctuation with white space
 
-    :return:
+    :return: function instance for setting all strings to lower case and replaces punctuation with white space
     """
     return lambda x: re.sub('[%s]' % re.escape(string.punctuation), ' ', x.lower())
 
@@ -59,7 +59,7 @@ def process_punctuation_and_lower_cased():
 def process_new_lines():
     """ Replaces new lines (\n) with white spaces
 
-    :return:
+    :return: function instance for replacing new lines (\n) with white spaces
     """
     return lambda x: re.sub("\n", " ", x)
 
@@ -67,13 +67,23 @@ def process_new_lines():
 def remove_non_ascii():
     """ Removes non-ascii characters
 
-    :return:
+    :return: function instance for removing non-ascii characters
     """
     return lambda x: re.sub(r'[^\x00-\x7f]', r' ', x)
 
 
-def get_and_preprocess_data():
+def get_and_preprocess_data(train=True, test=True,
+                            train_path="dataset/keyword_categories/keyword_categories/keyword_categories.train.jsonl",
+                            test_path="dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl"):
 
-    return
+    pd_train, pd_test = get_data(train=train, test=test, train_path=train_path, test_path=test_path)
 
+    pd_train_dict = build_category_datasets(pd_train)
+    pd_test_dict = build_category_datasets(pd_test)
 
+    if train and test:
+        return pd_train_dict, pd_test_dict
+    elif train and test is False:
+        return pd_train_dict
+    elif train is False and test:
+        return pd_test_dict
