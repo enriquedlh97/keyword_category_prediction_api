@@ -18,11 +18,11 @@ args = parser.parse_args()
 
 start_time = time.time()
 
-if not os.path.exists('logs'):
-    os.makedirs('logs')
+if not os.path.exists('hyperparameter_optimization/bert_base_multilingual_cased/logs'):
+    os.makedirs('hyperparameter_optimization/bert_base_multilingual_cased/logs')
 
 # Set path to logs
-path_to_logs = 'logs'
+path_to_logs = 'hyperparameter_optimization/bert_base_multilingual_cased/logs'
 
 logger = JSONLogger(path="{path}/logs.json".format(path=path_to_logs))
 
