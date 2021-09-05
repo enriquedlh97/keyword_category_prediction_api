@@ -101,7 +101,7 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
     return np.array(fold_validation_results).mean()
 
 
-def evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule, k_folds=10,
+def evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule, k_folds=2,
                    verbose=1):
     # Fix hyperparameters
     max_token_count = round(max_token_count)
@@ -130,16 +130,3 @@ def get_schedule(schedule):
         schedule = get_polynomial_decay_schedule_with_warmup
 
     return schedule
-
-
-# if __name__ == "__main__":
-#     max_token_count = 40
-#     epochs = 1
-#     batch_size = 1
-#     learning_rate = 2e-5
-#     dropout = 0.12
-#     learning_rate_schedule = 0.7  # Should select get_linear_schedule_with_warmup
-#
-#     cv_loss = evaluate_model(max_token_count, epochs, batch_size, learning_rate, dropout, learning_rate_schedule)
-#
-#     print(cv_loss)
