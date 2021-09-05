@@ -35,7 +35,7 @@ pbounds = {
     'max_token_count': (33, 60),
     'epochs': (1, 1.1),
     'batch_size': (8, 128),
-    'learning_rate': (1e-4, 5e-5),
+    'learning_rate': (5e-5, 1e-4),
     'dropout': (0, 1),
     'learning_rate_schedule': (0, 1),
 }
