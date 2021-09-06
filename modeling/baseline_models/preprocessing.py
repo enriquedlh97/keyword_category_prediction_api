@@ -4,38 +4,19 @@ import re
 import string
 
 
-def build_category_datasets(pd_data):
+def build_category_datasets(pd_data, label_columns):
     """ Separates dataset into sections for each category
 
+    :param label_columns:
     :param pd_data:
     :return:
     """
 
+    category_datasets_dict = {}
+
     # Builds dictionary with all dataframes
-    category_datasets_dict = {
-        'pd_health': pd_data.reset_index().loc[:, ['index', 'keyword', 'Health']],
-        'pd_vehicles': pd_data.reset_index().loc[:, ['index', 'keyword', 'Vehicles']],
-        'pd_hobbies': pd_data.reset_index().loc[:, ['index', 'keyword', 'Hobbies & Leisure']],
-        'pd_food': pd_data.reset_index().loc[:, ['index', 'keyword', 'Food & Groceries']],
-        'pd_retailers': pd_data.reset_index().loc[:, ['index', 'keyword', 'Retailers & General Merchandise']],
-        'pd_arts': pd_data.reset_index().loc[:, ['index', 'keyword', 'Arts & Entertainment']],
-        'pd_jobs': pd_data.reset_index().loc[:, ['index', 'keyword', 'Jobs & Education']],
-        'pd_law': pd_data.reset_index().loc[:, ['index', 'keyword', 'Law & Government']],
-        'pd_home': pd_data.reset_index().loc[:, ['index', 'keyword', 'Home & Garden']],
-        'pd_finance': pd_data.reset_index().loc[:, ['index', 'keyword', 'Finance']],
-        'pd_computers': pd_data.reset_index().loc[:, ['index', 'keyword', 'Computers & Consumer Electronics']],
-        'pd_internet': pd_data.reset_index().loc[:, ['index', 'keyword', 'Internet & Telecom']],
-        'pd_sports': pd_data.reset_index().loc[:, ['index', 'keyword', 'Sports & Fitness']],
-        'pd_dining': pd_data.reset_index().loc[:, ['index', 'keyword', 'Dining & Nightlife']],
-        'pd_business': pd_data.reset_index().loc[:, ['index', 'keyword', 'Business & Industrial']],
-        'pd_gifts': pd_data.reset_index().loc[:, ['index', 'keyword', 'Occasions & Gifts']],
-        'pd_travel': pd_data.reset_index().loc[:, ['index', 'keyword', 'Travel & Tourism']],
-        'pd_news': pd_data.reset_index().loc[:, ['index', 'keyword', 'News, Media & Publications']],
-        'pd_apparel': pd_data.reset_index().loc[:, ['index', 'keyword', 'Apparel']],
-        'pd_beauty': pd_data.reset_index().loc[:, ['index', 'keyword', 'Beauty & Personal Care']],
-        'pd_family': pd_data.reset_index().loc[:, ['index', 'keyword', 'Family & Community']],
-        'pd_real_estate': pd_data.reset_index().loc[:, ['index', 'keyword', 'Real Estate']]
-    }
+    for category in label_columns:
+        category_datasets_dict[category] = pd_data.reset_index().loc[:, ['index', 'keyword', category]]
 
     return category_datasets_dict
 
@@ -77,10 +58,11 @@ def get_and_preprocess_data(train=True, test=True,
                             test_path="dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl",
                             sampling=1):
 
-    pd_train, pd_test, label_columns = get_data(train=train, test=test, train_path=train_path, test_path=test_path, sampling=sampling)
+    pd_train, pd_test, label_columns = get_data(train=train, test=test, train_path=train_path, test_path=test_path,
+                                                sampling=sampling)
 
-    pd_train_dict = build_category_datasets(pd_train)
-    pd_test_dict = build_category_datasets(pd_test)
+    pd_train_dict = build_category_datasets(pd_train, label_columns)
+    pd_test_dict = build_category_datasets(pd_test, label_columns)
 
     if train and test:
         return pd_train_dict, pd_test_dict, label_columns
