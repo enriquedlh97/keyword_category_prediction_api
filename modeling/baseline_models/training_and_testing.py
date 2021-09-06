@@ -67,7 +67,7 @@ def test_models(pd_data, model_name, label_columns, models_and_params=None, verb
     return pd_avg_precision_results.transpose(), pd_auc_roc_results.transpose()
 
 
-def build_dummy_dict(model_name, model_path):
+def build_dummy_dict(model_name, model_path='assets/logistic_regression'):
     pd_train_dict, pd_test_dict, label_columns = get_and_preprocess_data(train=True, test=True, sampling=0.001)
     models_and_params = {model_name: pd_train_dict}
     models_and_params = set_model_and_vectorizer_params(hyperparams=None, models_and_params=models_and_params,
