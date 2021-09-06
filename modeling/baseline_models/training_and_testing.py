@@ -56,3 +56,13 @@ def initialize_models(models, hyperparameters):
         initialized_models.append([model[0], model_init])
 
     return initialized_models
+
+
+def initialize_vectorizers(vectorizers, parameters):
+    initialized_vectorizers = []
+
+    for vectorizer, params in zip(vectorizers, parameters):
+        vectorizer_init = vectorizer(params)
+        initialized_vectorizers.append([vectorizer_init])
+
+    return initialized_vectorizers
