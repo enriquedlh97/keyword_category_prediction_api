@@ -20,8 +20,10 @@ warnings.filterwarnings("ignore")
 # Parse arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--d', type=int, default=True, help="Use default parameters for models and vectorizers")
+parser.add_argument('--s', type=int, default=True, help="Define sampling proportion fo data")
 args = parser.parse_args()
 default = args.d
+sampling = args.s
 
 # Get model and vectorizer hyperparameters
 with open("training_and_testing/logistic_regression/hyperparameters.json") as json_file:
@@ -36,7 +38,7 @@ else:  # @TODO: add loading of optimized hyperparameters
     pass
 
 # Data fetching and preprocessing, and basic set up
-pd_train_dict, pd_test_dict, label_columns = get_and_preprocess_data(train=True, test=True, sampling=.05)
+pd_train_dict, pd_test_dict, label_columns = get_and_preprocess_data(train=True, test=True, sampling=sampling)
 models_and_params = {model_name: pd_train_dict}
 hyperparams = load_hyperparams(model_params_dict=lr_params_dict,
                                vectorizer_params_dict=lr_vectorizer_params_dict,
