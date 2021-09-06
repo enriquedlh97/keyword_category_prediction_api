@@ -138,3 +138,19 @@ def load_trained_models(model_path='assets/logistic_regression', category=None, 
         return trained_vectorizer
     if not vectorizer and model:
         return trained_model
+
+
+def load_hyperparams(model_params_dict, vectorizer_params_dict, label_columns, default=False):
+    hyperparams = {}
+    if default:
+        # The hyperparameters will be loaded as dictionaries. Here we use the default parameters for all models
+        for category in label_columns:
+            hyperparams[category] = {
+                'model': model_params_dict,
+                'vectorizer': vectorizer_params_dict
+            }
+    else:
+        # @TODO: implement loading of optimized hyperparameters
+        pass
+
+    return hyperparams
