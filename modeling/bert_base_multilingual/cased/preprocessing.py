@@ -69,13 +69,16 @@ def get_data(train=True, test=True,
     pd_train = add_category_columns(pd_train, categories_dict)
     pd_test = add_category_columns(pd_test, categories_dict)
 
+    # Get category names into list
+    label_columns = pd_train.columns.tolist()[2:]
+
     # Temporary sampling
     pd_train = pd_train.sample(round(pd_train.shape[0] * sampling))
     pd_test = pd_test.sample(round(pd_test.shape[0] * sampling))
 
     if train and test:
-        return pd_train, pd_test
+        return pd_train, pd_test, label_columns
     elif train and test is False:
-        return pd_train
+        return pd_train, label_columns
     elif train is False and test:
-        return pd_test
+        return pd_test, label_columns
