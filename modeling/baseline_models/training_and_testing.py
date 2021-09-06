@@ -128,8 +128,16 @@ def save_trained_models(models_and_params, label_columns):
     return None
 
 
-def load_trained_models(model_path, category, model=True, vectorizer=True):
-    pass
+def load_trained_models(model_path='assets/logistic_regression', category=None, model=True, vectorizer=True):
+    trained_model = joblib.load("".join([model_path, '/', category.lower().replace(" ", "_"), '/model/model.sav']))
+    trained_vectorizer = joblib.load("".join([model_path, '/', category.lower().replace(" ", "_"),
+                                      '/vectorizer/vectorizer.sav']))
+    if model and vectorizer:
+        return trained_model, trained_vectorizer
+    if not model and vectorizer:
+        return trained_vectorizer
+    if not vectorizer and model:
+        return trained_model
 
 
 def train_all_models():
