@@ -105,7 +105,7 @@ trainer = pl.Trainer(
     progress_bar_refresh_rate=10
 )
 
-# Start training
+# Start training_and_testing
 
 trainer.fit(model, data_module)
 
