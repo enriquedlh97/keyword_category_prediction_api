@@ -1,5 +1,8 @@
 from sklearn.metrics import roc_auc_score, average_precision_score
+from modeling.baseline_models.preprocessing import get_and_preprocess_data
 import pandas as pd
+import joblib
+import os
 
 
 def train_category(pd_data, category, model, vectorizer):
@@ -37,7 +40,7 @@ def train_models(models_and_params, model_name, verbose=1):
     return models_and_params
 
 
-def test_models(pd_data, models_and_params, model_name, label_columns, verbose=1):
+def test_models(pd_data, model_name, label_columns, models_and_params=None, verbose=1):
     pd_avg_precision_results, pd_auc_roc_results = pd.DataFrame(columns=[label_columns], index=[model_name]), \
                                                    pd.DataFrame(columns=[label_columns], index=[model_name])
 
@@ -64,24 +67,68 @@ def test_models(pd_data, models_and_params, model_name, label_columns, verbose=1
     return pd_avg_precision_results.transpose(), pd_auc_roc_results.transpose()
 
 
-def set_model_and_vectorizer_params(hyperparams, models_and_params, label_columns, model, model_name, vectorizer):
-    for category in label_columns:
-        # Initialize model with hyperparameters
-        initialized_model = model(**hyperparams[category]['model'])
-        # Initialize vectorizer with parameters
-        initialized_vectorizer = vectorizer(**hyperparams[category]['vectorizer'])
-
-        models_and_params[model_name][category]['model'] = initialized_model
-        models_and_params[model_name][category]['vectorizer'] = initialized_vectorizer
+def build_dummy_dict(model_name, model_path):
+    pd_train_dict, pd_test_dict, label_columns = get_and_preprocess_data(train=True, test=True, sampling=0.001)
+    models_and_params = {model_name: pd_train_dict}
+    models_and_params = set_model_and_vectorizer_params(hyperparams=None, models_and_params=models_and_params,
+                                                        label_columns=label_columns, model=None,
+                                                        model_name=model_name, vectorizer=None, model_path=model_path)
 
     return models_and_params
 
 
-def save_trained_models():
-    pass
+def set_model_and_vectorizer_params(hyperparams, models_and_params, label_columns, model, model_name, vectorizer,
+                                    model_path=None):
+
+    for category in label_columns:
+        if hyperparams is not None:
+            # Initialize model with hyperparameters
+            initialized_model = model(**hyperparams[category]['model'])
+            # Initialize vectorizer with parameters
+            initialized_vectorizer = vectorizer(**hyperparams[category]['vectorizer'])
+
+            models_and_params[model_name][category]['model'] = initialized_model
+            models_and_params[model_name][category]['vectorizer'] = initialized_vectorizer
+        else:  # Load models
+            models_and_params[model_name][category]['model'], \
+            models_and_params[model_name][category]['vectorizer'] = load_trained_models(model_path, category)
+
+    return models_and_params
 
 
-def load_trained_models():
+def save_trained_models(models_and_params, label_columns):
+
+    if not os.path.exists('assets'):
+        os.makedirs('assets')
+
+    model_name = list(models_and_params.keys())[0].lower().replace(" ", "_")
+
+    if not os.path.exists(f"assets/{model_name}"):
+        os.makedirs(f"assets/{model_name}")
+
+    for category in label_columns:
+        category_name = category.lower().replace(" ", "_")
+        if not os.path.exists(f"assets/{model_name}/{category_name}"):
+            os.makedirs(f"assets/{model_name}/{category_name}")
+
+        if not os.path.exists(f"assets/{model_name}/{category_name}/model"):
+            os.makedirs(f"assets/{model_name}/{category_name}/model")
+
+        if not os.path.exists(f"assets/{model_name}/{category_name}/vectorizer"):
+            os.makedirs(f"assets/{model_name}/{category_name}/vectorizer")
+
+        # Save models
+        joblib.dump(models_and_params[list(models_and_params.keys())[0]][category]['model'],
+                    f"assets/{model_name}/{category_name}/model/model.sav")
+        print(f"Model '{model_name}' for category '{category}' saved", flush=True)
+        joblib.dump(models_and_params[list(models_and_params.keys())[0]][category]['vectorizer'],
+                    f"assets/{model_name}/{category_name}/vectorizer/vectorizer.sav")
+        print(f"Vectorizer for model '{model_name}' for category '{category}' saved", flush=True)
+
+    return None
+
+
+def load_trained_models(model_path, category, model=True, vectorizer=True):
     pass
 
 
