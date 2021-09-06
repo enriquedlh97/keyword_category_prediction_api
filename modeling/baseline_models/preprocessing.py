@@ -74,9 +74,10 @@ def remove_non_ascii():
 
 def get_and_preprocess_data(train=True, test=True,
                             train_path="dataset/keyword_categories/keyword_categories/keyword_categories.train.jsonl",
-                            test_path="dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl"):
+                            test_path="dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl",
+                            sampling=1):
 
-    pd_train, pd_test = get_data(train=train, test=test, train_path=train_path, test_path=test_path)
+    pd_train, pd_test = get_data(train=train, test=test, train_path=train_path, test_path=test_path, sampling=sampling)
 
     pd_train_dict = build_category_datasets(pd_train)
     pd_test_dict = build_category_datasets(pd_test)
