@@ -4,7 +4,7 @@ import re
 import string
 
 
-def build_category_datasets(pd_data, label_columns):
+def build_category_datasets(pd_data, label_columns, train=True):
     """ Separates dataset into sections for each category
 
     :param label_columns:
@@ -16,11 +16,14 @@ def build_category_datasets(pd_data, label_columns):
 
     # Builds dictionary with all dataframes
     for category in label_columns:
-        category_datasets_dict[category] = {
-            'data': pd_data.reset_index().loc[:, ['index', 'keyword', category]],
-            'model': None,
-            'vectorizer': None
-        }
+        if train:
+            category_datasets_dict[category] = {
+                'data': pd_data.reset_index().loc[:, ['index', 'keyword', category]],
+                'model': None,
+                'vectorizer': None
+            }
+        else:
+            category_datasets_dict[category] = pd_data.reset_index().loc[:, ['index', 'keyword', category]]
 
     return category_datasets_dict
 
@@ -66,7 +69,7 @@ def get_and_preprocess_data(train=True, test=True,
                                                 sampling=sampling)
 
     pd_train_dict = build_category_datasets(pd_train, label_columns)
-    pd_test_dict = build_category_datasets(pd_test, label_columns)
+    pd_test_dict = build_category_datasets(pd_test, label_columns, train=False)
 
     if train and test:
         return pd_train_dict, pd_test_dict, label_columns
