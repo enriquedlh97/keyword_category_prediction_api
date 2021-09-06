@@ -21,17 +21,20 @@ def test_category(pd_data, category, model, vectorizer, avg_precision=True, roc_
         return {'AUC ROC': [roc_auc_score(model.predict(x_test_matrix), y_test)]}
 
 
-def train_models(pd_data, models, vectorizers, label_columns):
+def train_models(pd_data, models, vectorizers, label_columns, verbose=1):
     trained_models = []
 
     for category, model, vectorizer in zip(label_columns, models, vectorizers):
         trained_model = train_category(pd_data=pd_data, category=category, model=model[1], vectorizer=vectorizer)
         trained_models.append([model[0], trained_model])
 
+        if verbose >= 1:
+            print(f"Model: {model[0]}, Category: {category} - Training done")
+
     return trained_models
 
 
-def test_models(pd_data, models, vectorizers, label_columns):
+def test_models(pd_data, models, vectorizers, label_columns, verbose=1):
     pd_avg_precision_results, pd_auc_roc_results = pd.DataFrame(), pd.DataFrame()
 
     for category, model, vectorizer in zip(label_columns, models, vectorizers):
@@ -45,6 +48,9 @@ def test_models(pd_data, models, vectorizers, label_columns):
         pd_auc_roc_results[category] = pd.DataFrame(auc_roc_score_data, index=[model[0]])
         pd_auc_roc_results.rename(columns={'Average precision': f"Average precision - {category}"}, inplace=True)
 
+        if verbose >= 1:
+            print(f"Model: {model[0]}, Category: {category} - Testing done")
+
     return pd_avg_precision_results.transpose(), pd_auc_roc_results.transpose()
 
 
@@ -52,7 +58,7 @@ def initialize_models(models, hyperparameters):
     initialized_models = []
 
     for model, hyperparams in zip(models, hyperparameters):
-        model_init = model[1](hyperparams)
+        model_init = model[1]().set_params(**hyperparams)
         initialized_models.append([model[0], model_init])
 
     return initialized_models
@@ -62,7 +68,7 @@ def initialize_vectorizers(vectorizers, parameters):
     initialized_vectorizers = []
 
     for vectorizer, params in zip(vectorizers, parameters):
-        vectorizer_init = vectorizer(params)
-        initialized_vectorizers.append([vectorizer_init])
+        vectorizer_init = vectorizer().set_params(**params)
+        initialized_vectorizers.append(vectorizer_init)
 
     return initialized_vectorizers
