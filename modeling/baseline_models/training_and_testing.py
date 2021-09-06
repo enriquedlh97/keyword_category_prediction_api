@@ -1,6 +1,7 @@
 from sklearn.metrics import roc_auc_score, average_precision_score
 from modeling.baseline_models.preprocessing import get_and_preprocess_data
 import pandas as pd
+import numpy as np
 import joblib
 import os
 
@@ -26,8 +27,8 @@ def test_category(pd_data, category, model, vectorizer, avg_precision=True, roc_
 
 def train_models(models_and_params, model_name, verbose=1):
     for category in models_and_params[model_name]:
-        models_and_params[model_name][category]['model'], \
-        models_and_params[model_name][category]['vectorizer'] = train_category(
+        models_and_params[model_name][category]['model'], models_and_params[model_name][category]['vectorizer'] = \
+            train_category(
             pd_data=models_and_params[model_name][category]['data'],
             category=category,
             model=models_and_params[model_name][category]['model'],
@@ -79,7 +80,6 @@ def build_dummy_dict(model_name, model_path='assets/logistic_regression'):
 
 def set_model_and_vectorizer_params(hyperparams, models_and_params, label_columns, model, model_name, vectorizer,
                                     model_path=None):
-
     for category in label_columns:
         if hyperparams is not None:
             # Initialize model with hyperparameters
@@ -97,7 +97,6 @@ def set_model_and_vectorizer_params(hyperparams, models_and_params, label_column
 
 
 def save_trained_models(models_and_params, label_columns):
-
     if not os.path.exists('assets'):
         os.makedirs('assets')
 
@@ -131,7 +130,7 @@ def save_trained_models(models_and_params, label_columns):
 def load_trained_models(model_path='assets/logistic_regression', category=None, model=True, vectorizer=True):
     trained_model = joblib.load("".join([model_path, '/', category.lower().replace(" ", "_"), '/model/model.sav']))
     trained_vectorizer = joblib.load("".join([model_path, '/', category.lower().replace(" ", "_"),
-                                      '/vectorizer/vectorizer.sav']))
+                                              '/vectorizer/vectorizer.sav']))
     if model and vectorizer:
         return trained_model, trained_vectorizer
     if not model and vectorizer:
@@ -143,6 +142,8 @@ def load_trained_models(model_path='assets/logistic_regression', category=None, 
 def load_hyperparams(model_params_dict, vectorizer_params_dict, label_columns, default=False):
     hyperparams = {}
     if default:
+        vectorizer_params_dict['dtype'] = eval(vectorizer_params_dict['dtype'])
+        vectorizer_params_dict['ngram_range'] = eval(vectorizer_params_dict['ngram_range'])
         # The hyperparameters will be loaded as dictionaries. Here we use the default parameters for all models
         for category in label_columns:
             hyperparams[category] = {
