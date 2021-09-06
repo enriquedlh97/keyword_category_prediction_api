@@ -2,201 +2,201 @@
   "DEFAULT": {
     "MODEL": {
       "penalty": "l2",
-      "dual": "False",
+      "dual": false,
       "tol": 0.0001,
       "C": 1.0,
-      "fit_intercept": "True",
+      "fit_intercept": true,
       "intercept_scaling": 1,
-      "class_weight": "None",
-      "random_state": "None",
+      "class_weight": null,
+      "random_state": null,
       "solver": "lbfgs",
       "max_iter": 100,
       "multi_class": "auto",
       "verbose": 0,
-      "warm_start": "False",
-      "n_jobs": "None",
-      "l1_ratio": "None"
+      "warm_start": false,
+      "n_jobs": null,
+      "l1_ratio": null
     },
     "VECTORIZER": {
       "NAME": "TfidfVectorizer",
       "PARAMS": {
         "analyzer": "word",
-        "binary": "False",
+        "binary": false,
         "decode_error": "strict",
         "dtype": "np.float64",
         "encoding": "utf-8",
         "input": "content",
-        "lowercase": "True",
+        "lowercase": true,
         "max_df": 1.0,
-        "max_features": "None",
+        "max_features": null,
         "min_df": 1,
         "ngram_range": "(1, 1)",
         "norm": "l2",
-        "preprocessor": "None",
-        "smooth_idf": "True",
-        "stop_words": "None",
-        "strip_accents": "None",
-        "sublinear_tf": "False",
+        "preprocessor": null,
+        "smooth_idf": true,
+        "stop_words": null,
+        "strip_accents": null,
+        "sublinear_tf": false,
         "token_pattern": "(?u)\\b\\w\\w+\\b",
-        "tokenizer": "None",
-        "use_idf": "True",
-        "vocabulary": "None"
+        "tokenizer": null,
+        "use_idf": false,
+        "vocabulary": null
       }
     }
   },
   "OPTIMIZED": {
     "Health": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Vehicles": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Hobbies & Leisure": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Food & Groceries": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Retailers & General Merchandise": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Arts & Entertainment": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Jobs & Education": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Law & Government": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Home & Garden": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Finance": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Computers & Consumer Electronics": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Internet & Telecom": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Sports & Fitness": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Dining & Nightlife": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Business & Industrial": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Occasions & Gifts": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Travel & Tourism": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "News, Media & Publications": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Apparel": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Beauty & Personal Care": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Family & Community": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     },
     "Real Estate": {
-      "MODEL": "None",
+      "MODEL": null,
       "VECTORIZER": {
-        "NAME": "None",
-        "PARAMS": "None"
+        "NAME": null,
+        "PARAMS": null
       }
     }
   }
