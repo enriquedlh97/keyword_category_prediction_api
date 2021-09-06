@@ -75,3 +75,11 @@ def set_model_and_vectorizer_params(hyperparams, models_and_params, label_column
         models_and_params[model_name][category]['vectorizer'] = initialized_vectorizer
 
     return models_and_params
+
+
+def train_all_models():
+    pass
+
+
+def test_all_models():
+    pass
