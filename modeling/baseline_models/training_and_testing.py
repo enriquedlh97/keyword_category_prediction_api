@@ -138,11 +138,3 @@ def load_trained_models(model_path='assets/logistic_regression', category=None, 
         return trained_vectorizer
     if not vectorizer and model:
         return trained_model
-
-
-def train_all_models():
-    pass
-
-
-def test_all_models():
-    pass
