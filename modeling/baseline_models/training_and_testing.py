@@ -7,7 +7,7 @@ def train_category(pd_data, category, model, vectorizer):
 
     x_train_matrix = vectorizer.fit_transform(x_train)
 
-    return model.fit(x_train_matrix, y_train)
+    return model.fit(x_train_matrix, y_train), vectorizer
 
 
 def test_category(pd_data, category, model, vectorizer, avg_precision=True, roc_auc=False):
@@ -23,9 +23,10 @@ def test_category(pd_data, category, model, vectorizer, avg_precision=True, roc_
 
 def train_models(pd_data, models, vectorizers, label_columns, verbose=1):
     trained_models = []
+    fitted_vectorizers = []
 
     for category, model, vectorizer in zip(label_columns, models, vectorizers):
-        trained_model = train_category(pd_data=pd_data, category=category, model=model[1], vectorizer=vectorizer)
+        trained_model, vectorizer = train_category(pd_data=pd_data, category=category, model=model[1], vectorizer=vectorizer)
         trained_models.append([model[0], trained_model])
 
         if verbose >= 1:
@@ -54,21 +55,15 @@ def test_models(pd_data, models, vectorizers, label_columns, verbose=1):
     return pd_avg_precision_results.transpose(), pd_auc_roc_results.transpose()
 
 
-def initialize_models(models, hyperparameters):
-    initialized_models = []
+def set_model_and_vectorizer_params(hyperparams, models_and_params, label_columns, model, model_name, vectorizer):
 
-    for model, hyperparams in zip(models, hyperparameters):
-        model_init = model[1]().set_params(**hyperparams)
-        initialized_models.append([model[0], model_init])
+    for category in label_columns:
+        # Initialize model with hyperparameters
+        initialized_model = model(**hyperparams[category]['model'])
+        # Initialize vectorizer with parameters
+        initialized_vectorizer = vectorizer(**hyperparams[category]['vectorizer'])
 
-    return initialized_models
+        models_and_params[model_name][category]['model'] = initialized_model
+        models_and_params[model_name][category]['vectorizer'] = initialized_vectorizer
 
-
-def initialize_vectorizers(vectorizers, parameters):
-    initialized_vectorizers = []
-
-    for vectorizer, params in zip(vectorizers, parameters):
-        vectorizer_init = vectorizer().set_params(**params)
-        initialized_vectorizers.append(vectorizer_init)
-
-    return initialized_vectorizers
+    return models_and_params

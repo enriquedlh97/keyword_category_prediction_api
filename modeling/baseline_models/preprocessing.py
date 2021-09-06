@@ -16,7 +16,11 @@ def build_category_datasets(pd_data, label_columns):
 
     # Builds dictionary with all dataframes
     for category in label_columns:
-        category_datasets_dict[category] = pd_data.reset_index().loc[:, ['index', 'keyword', category]]
+        category_datasets_dict[category] = {
+            'data': pd_data.reset_index().loc[:, ['index', 'keyword', category]],
+            'model': None,
+            'vectorizer': None
+        }
 
     return category_datasets_dict
 
