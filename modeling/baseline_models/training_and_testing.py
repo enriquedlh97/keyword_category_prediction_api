@@ -59,7 +59,7 @@ def test_models(pd_data, model_name, label_columns, models_and_params=None, verb
                                            vectorizer=models_and_params[model_name][category]['vectorizer'],
                                            avg_precision=False, roc_auc=True)
         pd_auc_roc_results[[category]] = auc_roc_score_data['AUC ROC'][0]
-        pd_auc_roc_results.rename(columns={'Health': f"AUC ROC - {category}"}, inplace=True)
+        pd_auc_roc_results.rename(columns={category: f"AUC ROC - {category}"}, inplace=True)
 
         if verbose >= 1:
             print(f"Model: {model_name}, Category: {category} - Testing done")
