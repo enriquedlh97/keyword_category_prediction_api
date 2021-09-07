@@ -16,11 +16,11 @@ import argparse
 
 # Parse arguments
 parser = argparse.ArgumentParser()
-parser.add_argument('--d', type=bool, default=True, help="Use default parameters for models and vectorizers")
+parser.add_argument('--d', type=bool, dest='d', action='store_false', default=True, help="Use default parameters for models and vectorizers")
 parser.add_argument('--s', type=float, default=1, help="Define sampling proportion fo data")
 parser.add_argument('--m', type=str, default='lr',
                     help="Set model to be trained. 'lr' for Linear Regression. 'svm' for Support Vector Machine. 'rf' for Random Forest")
-parser.add_argument('--w', type=bool, default=True, help="True for ignoring warnings, False otherwise")
+parser.add_argument('--w', type=bool, dest='w', action='store_false', default=True, help="True for ignoring warnings, False otherwise")
 
 args = parser.parse_args()
 if args.m == 'lr':
@@ -36,9 +36,7 @@ elif args.m == 'rf':
 default = args.d
 sampling = args.s
 
-print(f"default: {default}", flush=True)
-
-if not args.w:
+if args.w is True:
     warnings.filterwarnings("ignore")
 
 print(f"Training {model_name}...", flush=True)
@@ -48,12 +46,12 @@ with open(f"training_and_testing/{hyperparams_path}/hyperparameters.json") as js
     model_params = json.load(json_file)
 
 # Model definition
-if default:
+if default is True:
     print('Using default model hyperparameters', flush=True)
     model_params_dict = model_params['DEFAULT']['MODEL']
     print('Using default vectorizer parameters', flush=True)
     vectorizer_params_dict = model_params['DEFAULT']['VECTORIZER']['PARAMS']
-elif not default:  # @TODO: add loading of optimized hyperparameters
+else:  # @TODO: add loading of optimized hyperparameters
     print('Using optimal model hyperparameters', flush=True)
     print('Using optimal vectorizer parameters', flush=True)
 
