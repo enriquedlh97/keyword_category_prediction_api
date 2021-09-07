@@ -27,16 +27,19 @@ parser.add_argument('--m', type=int, default='lr',
 args = parser.parse_args()
 if args.d == 'lr':
     model_name = 'Logistic Regression'
+    hyperparams_path = 'logistic_regression'
 elif args.d == 'svm':
     model_name = 'Support Vector Machine'
+    hyperparams_path = 'support_vector_machine'
 elif args.d == 'rf':
     model_name = 'Random Forest'
+    hyperparams_path = 'random_forest'
 
 default = args.d
 sampling = args.s
 
 # Get model and vectorizer hyperparameters
-with open("training_and_testing/logistic_regression/hyperparameters.json") as json_file:
+with open(f"training_and_testing/{hyperparams_path}/hyperparameters.json") as json_file:
     lr_params = json.load(json_file)
 
 # Model definition
