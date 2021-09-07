@@ -80,25 +80,25 @@ print('Initializing model', flush=True)
 model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STEPS, WARMUP_STEPS, MODEL_NAME,
                            LEARNING_RATE, DROPOUT)
 
-# # TRAINING
-#
-# # Checkpoints and early stopping
-# print('Setting up model checkpoints, tensorboard logger and early stopping', flush=True)
-#
-# if not os.path.exists('assets/bert_training'):
-#     os.makedirs('assets/')
-#
-# checkpoint_callback = ModelCheckpoint(
-#     dirpath="assets/bert_final_training",
-#     filename="{epoch}-{val_loss:.5f}-best-checkpoint",
-#     save_top_k=-1,
-#     verbose=True,
-#     monitor="val_loss",
-#     mode="min"
-# )
-#
-# # b64_l5e-5
-#
+# TRAINING
+
+# Checkpoints and early stopping
+print('Setting up model checkpoints, tensorboard logger and early stopping', flush=True)
+
+if not os.path.exists('assets/bert_training'):
+    os.makedirs('assets/')
+
+checkpoint_callback = ModelCheckpoint(
+    dirpath="assets/bert_final_training",
+    filename="{epoch}-{val_loss:.5f}-best-checkpoint",
+    save_top_k=-1,
+    verbose=True,
+    monitor="val_loss",
+    mode="min"
+)
+
+# b64_l5e-5
+
 # logger = TensorBoardLogger("assets/bert_final_training/lightning_logs", name="keyword-categories")
 #
 # early_stopping_callback = EarlyStopping(monitor='val_loss', patience=N_EPOCHS)
