@@ -86,7 +86,7 @@ model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STE
 print('Setting up model checkpoints, tensorboard logger and early stopping', flush=True)
 
 if not os.path.exists('assets/bert_training'):
-    os.makedirs('assets/')
+    os.makedirs('assets/bert_training')
 
 checkpoint_callback = ModelCheckpoint(
     dirpath="assets/bert_final_training",
@@ -99,22 +99,22 @@ checkpoint_callback = ModelCheckpoint(
 
 # b64_l5e-5
 
-# logger = TensorBoardLogger("assets/bert_final_training/lightning_logs", name="keyword-categories")
-#
-# early_stopping_callback = EarlyStopping(monitor='val_loss', patience=N_EPOCHS)
-#
-# # Initialize trainer - Requires GPU
-#
-# print('Initializing trainer', flush=True)
-# trainer = pl.Trainer(
-#     logger=logger,
-#     checkpoint_callback=True,
-#     callbacks=[checkpoint_callback, early_stopping_callback],
-#     max_epochs=N_EPOCHS,
-#     gpus=1,  # If no GPU available comment this line
-#     progress_bar_refresh_rate=10
-# )
-#
+logger = TensorBoardLogger("assets/bert_final_training/lightning_logs", name="keyword-categories")
+
+early_stopping_callback = EarlyStopping(monitor='val_loss', patience=N_EPOCHS)
+
+# Initialize trainer - Requires GPU
+
+print('Initializing trainer', flush=True)
+trainer = pl.Trainer(
+    logger=logger,
+    checkpoint_callback=True,
+    callbacks=[checkpoint_callback, early_stopping_callback],
+    max_epochs=N_EPOCHS,
+    gpus=1,  # If no GPU available comment this line
+    progress_bar_refresh_rate=10
+)
+
 # # Start training_and_testing
 # print('Training model', flush=True)
 # start_time = time.time()
