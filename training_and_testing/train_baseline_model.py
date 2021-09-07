@@ -25,13 +25,13 @@ parser.add_argument('--m', type=str, default='lr',
                     help="Set model to be trained. 'lr' for Linear Regression. 'svm' for Support Vector Machine. 'rf' for Random Forest")
 
 args = parser.parse_args()
-if args.d == 'lr':
+if args.m == 'lr':
     model_name = 'Logistic Regression'
     hyperparams_path = 'logistic_regression'
-elif args.d == 'svm':
+elif args.m == 'svm':
     model_name = 'Support Vector Machine'
     hyperparams_path = 'support_vector_machine'
-elif args.d == 'rf':
+elif args.m == 'rf':
     model_name = 'Random Forest'
     hyperparams_path = 'random_forest'
 
