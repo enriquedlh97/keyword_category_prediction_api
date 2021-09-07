@@ -60,7 +60,7 @@ pd_test = pd_test.sample(round(pd_test.shape[0] * args.s))
 
 # GLOBAL VARIABLES AND PARAMETERS
 print('Setting hyperparameters', flush=True)
-file = (f"assets/bert_final_training/{model_path}/hyperparams.json", "r")
+file = open(f"assets/bert_final_training/{model_path}/hyperparams.json", "r")
 hyperparams = json.load(file)
 
 MODEL_NAME = 'bert-base-multilingual-cased'
