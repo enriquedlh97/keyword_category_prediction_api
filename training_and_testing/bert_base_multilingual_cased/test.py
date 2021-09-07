@@ -41,7 +41,7 @@ if args.w is True:
     warnings.filterwarnings("ignore")
 
 # Get data
-print('Loading and preprocessing data', flush=True)
+print('Loading and preprocessing test data', flush=True)
 pd_train, pd_test = get_train_test_data(
     train_path="dataset/keyword_categories/keyword_categories/keyword_categories.train.jsonl",
     test_path="dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl"
@@ -60,7 +60,7 @@ pd_test = pd_test.sample(round(pd_test.shape[0] * args.s))
 
 # GLOBAL VARIABLES AND PARAMETERS
 print('Setting hyperparameters', flush=True)
-file = open(f"assets/bert_final_training/{model_path}/hyperparams.json", "w")
+file = (f"assets/bert_final_training/{model_path}/hyperparams.json", "r")
 hyperparams = json.load(file)
 
 MODEL_NAME = 'bert-base-multilingual-cased'
