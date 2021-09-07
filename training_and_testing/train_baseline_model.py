@@ -20,8 +20,18 @@ warnings.filterwarnings("ignore")
 # Parse arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--d', type=int, default=True, help="Use default parameters for models and vectorizers")
-parser.add_argument('--s', type=int, default=True, help="Define sampling proportion fo data")
+parser.add_argument('--s', type=int, default=1, help="Define sampling proportion fo data")
+parser.add_argument('--m', type=int, default='lr',
+                    help="Set model to be trained. 'lr' for Linear Regression. 'svm' for Support Vector Machine. 'rf' for Random Forest")
+
 args = parser.parse_args()
+if args.d == 'lr':
+    model_name = 'Logistic Regression'
+elif args.d == 'svm':
+    model_name = 'Support Vector Machine'
+elif args.d == 'rf':
+    model_name = 'Random Forest'
+
 default = args.d
 sampling = args.s
 
@@ -30,7 +40,6 @@ with open("training_and_testing/logistic_regression/hyperparameters.json") as js
     lr_params = json.load(json_file)
 
 # Model definition
-model_name = 'Logistic Regression'
 if default:
     lr_params_dict = lr_params['DEFAULT']['MODEL']
     lr_vectorizer_params_dict = lr_params['DEFAULT']['VECTORIZER']['PARAMS']
