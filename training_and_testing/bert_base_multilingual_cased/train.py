@@ -17,6 +17,7 @@ from modeling.bert_base_multilingual.cased.metrics import mean_auc_roc, mean_avg
 # General
 import torch
 from tqdm.auto import tqdm
+from datetime import datetime
 import time
 import argparse
 import warnings
@@ -31,7 +32,11 @@ parser.add_argument('--d', type=float, default=0.12, help="Set dropout rate")
 parser.add_argument('--s', type=float, default=1, help="Define sampling proportion for data")
 parser.add_argument('--w', dest='w', action='store_false',
                     default=True, help="True for ignoring warnings, False otherwise")
+parser.add_argument('--n', type=str, default=str(datetime.now()).lower().replace(" ", "_").replace(":", "-"),
+                    help="Define name of training execution. If nothing is specified then the current datetime will be used")
+
 args = parser.parse_args()
+run_name = args.n
 
 if args.w is True:
     warnings.filterwarnings("ignore")
@@ -85,11 +90,14 @@ model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STE
 # Checkpoints and early stopping
 print('Setting up model checkpoints, tensorboard logger and early stopping', flush=True)
 
-if not os.path.exists('assets/bert_training'):
-    os.makedirs('assets/bert_training')
+if not os.path.exists('assets/bert_final_training'):
+    os.makedirs('assets/bert_final_training')
+
+if not os.path.exists(f"assets/bert_final_training/{run_name}"):
+    os.makedirs(f"assets/bert_final_training/{run_name}")
 
 checkpoint_callback = ModelCheckpoint(
-    dirpath="assets/bert_final_training",
+    dirpath=f"assets/bert_final_training/{run_name}",
     filename="{epoch}-{val_loss:.5f}-best-checkpoint",
     save_top_k=-1,
     verbose=True,
@@ -99,7 +107,7 @@ checkpoint_callback = ModelCheckpoint(
 
 # b64_l5e-5
 
-logger = TensorBoardLogger("assets/bert_final_training/lightning_logs", name="keyword-categories")
+logger = TensorBoardLogger(f"assets/bert_final_training/{run_name}lightning_logs", name="keyword-categories")
 
 early_stopping_callback = EarlyStopping(monitor='val_loss', patience=N_EPOCHS)
 
