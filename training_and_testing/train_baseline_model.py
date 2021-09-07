@@ -76,6 +76,7 @@ models_and_params = set_model_and_vectorizer_params(hyperparams=hyperparams,
 start_time = time.time()
 print('Training model', flush=True)
 models_and_params = train_models(models_and_params=models_and_params, model_name=model_name)
+print("The model trained in: %s seconds" % (time.time() - start_time), flush=True)
 
 # Save models
 print('Saving model', flush=True)
