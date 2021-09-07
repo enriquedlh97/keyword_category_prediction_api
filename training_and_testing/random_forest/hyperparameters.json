@@ -1,0 +1,207 @@
+{
+  "DEFAULT": {
+    "MODEL": {
+      "n_estimators": 1,
+      "criterion": "gini",
+      "max_depth": null,
+      "min_samples_split": 2,
+      "min_samples_leaf": 1,
+      "min_weight_fraction_leaf": 0.0,
+      "max_features": "auto",
+      "max_leaf_nodes": null,
+      "min_impurity_decrease": 0.0,
+      "min_impurity_split": null,
+      "bootstrap": true,
+      "oob_score": false,
+      "n_jobs": -1,
+      "random_state": 3,
+      "verbose": 0,
+      "warm_start": false,
+      "class_weight": null,
+      "ccp_alpha": 0.0,
+      "max_samples": null
+    },
+    "VECTORIZER": {
+      "NAME": "TfidfVectorizer",
+      "PARAMS": {
+        "analyzer": "word",
+        "binary": false,
+        "decode_error": "strict",
+        "dtype": "np.float64",
+        "encoding": "utf-8",
+        "input": "content",
+        "lowercase": true,
+        "max_df": 1.0,
+        "max_features": null,
+        "min_df": 1,
+        "ngram_range": "(1, 1)",
+        "norm": "l2",
+        "preprocessor": null,
+        "smooth_idf": true,
+        "stop_words": null,
+        "strip_accents": null,
+        "sublinear_tf": false,
+        "token_pattern": "(?u)\\b\\w\\w+\\b",
+        "tokenizer": null,
+        "use_idf": false,
+        "vocabulary": null
+      }
+    }
+  },
+  "OPTIMIZED": {
+    "Health": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Vehicles": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Hobbies & Leisure": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Food & Groceries": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Retailers & General Merchandise": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Arts & Entertainment": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Jobs & Education": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Law & Government": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Home & Garden": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Finance": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Computers & Consumer Electronics": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Internet & Telecom": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Sports & Fitness": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Dining & Nightlife": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Business & Industrial": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Occasions & Gifts": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Travel & Tourism": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "News, Media & Publications": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Apparel": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Beauty & Personal Care": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Family & Community": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    },
+    "Real Estate": {
+      "MODEL": null,
+      "VECTORIZER": {
+        "NAME": null,
+        "PARAMS": null
+      }
+    }
+  }
+}

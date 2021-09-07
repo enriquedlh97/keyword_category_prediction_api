@@ -1,5 +1,6 @@
 name: keyword_api
 channels:
+  - fastchan
   - pytorch
   - anaconda
   - conda-forge
@@ -10,12 +11,13 @@ dependencies:
   - asgiref=3.4.1=pyhd8ed1ab_0
   - async-timeout=3.0.1=py_1000
   - attrs=21.2.0=pyhd8ed1ab_0
+  - bayesian-optimization=1.1.0=py_0
   - blas=1.0=mkl
   - blinker=1.4=py_1
   - brotlipy=0.7.0=py37hcc03f2d_1001
-  - ca-certificates=2021.5.30=h5b45459_0
+  - ca-certificates=2021.7.5=haa95532_1
   - cachetools=4.2.2=pyhd8ed1ab_0
-  - certifi=2021.5.30=py37h03978a9_0
+  - certifi=2021.5.30=py37haa95532_0
   - cffi=1.14.6=py37hd8e9650_0
   - chardet=4.0.0=py37h03978a9_1
   - charset-normalizer=2.0.0=pyhd8ed1ab_0
@@ -93,7 +95,7 @@ dependencies:
   - rsa=4.7.2=pyh44b312d_0
   - sacremoses=0.0.43=pyh9f0ad1d_0
   - scikit-learn=0.22.2.post1=py37h7208079_0
-  - scipy=1.7.1=py37hb6553fb_0
+  - scipy=1.5.3=py37h6db1a17_0
   - sentencepiece=0.1.95=py37h8c56517_0
   - setuptools=52.0.0=py37haa95532_0
   - six=1.16.0=pyhd3eb1b0_0
