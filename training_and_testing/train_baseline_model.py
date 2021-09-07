@@ -51,7 +51,7 @@ if default:
     model_params_dict = model_params['DEFAULT']['MODEL']
     print('Using default vectorizer parameters', flush=True)
     vectorizer_params_dict = model_params['DEFAULT']['VECTORIZER']['PARAMS']
-else:  # @TODO: add loading of optimized hyperparameters
+elif not default:  # @TODO: add loading of optimized hyperparameters
     print('Using optimal model hyperparameters', flush=True)
     print('Using optimal vectorizer parameters', flush=True)
 
