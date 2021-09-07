@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from torchmetrics import AveragePrecision
 from pytorch_lightning.metrics.functional import auroc
 
@@ -28,3 +29,11 @@ def mean_avg_precision(predictions, labels, label_columns):
         avg_precision_values.append(avg_precision.reshape(-1).numpy()[0])
 
     return np.array(avg_precision_values).mean(), avg_precision_dict
+
+
+def build_pd_results(dictionary, metric):
+    results = {}
+    for category in dictionary:
+        results[f"{metric} - {category}"] = [dictionary[category]]
+
+    return pd.DataFrame.from_dict(results).transpose().rename(columns={0: "BERT"})

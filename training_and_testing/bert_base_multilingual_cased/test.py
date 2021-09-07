@@ -8,7 +8,7 @@ from modeling.bert_base_multilingual.cased.model import KeywordCategorizer
 # Transformer imports
 from transformers import BertTokenizer
 # Metrics
-from modeling.bert_base_multilingual.cased.metrics import mean_auc_roc, mean_avg_precision
+from modeling.bert_base_multilingual.cased.metrics import mean_auc_roc, mean_avg_precision, build_pd_results
 # General
 import torch
 from tqdm.auto import tqdm
@@ -59,10 +59,6 @@ hyperparams = json.load(file)
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
 MAX_TOKEN_COUNT = hyperparams['MAX_TOKEN_COUNT']
-# N_EPOCHS = hyperparams['N_EPOCHS']
-# BATCH_SIZE = hyperparams['BATCH_SIZE']
-# LEARNING_RATE = hyperparams['LEARNING_RATE']
-# DROPOUT = hyperparams['DROPOUT']
 
 # Load model
 print('Loading model', flush=True)
@@ -108,25 +104,16 @@ print('Computing metrics', flush=True)
 # Compute AUC ROC metrics
 
 mean_aucroc, auc_roc_class = mean_auc_roc(predictions, labels, LABEL_COLUMNS)
-
+auc_roc_results = build_pd_results(dictionary=auc_roc_class, metric="AUC ROC")
 print("Mean AUC ROC:", mean_aucroc, "\n\nAUC ROC per category:", auc_roc_class, flush=True)
 
-# Save AUC ROC metrics
-# file_object = open('final_metrics.txt', 'a')
-# file_object.write('Mean AUC ROC:{0}'.format(mean_aucroc))
-# file_object.write('\n\nAUC ROC per category:\n\n')
-# for key, value in auc_roc_class.items():
-#     file_object.write('%s:%s\n' % (key, value))
-
-# Compute Mean Average Precision
+# Compute Mean Average Precision Average precision
 
 mean_avg_prec, avg_prec_class = mean_avg_precision(predictions, labels, LABEL_COLUMNS)
-
+avg_precision_results = build_pd_results(dictionary=avg_prec_class, metric="Average precision")
 print("Mean Average Precision:", mean_avg_prec, "\n\nAverage Precision per category:", avg_prec_class, flush=True)
 
-# Save Mean Average Precision metrics
-# file_object.write('\n\n\n\nMean Average Precision:{0}'.format(mean_avg_prec))
-# file_object.write('\n\nAverage Precision per category::\n\n')
-# for key, value in avg_prec_class.items():
-#     file_object.write('%s:%s\n' % (key, value))
-# file_object.close()
+# Save results
+print("Saving results", flush=True)
+auc_roc_results.to_csv(f"assets/bert_final_training/{model_path}/auc_roc_results.csv")
+avg_precision_results.to_csv(f"assets/bert_final_training/{model_path}/avg_precision_results.csv")
