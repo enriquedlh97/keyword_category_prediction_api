@@ -66,10 +66,10 @@ hyperparams = json.load(file)
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
 MAX_TOKEN_COUNT = hyperparams['MAX_TOKEN_COUNT']
-N_EPOCHS = hyperparams['N_EPOCHS']
-BATCH_SIZE = hyperparams['BATCH_SIZE']
-LEARNING_RATE = hyperparams['LEARNING_RATE']
-DROPOUT = hyperparams['DROPOUT']
+# N_EPOCHS = hyperparams['N_EPOCHS']
+# BATCH_SIZE = hyperparams['BATCH_SIZE']
+# LEARNING_RATE = hyperparams['LEARNING_RATE']
+# DROPOUT = hyperparams['DROPOUT']
 
 # Load model
 print('Loading model', flush=True)
