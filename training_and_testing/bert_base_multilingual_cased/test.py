@@ -22,6 +22,7 @@ parser.add_argument('--w', dest='w', action='store_false',
                     default=True, help="True for ignoring warnings, False otherwise")
 parser.add_argument('--n', type=str, help="Set name of training execution where all model data is")
 parser.add_argument('--p', type=str, help="Set path to model .ckpt file to be tested.")
+parser.add_argument('--v', type=int, default=0, help="Set verbosity. 1 prints metrics at the end. 0 prints nothing")
 
 args = parser.parse_args()
 model_path = args.n
@@ -106,13 +107,15 @@ print('Computing metrics', flush=True)
 
 mean_aucroc, auc_roc_class = mean_auc_roc(predictions, labels, LABEL_COLUMNS)
 auc_roc_results = build_pd_results(dictionary=auc_roc_class, metric="AUC ROC")
-print("Mean AUC ROC:", mean_aucroc, "\n\nAUC ROC per category:", auc_roc_class, flush=True)
+if args.v == 1:
+    print("Mean AUC ROC:", mean_aucroc, "\n\nAUC ROC per category:", auc_roc_class, flush=True)
 
 # Compute Mean Average Precision Average precision
 
 mean_avg_prec, avg_prec_class = mean_avg_precision(predictions, labels, LABEL_COLUMNS)
 avg_precision_results = build_pd_results(dictionary=avg_prec_class, metric="Average precision")
-print("Mean Average Precision:", mean_avg_prec, "\n\nAverage Precision per category:", avg_prec_class, flush=True)
+if args.v == 1:
+    print("Mean Average Precision:", mean_avg_prec, "\n\nAverage Precision per category:", avg_prec_class, flush=True)
 
 # Save results
 print("Saving results", flush=True)
