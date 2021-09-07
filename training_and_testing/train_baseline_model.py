@@ -6,6 +6,8 @@ from modeling.baseline_models.training_and_testing import train_models, set_mode
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 # Models
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC
+from sklearn.ensemble import RandomForestClassifier
 from modeling.baseline_models.training_and_testing import load_hyperparams
 # Other
 import time
@@ -25,12 +27,15 @@ parser.add_argument('--w', dest='w', action='store_false', default=True, help="T
 args = parser.parse_args()
 if args.m == 'lr':
     model_name = 'Logistic Regression'
+    model = LogisticRegression
     hyperparams_path = 'logistic_regression'
 elif args.m == 'svm':
     model_name = 'Support Vector Machine'
+    model = LinearSVC
     hyperparams_path = 'support_vector_machine'
 elif args.m == 'rf':
     model_name = 'Random Forest'
+    model = RandomForestClassifier
     hyperparams_path = 'random_forest'
 
 default = args.d
@@ -68,7 +73,7 @@ print('Setting up model', flush=True)
 models_and_params = set_model_and_vectorizer_params(hyperparams=hyperparams,
                                                     models_and_params=models_and_params,
                                                     label_columns=label_columns,
-                                                    model=LogisticRegression,
+                                                    model=model,
                                                     model_name=model_name,
                                                     vectorizer=eval(model_params['DEFAULT']['VECTORIZER']['NAME']))
 
