@@ -36,6 +36,8 @@ elif args.m == 'rf':
 default = args.d
 sampling = args.s
 
+print(f"default: {default}", flush=True)
+
 if not args.w:
     warnings.filterwarnings("ignore")
 
