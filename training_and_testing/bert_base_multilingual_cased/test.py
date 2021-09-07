@@ -119,11 +119,11 @@ mean_aucroc, auc_roc_class = mean_auc_roc(predictions, labels, LABEL_COLUMNS)
 print("Mean AUC ROC:", mean_aucroc, "\n\nAUC ROC per category:", auc_roc_class, flush=True)
 
 # Save AUC ROC metrics
-file_object = open('final_metrics.txt', 'a')
-file_object.write('Mean AUC ROC:{0}'.format(mean_aucroc))
-file_object.write('\n\nAUC ROC per category:\n\n')
-for key, value in auc_roc_class.items():
-    file_object.write('%s:%s\n' % (key, value))
+# file_object = open('final_metrics.txt', 'a')
+# file_object.write('Mean AUC ROC:{0}'.format(mean_aucroc))
+# file_object.write('\n\nAUC ROC per category:\n\n')
+# for key, value in auc_roc_class.items():
+#     file_object.write('%s:%s\n' % (key, value))
 
 # Compute Mean Average Precision
 
@@ -132,8 +132,8 @@ mean_avg_prec, avg_prec_class = mean_avg_precision(predictions, labels, LABEL_CO
 print("Mean Average Precision:", mean_avg_prec, "\n\nAverage Precision per category:", avg_prec_class, flush=True)
 
 # Save Mean Average Precision metrics
-file_object.write('\n\n\n\nMean Average Precision:{0}'.format(mean_avg_prec))
-file_object.write('\n\nAverage Precision per category::\n\n')
-for key, value in avg_prec_class.items():
-    file_object.write('%s:%s\n' % (key, value))
-file_object.close()
+# file_object.write('\n\n\n\nMean Average Precision:{0}'.format(mean_avg_prec))
+# file_object.write('\n\nAverage Precision per category::\n\n')
+# for key, value in avg_prec_class.items():
+#     file_object.write('%s:%s\n' % (key, value))
+# file_object.close()
