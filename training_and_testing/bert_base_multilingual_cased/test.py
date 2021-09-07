@@ -25,21 +25,15 @@ import os
 import json
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--t', type=int, default=40, help="Set max token count")
-parser.add_argument('--e', type=int, default=20, help="Set number of epochs")
-parser.add_argument('--b', type=int, default=64, help="Set batch size")
-parser.add_argument('--l', type=float, default=2e-5, help="Set learning rate")
-parser.add_argument('--d', type=float, default=0.12, help="Set dropout rate")
 parser.add_argument('--s', type=float, default=1, help="Define sampling proportion for data")
 parser.add_argument('--w', dest='w', action='store_false',
                     default=True, help="True for ignoring warnings, False otherwise")
-parser.add_argument('--n', type=str, default=str(datetime.now()).lower().replace(" ", "_").replace(":", "-"),
-                    help="Define name of training execution. If nothing is specified then the current datetime will be used")
-parser.add_argument('--p', type=str, help="Set path of model to be tested")
+parser.add_argument('--n', type=str, help="Set name of training execution where all model data is")
+parser.add_argument('--p', type=str, help="Set path to model file to be tested")
 
 args = parser.parse_args()
-model_path = args.p
-model_name = args.n
+model_path = args.n
+model_name = args.p
 
 print(f"Test results will be saved to: 'assets/bert_final_training/{model_path}'")
 
