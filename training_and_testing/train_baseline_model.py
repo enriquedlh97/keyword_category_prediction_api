@@ -42,20 +42,23 @@ print(f"Training {model_name}...", flush=True)
 
 # Get model and vectorizer hyperparameters
 with open(f"training_and_testing/{hyperparams_path}/hyperparameters.json") as json_file:
-    lr_params = json.load(json_file)
+    model_params = json.load(json_file)
 
 # Model definition
 if default:
-    lr_params_dict = lr_params['DEFAULT']['MODEL']
-    lr_vectorizer_params_dict = lr_params['DEFAULT']['VECTORIZER']['PARAMS']
+    print('Using default model hyperparameters', flush=True)
+    model_params_dict = model_params['DEFAULT']['MODEL']
+    print('Using default vectorizer parameters', flush=True)
+    vectorizer_params_dict = model_params['DEFAULT']['VECTORIZER']['PARAMS']
 else:  # @TODO: add loading of optimized hyperparameters
-    pass
+    print('Using optimal model hyperparameters', flush=True)
+    print('Using optimal vectorizer parameters', flush=True)
 
 # Data fetching and preprocessing, and basic set up
 pd_train_dict, pd_test_dict, label_columns = get_and_preprocess_data(train=True, test=True, sampling=sampling)
 models_and_params = {model_name: pd_train_dict}
-hyperparams = load_hyperparams(model_params_dict=lr_params_dict,
-                               vectorizer_params_dict=lr_vectorizer_params_dict,
+hyperparams = load_hyperparams(model_params_dict=model_params_dict,
+                               vectorizer_params_dict=vectorizer_params_dict,
                                label_columns=label_columns,
                                default=default)
 
@@ -65,7 +68,7 @@ models_and_params = set_model_and_vectorizer_params(hyperparams=hyperparams,
                                                     label_columns=label_columns,
                                                     model=LogisticRegression,
                                                     model_name=model_name,
-                                                    vectorizer=eval(lr_params['DEFAULT']['VECTORIZER']['NAME']))
+                                                    vectorizer=eval(model_params['DEFAULT']['VECTORIZER']['NAME']))
 
 # Train categories
 start_time = time.time()
