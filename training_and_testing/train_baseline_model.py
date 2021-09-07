@@ -14,15 +14,13 @@ import warnings
 import argparse
 
 
-warnings.filterwarnings("ignore")
-
-
 # Parse arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--d', type=bool, default=True, help="Use default parameters for models and vectorizers")
 parser.add_argument('--s', type=float, default=1, help="Define sampling proportion fo data")
 parser.add_argument('--m', type=str, default='lr',
                     help="Set model to be trained. 'lr' for Linear Regression. 'svm' for Support Vector Machine. 'rf' for Random Forest")
+parser.add_argument('--w', type=bool, default=True, help="True for ignoring warnings, False otherwise")
 
 args = parser.parse_args()
 if args.m == 'lr':
@@ -37,6 +35,9 @@ elif args.m == 'rf':
 
 default = args.d
 sampling = args.s
+
+if not args.w:
+    warnings.filterwarnings("ignore")
 
 print(f"Training {model_name}...", flush=True)
 
