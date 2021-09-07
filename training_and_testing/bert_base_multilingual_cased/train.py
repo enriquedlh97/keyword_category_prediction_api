@@ -38,6 +38,8 @@ parser.add_argument('--n', type=str, default=str(datetime.now()).lower().replace
 args = parser.parse_args()
 run_name = args.n
 
+print(f"Model will be saved to: 'assets/bert_final_training/{run_name}'")
+
 if args.w is True:
     warnings.filterwarnings("ignore")
 
