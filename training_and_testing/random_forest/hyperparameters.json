@@ -14,7 +14,7 @@
       "bootstrap": true,
       "oob_score": false,
       "n_jobs": -1,
-      "random_state": null,
+      "random_state": 3,
       "verbose": 0,
       "warm_start": false,
       "class_weight": null,
