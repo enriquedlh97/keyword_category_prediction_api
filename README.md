@@ -444,6 +444,7 @@ Finally, go into the `environment_no_builds.yml` and look for the following pack
 - m2w64-gmp=6.1.0
 - m2w64-gcc-libgfortran=5.3.0
 - m2w64-gcc-libs-core=5.3.0
+- m2w64-gcc-libs=5.3.0
 ```
 Then, add a `#` before each of them. They should end up looking like this. 
 ```
@@ -456,6 +457,7 @@ Then, add a `#` before each of them. They should end up looking like this.
 # - m2w64-gmp=6.1.0
 # - m2w64-gcc-libgfortran=5.3.0
 # - m2w64-gcc-libs-core=5.3.0
+# - m2w64-gcc-libs=5.3.0
 # - m2w64-gcc-libs=5.3.0
 ```
 
