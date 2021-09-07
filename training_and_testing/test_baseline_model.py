@@ -36,7 +36,7 @@ sampling = args.s
 if args.w is True:
     warnings.filterwarnings("ignore")
 
-print(f"Training {model_name}...", flush=True)
+print(f"Testing {model_name}...", flush=True)
 
 # Get data
 print('Loading testing data', flush=True)

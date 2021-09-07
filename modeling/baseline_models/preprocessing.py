@@ -65,7 +65,7 @@ def get_and_preprocess_data(train=True, test=True,
                             test_path="dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl",
                             sampling=1):
 
-    pd_train, pd_test, label_columns = get_data(train=train, test=test, train_path=train_path, test_path=test_path,
+    pd_train, pd_test, label_columns = get_data(train=True, test=True, train_path=train_path, test_path=test_path,
                                                 sampling=sampling)
 
     pd_train_dict = build_category_datasets(pd_train, label_columns)
