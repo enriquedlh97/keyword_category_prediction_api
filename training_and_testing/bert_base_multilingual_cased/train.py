@@ -2,7 +2,6 @@
 from modeling.bert_base_multilingual.cased.preprocessing import get_train_test_data, get_categories, \
     add_category_columns
 # Datset
-from modeling.bert_base_multilingual.cased.text_dataset import KeywordDataset
 from modeling.bert_base_multilingual.cased.data_module import KeywordDataModule
 # Model
 from modeling.bert_base_multilingual.cased.model import KeywordCategorizer
@@ -12,11 +11,7 @@ from transformers import BertTokenizer
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from pytorch_lightning.loggers import TensorBoardLogger
-# Metrics
-from modeling.bert_base_multilingual.cased.metrics import mean_auc_roc, mean_avg_precision
-# General
-import torch
-from tqdm.auto import tqdm
+# Other
 from datetime import datetime
 import time
 import argparse
