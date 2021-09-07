@@ -64,6 +64,7 @@ hyperparams = load_hyperparams(model_params_dict=model_params_dict,
                                default=default)
 
 # Set model, model hyperparameters, vectorizer and vectorizer parameters
+print('Setting up model', flush=True)
 models_and_params = set_model_and_vectorizer_params(hyperparams=hyperparams,
                                                     models_and_params=models_and_params,
                                                     label_columns=label_columns,
@@ -73,7 +74,9 @@ models_and_params = set_model_and_vectorizer_params(hyperparams=hyperparams,
 
 # Train categories
 start_time = time.time()
+print('Training model', flush=True)
 models_and_params = train_models(models_and_params=models_and_params, model_name=model_name)
 
 # Save models
+print('Saving model', flush=True)
 save_trained_models(models_and_params=models_and_params, label_columns=label_columns)
