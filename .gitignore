@@ -5,7 +5,8 @@
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
 
-assets/
+# assets/
+bert_base_multilingual_cased/
 lightning_logs/
 checkpoints/
 dataset/
