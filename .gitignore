@@ -7,6 +7,7 @@
 
 # assets/
 bert_base_multilingual_cased/
+bert_final_training/
 lightning_logs/
 checkpoints/
 dataset/
