@@ -19,8 +19,8 @@ warnings.filterwarnings("ignore")
 
 # Parse arguments
 parser = argparse.ArgumentParser()
-parser.add_argument('--d', type=int, default=True, help="Use default parameters for models and vectorizers")
-parser.add_argument('--s', type=int, default=1, help="Define sampling proportion fo data")
+parser.add_argument('--d', type=bool, default=True, help="Use default parameters for models and vectorizers")
+parser.add_argument('--s', type=float, default=1, help="Define sampling proportion fo data")
 parser.add_argument('--m', type=int, default='lr',
                     help="Set model to be trained. 'lr' for Linear Regression. 'svm' for Support Vector Machine. 'rf' for Random Forest")
 
@@ -37,6 +37,8 @@ elif args.d == 'rf':
 
 default = args.d
 sampling = args.s
+
+print(f"Training {model_name}...", flush=True)
 
 # Get model and vectorizer hyperparameters
 with open(f"training_and_testing/{hyperparams_path}/hyperparameters.json") as json_file:
