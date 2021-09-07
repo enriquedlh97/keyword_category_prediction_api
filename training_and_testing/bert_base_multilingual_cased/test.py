@@ -22,6 +22,7 @@ import time
 import argparse
 import warnings
 import os
+import json
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--t', type=int, default=40, help="Set max token count")
@@ -65,14 +66,16 @@ pd_test = pd_test.sample(round(pd_test.shape[0] * args.s))
 
 # GLOBAL VARIABLES AND PARAMETERS
 print('Setting hyperparameters', flush=True)
+file = open(f"assets/bert_final_training/{model_path}/hyperparams.json", "w")
+hyperparams = json.load(file)
 
 MODEL_NAME = 'bert-base-multilingual-cased'
 LABEL_COLUMNS = list(categories_dict.keys())
-MAX_TOKEN_COUNT = args.t
-N_EPOCHS = args.e
-BATCH_SIZE = args.b  # batch sizes: 8, 16, 32, 64, 128
-LEARNING_RATE = args.l  # learning rates: 3e-4, 1e-4, 5e-5, 3e-5, 2e-5
-DROPOUT = args.d
+MAX_TOKEN_COUNT = hyperparams['MAX_TOKEN_COUNT']
+N_EPOCHS = hyperparams['N_EPOCHS']
+BATCH_SIZE = hyperparams['BATCH_SIZE']
+LEARNING_RATE = hyperparams['LEARNING_RATE']
+DROPOUT = hyperparams['DROPOUT']
 
 # Load model
 print('Loading model', flush=True)

@@ -22,6 +22,7 @@ import time
 import argparse
 import warnings
 import os
+import json
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--t', type=int, default=40, help="Set max token count")
@@ -130,3 +131,16 @@ print('Training model', flush=True)
 start_time = time.time()
 trainer.fit(model, data_module)
 print("The model trained in: %s seconds" % (time.time() - start_time), flush=True)
+
+# Save model hyperparameters
+hyperparams = {
+    "MODEL_NAME": "bert-base-multilingual-cased",
+    "MAX_TOKEN_COUNT": args.t,
+    "N_EPOCHS": args.e,
+    "BATCH_SIZE": args.b,
+    "LEARNING_RATE": args.l,
+    "DROPOUT": args.d
+}
+
+file = open(f"assets/bert_final_training/{run_name}/hyperparams.json", "w")
+json.dump(hyperparams, file)
