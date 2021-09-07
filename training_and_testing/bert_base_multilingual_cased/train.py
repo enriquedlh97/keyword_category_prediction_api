@@ -115,8 +115,8 @@ trainer = pl.Trainer(
     progress_bar_refresh_rate=10
 )
 
-# # Start training_and_testing
-# print('Training model', flush=True)
-# start_time = time.time()
-# trainer.fit(model, data_module)
-# print("The model trained in: %s seconds" % (time.time() - start_time), flush=True)
+# Start training_and_testing
+print('Training model', flush=True)
+start_time = time.time()
+trainer.fit(model, data_module)
+print("The model trained in: %s seconds" % (time.time() - start_time), flush=True)
