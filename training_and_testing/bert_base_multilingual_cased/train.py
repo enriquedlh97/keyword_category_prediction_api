@@ -70,11 +70,11 @@ STEPS_PER_EPOCH = len(pd_train) // BATCH_SIZE
 TOTAL_TRAINING_STEPS = STEPS_PER_EPOCH * N_EPOCHS
 WARMUP_STEPS = TOTAL_TRAINING_STEPS // 5
 
-# # DATASET
-# print('Initializing dataset', flush=True)
-# data_module = KeywordDataModule(pd_train, pd_test, BertTokenizer.from_pretrained(MODEL_NAME), LABEL_COLUMNS, BATCH_SIZE,
-#                                 MAX_TOKEN_COUNT)
-#
+# DATASET
+print('Initializing dataset', flush=True)
+data_module = KeywordDataModule(pd_train, pd_test, BertTokenizer.from_pretrained(MODEL_NAME), LABEL_COLUMNS, BATCH_SIZE,
+                                MAX_TOKEN_COUNT)
+
 # # MODEL
 # print('Initializing model', flush=True)
 # model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STEPS, WARMUP_STEPS, MODEL_NAME,
