@@ -1,6 +1,5 @@
 # Data reading and preprocessing
-from modeling.bert_base_multilingual.cased.preprocessing import get_train_test_data, get_categories, \
-    add_category_columns
+from modeling.bert_base_multilingual.cased.preprocessing import get_data
 # Datset
 from modeling.bert_base_multilingual.cased.data_module import KeywordDataModule
 # Model
@@ -41,27 +40,13 @@ if args.w is True:
 
 # Get data
 print('Loading and preprocessing data', flush=True)
-pd_train, pd_test = get_train_test_data(
-    train_path="dataset/keyword_categories/keyword_categories/keyword_categories.train.jsonl",
-    test_path="dataset/keyword_categories/keyword_categories/keyword_categories.test.jsonl"
-)
-
-# Get categories
-categories_dict = get_categories(pd_train, pd_test)
-
-# Add category columns and fill them
-pd_train = add_category_columns(pd_train, categories_dict)
-pd_test = add_category_columns(pd_test, categories_dict)
-
-# Temporary sampling
-pd_train = pd_train.sample(round(pd_train.shape[0] * args.s))
-pd_test = pd_test.sample(round(pd_test.shape[0] * args.s))
+pd_train, pd_test, label_columns = get_data(train=True, test=True, sampling=args.s)
 
 # GLOBAL VARIABLES AND PARAMETERS
 print('Setting hyperparameters', flush=True)
 # Finetune for 4 epochs is recommended
 MODEL_NAME = 'bert-base-multilingual-cased'
-LABEL_COLUMNS = list(categories_dict.keys())
+LABEL_COLUMNS = label_columns
 MAX_TOKEN_COUNT = args.t
 N_EPOCHS = args.e
 BATCH_SIZE = args.b  # batch sizes: 8, 16, 32, 64, 128
