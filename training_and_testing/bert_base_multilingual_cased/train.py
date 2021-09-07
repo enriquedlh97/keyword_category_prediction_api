@@ -75,11 +75,11 @@ print('Initializing dataset', flush=True)
 data_module = KeywordDataModule(pd_train, pd_test, BertTokenizer.from_pretrained(MODEL_NAME), LABEL_COLUMNS, BATCH_SIZE,
                                 MAX_TOKEN_COUNT)
 
-# # MODEL
-# print('Initializing model', flush=True)
-# model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STEPS, WARMUP_STEPS, MODEL_NAME,
-#                            LEARNING_RATE, DROPOUT)
-#
+# MODEL
+print('Initializing model', flush=True)
+model = KeywordCategorizer(len(LABEL_COLUMNS), LABEL_COLUMNS, TOTAL_TRAINING_STEPS, WARMUP_STEPS, MODEL_NAME,
+                           LEARNING_RATE, DROPOUT)
+
 # # TRAINING
 #
 # # Checkpoints and early stopping
