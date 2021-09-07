@@ -56,5 +56,5 @@ print("Testing the model took: %s seconds" % (time.time() - start_time), flush=T
 
 # Saving results
 print('Saving results', flush=True)
-pd_avg_precision_results.to_csv(f"training_and_testing/{model_path}/avg_precision_results.csv")
-pd_auc_roc_results.to_csv(f"training_and_testing/{model_path}/auc_roc_results.csv")
+pd_avg_precision_results.to_csv(f"assets/{model_path}/avg_precision_results.csv")
+pd_auc_roc_results.to_csv(f"assets/{model_path}/auc_roc_results.csv")

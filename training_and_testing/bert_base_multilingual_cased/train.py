@@ -109,7 +109,7 @@ checkpoint_callback = ModelCheckpoint(
 
 # b64_l5e-5
 
-logger = TensorBoardLogger(f"assets/bert_final_training/{run_name}lightning_logs", name="keyword-categories")
+logger = TensorBoardLogger(f"assets/bert_final_training/{run_name}/lightning_logs", name="keyword-categories")
 
 early_stopping_callback = EarlyStopping(monitor='val_loss', patience=N_EPOCHS)
 
