@@ -9,6 +9,7 @@ from bayes_opt.event import Events
 import os
 import argparse
 import time
+import json
 
 # Parse arguments
 parser = argparse.ArgumentParser()
@@ -16,6 +17,12 @@ parser.add_argument('--i', type=int, default=2, help="Set number of steps for ra
 parser.add_argument('--n', type=int, default=5, help="Set number of steps for bayesian optimization")
 parser.add_argument('--c', type=int, default=0, help="Set category number. The categories go from 0 to 21 in the order as they are found in the config.json file")
 args = parser.parse_args()
+
+with open("config.json") as json_file:
+    config = json.load(json_file)
+
+category = config["CLASS_NAMES"][args.c]
+print(f"Optimizing hyperparameters for {category}")
 
 start_time = time.time()
 
@@ -25,7 +32,7 @@ if not os.path.exists('hyperparameter_optimization/logistic_regression/logs'):
 # Set path to logs
 path_to_logs = 'hyperparameter_optimization/bert_base_multilingual_cased/logs'
 
-logger = JSONLogger(path="{path}/logs.json".format(path=path_to_logs))
+logger = JSONLogger(path="{path}/logs_{category}.json".format(path=path_to_logs, category=category))
 
 # Set exploration and exploitation parameters
 init_points = args.i
