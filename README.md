@@ -326,7 +326,7 @@ http://127.0.0.1:8000/docs#/default/predict_predict_post
 ```
 Then, select the `Try it out` button on the top right. Finally, substitute the `"string"` inside the `[]` by the actual 
 text you want to try and click on `Execute`. Notice that you can add multiple strings by separating them with a comma 
-just like in the previous example. For instance, you can try `["string 1", "string 2]`
+just like in the previous example. For instance, you can try `["string 1", "string 2"]`
 
 ## Setting up the PYTHONPATH
 
@@ -361,15 +361,15 @@ This repository implements 4 different models.
 3. Support Vector Machine
 4. Random Forest
 
-This 4 models were trained and tested [this](https://drive.google.com/uc?id=1LtrGndz9P766BRPf-jWkRw0_gzDuVCVo) dataset 
+This 4 models were trained and tested with [this](https://drive.google.com/uc?id=1LtrGndz9P766BRPf-jWkRw0_gzDuVCVo) dataset 
 using default values for the hyperparameters. Although hyperparameter optimization subroutines were set up for all 
-models, they were not run due to time constraint. The API uses the BERT base multilingual cased since it was the model
-that performed the best when comparing the results using default values for all hyperparameters. 
+models, they were not run due to time limitations. The API uses the `BERT base multilingual cased` model since it was 
+the model that performed the best when comparing the results using default values for all hyperparameters. 
 
 When the results from the hyperparameter optimization subroutines are ready, the four models will be compared once again 
 with the optimal values for the hyperparameters and, if necessary, the API will be updated with the best performing model. 
 
-### Results and model comparison
+### Results and Model Comparison
 The following figures show the comparison of the models. Initially the intention was to use a randomization test to see 
 if there was a statistically significant difference among the models, however, since the BERT model ended up performing 
 significantly better the tests were not done. 
