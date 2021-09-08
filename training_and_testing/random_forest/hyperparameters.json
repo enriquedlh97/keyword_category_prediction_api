@@ -1,7 +1,7 @@
 {
   "DEFAULT": {
     "MODEL": {
-      "n_estimators": 1,
+      "n_estimators": 100,
       "criterion": "gini",
       "max_depth": null,
       "min_samples_split": 2,
