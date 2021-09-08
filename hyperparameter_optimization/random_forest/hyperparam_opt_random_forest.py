@@ -53,7 +53,7 @@ n_iter = args.n
 # Bounded region of parameter space
 pbounds = {
     'category': (args.c, args.c + 0.1),
-    'n_estimators': (1, 1.1),
+    'n_estimators': (1, 20),
     'criterion': (0, 1),
     'max_features': (0, 1),
     'bootstrap': (0, 1),
