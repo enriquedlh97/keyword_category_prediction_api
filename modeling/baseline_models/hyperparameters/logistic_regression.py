@@ -7,6 +7,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 # Metrics
 from sklearn.metrics import log_loss
+# Stop words
+from nltk.corpus import stopwords
 # Other
 from sklearn.model_selection import KFold
 import numpy as np
@@ -62,7 +64,8 @@ def model_evaluation(category, C, class_weight, solver, max_iter, warm_start, ve
 
 
 def evaluate_model(category, C, class_weight, solver, max_iter, warm_start, vectorizer_selection, strip_accents,
-                   lowercase, ngram_range, k_folds=5, verbose=1, ):
+                   lowercase, ngram_range, english, italian, french, spanish, dutch, romanian, danish, norwegian,
+                   german, swedish, portuguese, finnish, k_folds=5, verbose=1):
     # Fix model hyperparamters
     class_weight = "balanced" if class_weight <= 0.5 else None
     solver = get_solver(solver)
@@ -75,7 +78,8 @@ def evaluate_model(category, C, class_weight, solver, max_iter, warm_start, vect
     strip_accents = get_strip_accents(strip_accents)
     lowercase = True if lowercase <= 0.5 else False
     ngram_range = get_ngram_range(ngram_range)
-    stop_words = None  # get_stop_words()
+    stop_words = get_stop_words(english, italian, french, spanish, dutch, romanian, danish, norwegian, german, swedish,
+                                portuguese, finnish)
 
     cv_loss = model_evaluation(category, C, class_weight, solver, max_iter, warm_start, vectorizer_selection,
                                strip_accents, lowercase, ngram_range, stop_words, k_folds, verbose)
@@ -150,6 +154,22 @@ def get_ngram_range(ngram_range):
         return 2, 2
 
 
-def get_stop_words(english=False, italian=False, french=False, spanish=False, dutch=False, romanian=False, danish=False,
-                   norwegian=False, german=False, swedish=False, portuguese=False, finnish=False):
-    pass
+def get_stop_words(english, italian, french, spanish, dutch, romanian, danish, norwegian, german, swedish,
+                   portuguese, finnish):
+    stopwords_list = set()
+
+    languages = ['english', 'italian', 'french', 'spanish', 'dutch', 'romanian', 'danish',
+                 'norwegian', 'german', 'swedish', 'portuguese', 'finnish']
+
+    language_selection = [english, italian, french, spanish, dutch, romanian, danish, norwegian, german, swedish,
+                          portuguese, finnish]
+
+    for language, selection in zip(languages, language_selection):
+        if round(selection):
+            for word in stopwords.words(language):
+                stopwords_list.add(word)
+
+    if stopwords_list:
+        return stopwords_list
+    else:
+        return None

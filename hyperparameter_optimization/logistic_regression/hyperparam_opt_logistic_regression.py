@@ -5,6 +5,9 @@ from modeling.baseline_models.hyperparameters.logistic_regression import evaluat
 from bayes_opt.logger import JSONLogger
 from bayes_opt.event import Events
 
+# Stop words
+import nltk
+
 # Others
 import os
 import argparse
@@ -19,6 +22,9 @@ parser.add_argument('--n', type=int, default=5, help="Set number of steps for ba
 parser.add_argument('--c', type=int, default=0, help="Set category number. The categories go from 0 to 21 in the order as they are found in the config.json file")
 parser.add_argument('--w', dest='w', action='store_false', default=True, help="True for ignoring warnings, False otherwise")
 args = parser.parse_args()
+
+# Download stopwords to avoid errors
+nltk.download('stopwords')
 
 if args.w is True:
     warnings.filterwarnings("ignore")

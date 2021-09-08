@@ -48,7 +48,7 @@ python 3.7.11
 pytorch-lightning 1.4.4
 transformers 4.3.0
 sentencepiece 0.1.96
-torch==1.9.0+cu102
+torch 1.9.0+cu102
 torchmetrics 0.5.0         
 torchtext 0.10.0         
 torchvision 0.10.0+cu102
@@ -57,6 +57,7 @@ pydantic 1.8.2
 uvicorn 0.15.0
 bayesian-optimization 1.1.0
 scipy 1.5.3
+nltk 3.5
 ```
 To do this you can create the conda environment and install them directly, or you can just use the .yml files. If you 
 are using windows you can just run the following.
