@@ -5,7 +5,7 @@ from modeling.baseline_models.hyperparameters.vectorizers import get_vectorizer,
     get_stop_words, get_strip_accents, apply_preprocessing
 from modeling.baseline_models.training_and_testing import train_category, test_category
 # Model
-from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
 # Metrics
 from sklearn.metrics import log_loss
 # Other
@@ -13,7 +13,7 @@ from sklearn.model_selection import KFold
 import numpy as np
 
 
-def model_evaluation(category, C, kernel, gamma, shrinking, probability, class_weight, vectorizer_selection,
+def model_evaluation(category, C, max_iter, class_weight, vectorizer_selection,
                      strip_accents, lowercase, ngram_range, stop_words, alphanumeric, punctuation_and_lower_cased,
                      new_lines, non_ascii,  k_folds, verbose):
     # Set k-fold cross validation scheme
@@ -45,8 +45,7 @@ def model_evaluation(category, C, kernel, gamma, shrinking, probability, class_w
         pd_test = pd_data.filter(items=test_ids, axis=0)
 
         # Initialize model and vectorizer
-        model = SVC(C=C, kernel=kernel, gamma=gamma, shrinking=shrinking, probability=probability,
-                          class_weight=class_weight)
+        model = LinearSVC(C=C, max_iter=max_iter, class_weight=class_weight)
         vectorizer = vectorizer_selection(strip_accents=strip_accents, lowercase=lowercase, ngram_range=ngram_range,
                                           stop_words=stop_words)
 
@@ -70,15 +69,11 @@ def model_evaluation(category, C, kernel, gamma, shrinking, probability, class_w
     return np.array(fold_validation_results).mean()
 
 
-def evaluate_model(category, C, kernel, gamma, shrinking, probability, class_weight, vectorizer_selection,
-                   strip_accents, lowercase, ngram_range, english, italian, french, spanish, dutch, romanian, danish,
-                   norwegian, german, swedish, portuguese, finnish, alphanumeric, punctuation_and_lower_cased,
-                   new_lines, non_ascii, k_folds=5, verbose=1):
+def evaluate_model(category, C, max_iter, class_weight, vectorizer_selection, strip_accents, lowercase, ngram_range, english,
+                   italian, french, spanish, dutch, romanian, danish, norwegian, german, swedish, portuguese, finnish,
+                   alphanumeric, punctuation_and_lower_cased, new_lines, non_ascii, k_folds=5, verbose=1):
     # Fix model hyperparamters
-    kernel = get_kernel(kernel)
-    gamma = 'scale' if gamma <= 0.5 else 'auto'
-    shrinking = True if shrinking <= 0.5 else False
-    probability = True if probability <= 0.5 else False
+    max_iter = round(max_iter)
     class_weight = get_class_weight(class_weight)
     category = get_category(category)
 
@@ -96,9 +91,9 @@ def evaluate_model(category, C, kernel, gamma, shrinking, probability, class_wei
     new_lines = process_new_lines if new_lines <= 0.5 else None
     non_ascii = remove_non_ascii if non_ascii <= 0.5 else None
 
-    cv_loss = model_evaluation(category, C, kernel, gamma, shrinking, probability, class_weight, vectorizer_selection,
-                               strip_accents, lowercase, ngram_range, stop_words, alphanumeric,
-                               punctuation_and_lower_cased, new_lines, non_ascii, k_folds, verbose)
+    cv_loss = model_evaluation(category, C, max_iter, class_weight, vectorizer_selection, strip_accents, lowercase,
+                               ngram_range, stop_words, alphanumeric, punctuation_and_lower_cased, new_lines, non_ascii,
+                               k_folds, verbose)
 
     return -cv_loss
 
@@ -109,15 +104,3 @@ def get_class_weight(class_weight):
         return 'balanced'
     elif 2.0 / 2 >= class_weight > 1.0 / 2:
         return None
-
-
-def get_kernel(kernel):
-    # set kernel
-    if kernel <= 1.0 / 4:
-        return 'linear'
-    elif 2.0 / 4 >= kernel > 1.0 / 4:
-        return 'poly'
-    elif 3.0 / 4 >= kernel > 2.0 / 4:
-        return 'rbf'
-    elif 4.0 / 4 >= kernel > 3.0 / 4:
-        return 'sigmoid'
