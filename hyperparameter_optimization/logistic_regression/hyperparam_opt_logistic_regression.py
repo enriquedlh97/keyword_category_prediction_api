@@ -30,9 +30,10 @@ if not os.path.exists('hyperparameter_optimization/logistic_regression/logs'):
     os.makedirs('hyperparameter_optimization/logistic_regression/logs')
 
 # Set path to logs
-path_to_logs = 'hyperparameter_optimization/bert_base_multilingual_cased/logs'
+path_to_logs = 'hyperparameter_optimization/logistic_regression/logs'
 
-logger = JSONLogger(path="{path}/logs_{category}.json".format(path=path_to_logs, category=category))
+logger = JSONLogger(path="{path}/logs_{category}.json".format(path=path_to_logs,
+                                                              category=category.lower().replace(" ", "_")))
 
 # Set exploration and exploitation parameters
 init_points = args.i
