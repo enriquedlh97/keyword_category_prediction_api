@@ -1,5 +1,6 @@
 # Data loading and preprocessing
-from modeling.baseline_models.preprocessing import get_and_preprocess_data
+from modeling.baseline_models.preprocessing import get_and_preprocess_data, remove_alphanumeric, \
+    process_punctuation_and_lower_cased, process_new_lines, remove_non_ascii
 from modeling.baseline_models.training_and_testing import train_category, test_category
 # Model
 from sklearn.linear_model import LogisticRegression
@@ -12,16 +13,25 @@ from nltk.corpus import stopwords
 # Other
 from sklearn.model_selection import KFold
 import numpy as np
+import pandas as pd
 
 
 def model_evaluation(category, C, class_weight, solver, max_iter, warm_start, vectorizer_selection, strip_accents,
-                     lowercase, ngram_range, stop_words, k_folds, verbose):
+                     lowercase, ngram_range, stop_words, alphanumeric, punctuation_and_lower_cased, new_lines,
+                     non_ascii, k_folds, verbose):
     # Set k-fold cross validation scheme
     cv = KFold(n_splits=k_folds, shuffle=True, random_state=69)
 
     # Data fetching and preprocessing, and basic set up
     pd_train_dict, label_columns = get_and_preprocess_data(train=True, test=False, sampling=0.05)
     pd_data = pd_train_dict[category]['data']
+
+    # Preprocess data
+    pd_data = apply_preprocessing(pd_data=pd_data,
+                                  alphanumeric=alphanumeric,
+                                  punctuation_and_lower_cased=punctuation_and_lower_cased,
+                                  new_lines=new_lines,
+                                  non_ascii=non_ascii)
 
     # For fold validation loss results
     fold_validation_results = []
@@ -65,7 +75,8 @@ def model_evaluation(category, C, class_weight, solver, max_iter, warm_start, ve
 
 def evaluate_model(category, C, class_weight, solver, max_iter, warm_start, vectorizer_selection, strip_accents,
                    lowercase, ngram_range, english, italian, french, spanish, dutch, romanian, danish, norwegian,
-                   german, swedish, portuguese, finnish, k_folds=5, verbose=1):
+                   german, swedish, portuguese, finnish, alphanumeric, punctuation_and_lower_cased, new_lines,
+                   non_ascii, k_folds=5, verbose=1):
     # Fix model hyperparamters
     class_weight = "balanced" if class_weight <= 0.5 else None
     solver = get_solver(solver)
@@ -81,8 +92,15 @@ def evaluate_model(category, C, class_weight, solver, max_iter, warm_start, vect
     stop_words = get_stop_words(english, italian, french, spanish, dutch, romanian, danish, norwegian, german, swedish,
                                 portuguese, finnish)
 
+    # Preprocessing
+    alphanumeric = remove_alphanumeric if alphanumeric <= 0.5 else None
+    punctuation_and_lower_cased = process_punctuation_and_lower_cased if punctuation_and_lower_cased <= 0.5 else None
+    new_lines = process_new_lines if new_lines <= 0.5 else None
+    non_ascii = remove_non_ascii if non_ascii <= 0.5 else None
+
     cv_loss = model_evaluation(category, C, class_weight, solver, max_iter, warm_start, vectorizer_selection,
-                               strip_accents, lowercase, ngram_range, stop_words, k_folds, verbose)
+                               strip_accents, lowercase, ngram_range, stop_words, alphanumeric,
+                               punctuation_and_lower_cased, new_lines, non_ascii, k_folds, verbose)
 
     return -cv_loss
 
@@ -173,3 +191,15 @@ def get_stop_words(english, italian, french, spanish, dutch, romanian, danish, n
         return stopwords_list
     else:
         return None
+
+
+def apply_preprocessing(pd_data, alphanumeric, punctuation_and_lower_cased, new_lines, non_ascii):
+    if alphanumeric is not None:
+        pd_data['keyword'] = pd_data['keyword'].map(alphanumeric)
+    if punctuation_and_lower_cased is not None:
+        pd_data['keyword'] = pd_data['keyword'].map(punctuation_and_lower_cased)
+    if new_lines is not None:
+        pd_data['keyword'] = pd_data['keyword'].map(new_lines)
+    if non_ascii is not None:
+        pd_data['keyword'] = pd_data['keyword'].map(non_ascii)
+    return pd_data

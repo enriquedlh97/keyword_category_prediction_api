@@ -74,6 +74,10 @@ pbounds = {
     'swedish': (0, 1),
     'portuguese': (0, 1),
     'finnish': (0, 1),
+    alphanumeric,
+    punctuation_and_lower_cased,
+    new_lines,
+    non_ascii,
 }
 
 # Initialize optimizer
