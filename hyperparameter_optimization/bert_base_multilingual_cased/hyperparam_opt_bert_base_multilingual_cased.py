@@ -12,8 +12,8 @@ import time
 
 # Parse arguments
 parser = argparse.ArgumentParser()
-parser.add_argument('--i', type=int, default=2, help="Set number of steps for random exploration")
-parser.add_argument('--n', type=int, default=5, help="Set number of steps for bayesian optimization")
+parser.add_argument('--i', type=int, default=5, help="Set number of steps for random exploration")
+parser.add_argument('--n', type=int, default=20, help="Set number of steps for bayesian optimization")
 args = parser.parse_args()
 
 start_time = time.time()
