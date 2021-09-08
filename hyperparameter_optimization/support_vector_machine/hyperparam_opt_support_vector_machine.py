@@ -54,7 +54,7 @@ n_iter = args.n
 pbounds = {
     'category': (args.c, args.c + 0.1),
     'C': (1e-5, 100),
-    'max_iter': (10, 10000),
+    'max_iter': (10, 11),
     'class_weight': (0, 1),
     'vectorizer_selection': (0, 1),
     'strip_accents': (0, 1),
