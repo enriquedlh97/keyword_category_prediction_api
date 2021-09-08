@@ -28,36 +28,36 @@ def build_category_datasets(pd_data, label_columns, train=True):
     return category_datasets_dict
 
 
-def remove_alphanumeric():
+def remove_alphanumeric(text):
     """ Removes numbers that have letters attached
 
     :return: function instance for removing numbers that have letters attached
     """
-    return lambda x: re.sub('\w*\d\w*', ' ', x)
+    return re.sub('\w*\d\w*', ' ', text)
 
 
-def process_punctuation_and_lower_cased():
+def process_punctuation_and_lower_cased(text):
     """ Sets all strings to lower case and replaces punctuation with white space
 
     :return: function instance for setting all strings to lower case and replaces punctuation with white space
     """
-    return lambda x: re.sub('[%s]' % re.escape(string.punctuation), ' ', x.lower())
+    return re.sub('[%s]' % re.escape(string.punctuation), ' ', text.lower())
 
 
-def process_new_lines():
+def process_new_lines(text):
     """ Replaces new lines (\n) with white spaces
 
     :return: function instance for replacing new lines (\n) with white spaces
     """
-    return lambda x: re.sub("\n", " ", x)
+    return re.sub("\n", " ", text)
 
 
-def remove_non_ascii():
+def remove_non_ascii(text):
     """ Removes non-ascii characters
 
     :return: function instance for removing non-ascii characters
     """
-    return lambda x: re.sub(r'[^\x00-\x7f]', r' ', x)
+    return re.sub(r'[^\x00-\x7f]', r' ', text)
 
 
 def get_and_preprocess_data(train=True, test=True,
