@@ -50,7 +50,7 @@ def model_evaluation(category, n_estimators, criterion, max_features, bootstrap,
         # Initialize model and vectorizer
         model = RandomForestClassifier(n_estimators=n_estimators, criterion=criterion, max_features=max_features,
                                        bootstrap=bootstrap, warm_start=warm_start, class_weight=class_weight,
-                                       ccp_alpha=ccp_alpha)
+                                       ccp_alpha=ccp_alpha, n_jobs=-1)
         vectorizer = vectorizer_selection(strip_accents=strip_accents, lowercase=lowercase, ngram_range=ngram_range,
                                           stop_words=stop_words)
 
