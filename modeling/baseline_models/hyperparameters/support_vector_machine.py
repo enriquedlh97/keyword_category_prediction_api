@@ -5,7 +5,7 @@ from modeling.baseline_models.hyperparameters.vectorizers import get_vectorizer,
     get_stop_words, get_strip_accents, apply_preprocessing
 from modeling.baseline_models.training_and_testing import train_category, test_category
 # Model
-from sklearn.svm import LinearSVC
+from sklearn.svm import SVC
 # Metrics
 from sklearn.metrics import log_loss
 # Other
@@ -45,7 +45,7 @@ def model_evaluation(category, C, kernel, gamma, shrinking, probability, class_w
         pd_test = pd_data.filter(items=test_ids, axis=0)
 
         # Initialize model and vectorizer
-        model = LinearSVC(C=C, kernel=kernel, gamma=gamma, shrinking=shrinking, probability=probability,
+        model = SVC(C=C, kernel=kernel, gamma=gamma, shrinking=shrinking, probability=probability,
                           class_weight=class_weight)
         vectorizer = vectorizer_selection(strip_accents=strip_accents, lowercase=lowercase, ngram_range=ngram_range,
                                           stop_words=stop_words)
