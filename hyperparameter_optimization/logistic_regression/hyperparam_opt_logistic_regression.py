@@ -14,6 +14,7 @@ import time
 parser = argparse.ArgumentParser()
 parser.add_argument('--i', type=int, default=2, help="Set number of steps for random exploration")
 parser.add_argument('--n', type=int, default=5, help="Set number of steps for bayesian optimization")
+parser.add_argument('--c', type=int, default=0, help="Set category number. The categories go from 0 to 21 in the order as they are found in the config.json file")
 args = parser.parse_args()
 
 start_time = time.time()
@@ -32,7 +33,7 @@ n_iter = args.n
 
 # Bounded region of parameter space
 pbounds = {
-    'category': (0, 0.1),  # Health
+    'category': (args.c, args.c + 0.1),  # Health
     'C': (1e-5, 100),
     'class_weight': (0, 1),
     'solver': (0, 1),
