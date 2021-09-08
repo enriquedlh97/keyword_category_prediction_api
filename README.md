@@ -572,32 +572,6 @@ The first one is a jupyter notebook, and the script version. The actual model wa
 ## Pre-trained model details
 --->
 
-## Training a model
-
-To train a model from scratch all you have to do is make sure you have the conda environment activated and run the 
-`final_model_training.py` script. This script will save the trained model to the assets folder (it will be created if it 
-does not already exist). 
-```bash
-$ python final_model_training.py
-```
-Currently, the only parameters (and their default values) that can be sepcified for the training subroutine are the following ones.
-```text
-MAX_TOKEN_COUNT = 40
-N_EPOCHS = 20
-BATCH_SIZE = 64  
-LEARNING_RATE = 2e-5 
-DROPOUT = 0.12
-```
-Each of these parameters can be specified to the `final_model_training.py` script with the flags `--t=MAX_TOKEN_COUNT`, 
-`--e=N_EPOCHS`, `--b=BATCH_SIZE`, `--l=LEARNING_RATE` and `--d=DROPOUT`. If no flags are specified the script will run 
-with the above mentioned default values. To specify values for these parameters just run something like this example.
-```bash
-$ python final_model_training.py --t=40 --e=20 --b=64 --l=2e-5 --d=0.12
-```
-After each epoch, a model is going to be saved in the `assets` folder with the name structure as 
-`epoch=EPOCH-val_loss=VALIDATION_LOSS-best-checkpoint.ckpt`. To use one of these models just put the model file name in the `config.json`
-file in the `PRETRAINED_MODEL` field. The API will automatically load this model when the server is started.
-
 ## Updating environment files
 There are two environment files available, the first one is for creating an environment on Windows and the file name is 
 ```environment.yml```. The second one is for cross-platform environments because the packages do not include 
