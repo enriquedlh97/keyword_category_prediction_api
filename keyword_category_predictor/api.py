@@ -3,10 +3,11 @@ from pydantic import BaseModel
 from typing import List
 from keyword_category_predictor.models.bert_base_multilingual_cased import Model, get_model
 
+
 app = FastAPI()
 
 
-class KeywordRequest(BaseModel):
+class BatchRequest(BaseModel):
     batch: list
 
 
@@ -25,7 +26,7 @@ class BatchResponse(BaseModel):
 
 
 @app.post("/predict", response_model=BatchResponse)
-def predict(request: KeywordRequest, model: Model = Depends(get_model)):
+def predict(request: BatchRequest, model: Model = Depends(get_model)):
 
     classifications = []
     for keyword in request.batch:
@@ -36,7 +37,6 @@ def predict(request: KeywordRequest, model: Model = Depends(get_model)):
             category_scores.append({"label": category, "score": probabilities[category]})
 
         keyword_output["labels"] = category_scores
-
         classifications.append(keyword_output)
-    print("classifications", classifications, '\n\n', flush=True)
+
     return BatchResponse(classifications=classifications)
