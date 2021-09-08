@@ -87,16 +87,15 @@ def model_evaluation(max_token_count, epochs, batch_size, learning_rate, dropout
         fold_validation_loss = trainer.validate(model, data_module)
 
         if verbose >= 2:
-            # Print accuracy
-            print(f"Validation loss for fold {fold + 1}: {fold_validation_loss[0]['val_loss']}%")
+            print(f"Validation loss for fold {fold + 1}: {fold_validation_loss[0]['val_loss']}")
             print('--------------------------------')
 
         # Save validation loss for current fold
         fold_validation_results.append(fold_validation_loss[0]['val_loss'])
 
     if verbose >= 1:
-        print(f'Average validation loss: {np.array(fold_validation_results).mean()} %',
-              f'Std dev of validation loss: {np.array(fold_validation_results).std()} %')
+        print(f'Average validation loss: {np.array(fold_validation_results).mean()}',
+              f'Std dev of validation loss: {np.array(fold_validation_results).std()}')
 
     return np.array(fold_validation_results).mean()
 
