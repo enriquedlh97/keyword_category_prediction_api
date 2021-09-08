@@ -1,0 +1,1 @@
+{"MODEL_NAME": "bert-base-multilingual-cased", "MAX_TOKEN_COUNT": 40, "N_EPOCHS": 2, "BATCH_SIZE": 64, "LEARNING_RATE": 2e-05, "DROPOUT": 0.12}
