@@ -394,7 +394,7 @@ Looking at the results a possible good course of action that could improve the r
 preprocessing steps to handle the category imbalance in the dataset. 
 
 <p align="center">
-  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/mean_auc_roc_results.png" width="600">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/mclass_distribution.png" width="600">
 
 Moreover, preprocessing steps are necessary to handle the different languages present in the dataset. These issues are 
 dealt with in the hyperparameter optimization subroutines for all models, however due to the time limitations, the results 
