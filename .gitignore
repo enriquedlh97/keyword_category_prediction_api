@@ -11,7 +11,7 @@ bert_final_training/
 lightning_logs/
 checkpoints/
 dataset/
-logs/
+# logs/
 
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
