@@ -62,6 +62,18 @@ pbounds = {
     'strip_accents': (0, 1),
     'lowercase': (0, 1),
     'ngram_range': (0, 1),
+    'english': (0, 1),
+    'italian': (0, 1),
+    'french': (0, 1),
+    'spanish': (0, 1),
+    'dutch': (0, 1),
+    'romanian': (0, 1),
+    'danish': (0, 1),
+    'norwegian': (0, 1),
+    'german': (0, 1),
+    'swedish': (0, 1),
+    'portuguese': (0, 1),
+    'finnish': (0, 1),
 }
 
 # Initialize optimizer
