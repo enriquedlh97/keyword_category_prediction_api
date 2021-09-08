@@ -12,6 +12,10 @@ lightning_logs/
 checkpoints/
 dataset/
 # logs/
+
+# Trained baseline models
+*.sav
+# Trained bert models
 *.ckpt
 
 .ipynb_checkpoints
