@@ -52,7 +52,7 @@ n_iter = args.n
 
 # Bounded region of parameter space
 pbounds = {
-    'category': (args.c, args.c + 0.1),  # Health
+    'category': (args.c, args.c + 0.1),
     'C': (1e-5, 100),
     'class_weight': (0, 1),
     'solver': (0, 1),
