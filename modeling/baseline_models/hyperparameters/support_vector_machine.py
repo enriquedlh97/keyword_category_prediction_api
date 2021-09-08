@@ -20,7 +20,7 @@ def model_evaluation(category, C, max_iter, class_weight, vectorizer_selection,
     cv = KFold(n_splits=k_folds, shuffle=True, random_state=69)
 
     # Data fetching and preprocessing, and basic set up
-    pd_train_dict, label_columns = get_and_preprocess_data(train=True, test=False, sampling=0.05)
+    pd_train_dict, label_columns = get_and_preprocess_data(train=True, test=False, sampling=1)
     pd_data = pd_train_dict[category]['data']
 
     # Preprocess data
