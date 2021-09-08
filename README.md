@@ -87,6 +87,22 @@ the API, otherwise you will need to first train a model. To download the pre-tra
 $ python bin/download_model.py
 ```
 
+### Getting the most recent environment. 
+If you already have the ```keyword_api``` environment created, and you need to updated ecause the environment files were 
+modified all you have to do is remove the current environment. To do this first make sure that the environment is not 
+currently active. You can just activate the base environment. 
+```bash
+$ conda activate base
+```
+The, you can remove the ```keyword_api``` environment as follows. 
+```bash
+$ conda remove --name keyword_api --all
+```
+Finally, run the ```setup.sh``` script just with the flag for the environment. 
+```bash
+$ source bin/setup.sh c - -
+```
+
 ## API testing
 To test the API you first need to start the app. You can do this by running the start server script. First you should
 give execution permission to it. You can do this by running the following command. 
@@ -99,43 +115,208 @@ $ bin/start_server.sh
 ```
 After this you will see that the server is running at `http://127.0.0.1:8000`. To test the actual API there are two 
 possibilities. The first one is to test it from the terminal. To do this just use the following command and substitute
-`string` after the `-d` flag for the actual text you want to predict categories for. 
+`string` values after the `-d` flag for the actual text you want to predict categories for. Make sure you put the text 
+inside the brackets since the API takes a list of keywords. This means you can add more than one string. 
 ```bash
 $ curl -X 'POST' \
   'http://127.0.0.1:8000/predict' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "text": "string"
+  "batch": ["string 1", "string 2"]
   }'
 ```
 You will get a response containing the probabilities for each category. It will look like this. 
 ```
 {
-  "probabilities": {
-    "Health": 0.5358596444129944,
-    "Vehicles": 0.5567029714584351,
-    "Hobbies & Leisure": 0.4562150239944458,
-    "Food & Groceries": 0.5050750970840454,
-    "Retailers & General Merchandise": 0.46449577808380127,
-    "Arts & Entertainment": 0.5480411052703857,
-    "Jobs & Education": 0.5760863423347473,
-    "Law & Government": 0.498044490814209,
-    "Home & Garden": 0.5054681897163391,
-    "Finance": 0.5238227844238281,
-    "Computers & Consumer Electronics": 0.45684221386909485,
-    "Internet & Telecom": 0.5297471880912781,
-    "Sports & Fitness": 0.4764178991317749,
-    "Dining & Nightlife": 0.45618385076522827,
-    "Business & Industrial": 0.4717608392238617,
-    "Occasions & Gifts": 0.5496118664741516,
-    "Travel & Tourism": 0.437097430229187,
-    "News, Media & Publications": 0.5520862340927124,
-    "Apparel": 0.5230557322502136,
-    "Beauty & Personal Care": 0.5549986362457275,
-    "Family & Community": 0.47445714473724365,
-    "Real Estate": 0.524471640586853
-  }
+  "classifications": [
+    {
+      "keyword": "string 1",
+      "labels": [
+        {
+          "label": "Health",
+          "score": 0.011274261400103569
+        },
+        {
+          "label": "Vehicles",
+          "score": 0.06771234422922134
+        },
+        {
+          "label": "Hobbies & Leisure",
+          "score": 0.195133775472641
+        },
+        {
+          "label": "Food & Groceries",
+          "score": 0.0026945434510707855
+        },
+        {
+          "label": "Retailers & General Merchandise",
+          "score": 0.0013113673776388168
+        },
+        {
+          "label": "Arts & Entertainment",
+          "score": 0.34272900223731995
+        },
+        {
+          "label": "Jobs & Education",
+          "score": 0.04811834543943405
+        },
+        {
+          "label": "Law & Government",
+          "score": 0.04289892315864563
+        },
+        {
+          "label": "Home & Garden",
+          "score": 0.09540806710720062
+        },
+        {
+          "label": "Finance",
+          "score": 0.009216787293553352
+        },
+        {
+          "label": "Computers & Consumer Electronics",
+          "score": 0.7871538996696472
+        },
+        {
+          "label": "Internet & Telecom",
+          "score": 0.5926831960678101
+        },
+        {
+          "label": "Sports & Fitness",
+          "score": 0.20651988685131073
+        },
+        {
+          "label": "Dining & Nightlife",
+          "score": 0.0017237392021343112
+        },
+        {
+          "label": "Business & Industrial",
+          "score": 0.18484708666801453
+        },
+        {
+          "label": "Occasions & Gifts",
+          "score": 0.005041724536567926
+        },
+        {
+          "label": "Travel & Tourism",
+          "score": 0.044590678066015244
+        },
+        {
+          "label": "News, Media & Publications",
+          "score": 0.15313173830509186
+        },
+        {
+          "label": "Apparel",
+          "score": 0.03802410140633583
+        },
+        {
+          "label": "Beauty & Personal Care",
+          "score": 0.011016074568033218
+        },
+        {
+          "label": "Family & Community",
+          "score": 0.06512366980314255
+        },
+        {
+          "label": "Real Estate",
+          "score": 0.015770507976412773
+        }
+      ]
+    },
+    {
+      "keyword": "string 2",
+      "labels": [
+        {
+          "label": "Health",
+          "score": 0.00784969236701727
+        },
+        {
+          "label": "Vehicles",
+          "score": 0.04988593980669975
+        },
+        {
+          "label": "Hobbies & Leisure",
+          "score": 0.14553707838058472
+        },
+        {
+          "label": "Food & Groceries",
+          "score": 0.0022167968563735485
+        },
+        {
+          "label": "Retailers & General Merchandise",
+          "score": 0.0007766910712234676
+        },
+        {
+          "label": "Arts & Entertainment",
+          "score": 0.24853244423866272
+        },
+        {
+          "label": "Jobs & Education",
+          "score": 0.027579136192798615
+        },
+        {
+          "label": "Law & Government",
+          "score": 0.029029864817857742
+        },
+        {
+          "label": "Home & Garden",
+          "score": 0.13453885912895203
+        },
+        {
+          "label": "Finance",
+          "score": 0.006180084776133299
+        },
+        {
+          "label": "Computers & Consumer Electronics",
+          "score": 0.8416517972946167
+        },
+        {
+          "label": "Internet & Telecom",
+          "score": 0.7193861603736877
+        },
+        {
+          "label": "Sports & Fitness",
+          "score": 0.17399124801158905
+        },
+        {
+          "label": "Dining & Nightlife",
+          "score": 0.0014157937839627266
+        },
+        {
+          "label": "Business & Industrial",
+          "score": 0.18167521059513092
+        },
+        {
+          "label": "Occasions & Gifts",
+          "score": 0.005364252254366875
+        },
+        {
+          "label": "Travel & Tourism",
+          "score": 0.048086315393447876
+        },
+        {
+          "label": "News, Media & Publications",
+          "score": 0.11453558504581451
+        },
+        {
+          "label": "Apparel",
+          "score": 0.03694669529795647
+        },
+        {
+          "label": "Beauty & Personal Care",
+          "score": 0.013184457086026669
+        },
+        {
+          "label": "Family & Community",
+          "score": 0.04143988713622093
+        },
+        {
+          "label": "Real Estate",
+          "score": 0.011533448472619057
+        }
+      ]
+    }
+  ]
 }
 ```
 The other way is to use the user interface generated by FastAPI. To do this just paste the following address in any 
@@ -143,8 +324,70 @@ browser.
 ```
 http://127.0.0.1:8000/docs#/default/predict_predict_post
 ```
-Then, select the `Try it out` button on the top right. Finally, substitute the `"string"` by the actual text you want to 
-try and click on `Execute`. 
+Then, select the `Try it out` button on the top right. Finally, substitute the `"string"` inside the `[]` by the actual 
+text you want to try and click on `Execute`. Notice that you can add multiple strings by separating them with a comma 
+just like in the previous example. For instance, you can try `["string 1", "string 2]`
+
+## Setting up the PYTHONPATH
+
+To be able to properly run files or scripts, specially from the terminal or console, make sure to set the PYTHONPATH to 
+include the contents of the directory where the current repository is. This needs to be done since this repository is 
+not an installable Python package and there are some modules that need to be imported. 
+
+First, check how the PYTHONPATH is empty by running the following: 
+```bash
+$ echo $PYTHONPATH
+```
+
+To set the PYTHONPATH temporarily for the current terminal session, navigate to the directory containing the repository 
+in your local computer. Once you are in the folder run the following. 
+```bash
+$ export PYTHONPATH="$PWD"
+``` 
+
+You can check how the PYTHONPATH was set correctly by running this command. Note that it should not be empty anymore. 
+```bash
+$ echo $PYTHONPATH
+```
+
+Note: For more information on PYTHONPATH and how to set it permanently see [this](https://bic-berkeley.github.io/psych-214-fall-2016/using_pythonpath.html)
+
+## Models
+
+This repository implements 4 different models. 
+
+1. BERT base multilingual cased
+2. Logistic Regression
+3. Support Vector Machine
+4. Random Forest
+
+This 4 models were trained and tested [this](https://drive.google.com/uc?id=1LtrGndz9P766BRPf-jWkRw0_gzDuVCVo) dataset 
+using default values for the hyperparameters. Although hyperparameter optimization subroutines were set up for all 
+models, they were not run due to time constraint. The API uses the BERT base multilingual cased since it was the model
+that performed the best when comparing the results using default values for all hyperparameters. 
+
+When the results from the hyperparameter optimization subroutines are ready, the four models will be compared once again 
+with the optimal values for the hyperparameters and, if necessary, the API will be updated with the best performing model. 
+
+### Results and model comparison
+The following figures show the comparison of the models. Initially the intention was to use a randomization test to see 
+if there was a statistically significant difference among the models, however, since the BERT model ended up performing 
+significantly better the tests were not done. 
+
+#### Mean Average Precision and Average Precision per Category
+<p align="center">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/avg_precision_score_results.png" width="600">
+
+<p align="center">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/mean_avg_precision_results.png" width="600">
+
+#### Mean AUC ROC and AUC ROC per Category
+<p align="center">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/auc_roc_results.png" width="600">
+
+<p align="center">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/mean_auc_roc_results.png" width="600">
+
 
 ## Project structure
 This project has the following structure
