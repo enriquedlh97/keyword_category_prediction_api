@@ -37,11 +37,11 @@ print(f"Optimizing hyperparameters for {category}")
 
 start_time = time.time()
 
-if not os.path.exists('hyperparameter_optimization/suppor_vector_machine/logs'):
-    os.makedirs('hyperparameter_optimization/suppor_vector_machine/logs')
+if not os.path.exists('hyperparameter_optimization/support_vector_machine/logs'):
+    os.makedirs('hyperparameter_optimization/support_vector_machine/logs')
 
 # Set path to logs
-path_to_logs = 'hyperparameter_optimization/suppor_vector_machine/logs'
+path_to_logs = 'hyperparameter_optimization/support_vector_machine/logs'
 
 logger = JSONLogger(path="{path}/logs_{category}.json".format(path=path_to_logs,
                                                               category=category.lower().replace(" ", "_")))
