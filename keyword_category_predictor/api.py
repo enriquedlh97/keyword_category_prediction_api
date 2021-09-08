@@ -1,60 +1,42 @@
-from typing import Dict
 from fastapi import FastAPI, Depends
 from pydantic import BaseModel
+from typing import List
 from keyword_category_predictor.models.bert_base_multilingual_cased import Model, get_model
 
 app = FastAPI()
 
 
 class KeywordRequest(BaseModel):
-    text: list
-    # text: str
+    batch: list
 
 
-class KeywordResponse(BaseModel):
-    classifications: Dict
+class Label(BaseModel):
+    label: str
+    score: float
 
 
-@app.post("/predict", response_model=KeywordResponse)
+class Keyword(BaseModel):
+    keyword: str
+    labels: List[Label] = []
+
+
+class BatchResponse(BaseModel):
+    classifications: List[Keyword] = []
+
+
+@app.post("/predict", response_model=BatchResponse)
 def predict(request: KeywordRequest, model: Model = Depends(get_model)):
+
     classifications = []
-    for batch in request.text:
-        _, probabilities = model.predict(request.text)
-        batch_output = {"keyword": batch}
+    for keyword in request.batch:
+        _, probabilities = model.predict(keyword)
+        keyword_output = {"keyword": keyword}
         category_scores = []
-        for category, score in probabilities:
-            category_scores.append({"label": category, "score": score})
+        for category in probabilities:
+            category_scores.append({"label": category, "score": probabilities[category]})
 
-        batch_output["labels"] = category_scores
+        keyword_output["labels"] = category_scores
 
-    classifications.append(batch_output)
-
-    return KeywordResponse(classifications=classifications)
-
-
-# {
-#   “classifications”: [
-#    {
-#     “keyword”: “fried chicken”,
-#     “labels”: [
-#      {
-#       “label”: “Food & Groceries”,
-#       “score”: 0.85
-#      },
-#      {
-#       “label”: “Dining & Nightlife”,
-#       “score”: 0.65
-#      }
-#     ]
-#    },
-#    {
-#     “keyword”: “hotels”,
-#     “labels”: [
-#      {
-#       “label”: “Travel & Tourism”,
-#       “score”: 0.9
-#      }
-#     ]
-#    }
-#   ]
-# }
+        classifications.append(keyword_output)
+    print("classifications", classifications, '\n\n', flush=True)
+    return BatchResponse(classifications=classifications)
