@@ -10,13 +10,18 @@ import os
 import argparse
 import time
 import json
+import warnings
 
 # Parse arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--i', type=int, default=2, help="Set number of steps for random exploration")
 parser.add_argument('--n', type=int, default=5, help="Set number of steps for bayesian optimization")
 parser.add_argument('--c', type=int, default=0, help="Set category number. The categories go from 0 to 21 in the order as they are found in the config.json file")
+parser.add_argument('--w', dest='w', action='store_false', default=True, help="True for ignoring warnings, False otherwise")
 args = parser.parse_args()
+
+if args.w is True:
+    warnings.filterwarnings("ignore")
 
 with open("config.json") as json_file:
     config = json.load(json_file)
