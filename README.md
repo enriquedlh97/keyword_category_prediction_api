@@ -389,6 +389,61 @@ significantly better the tests were not done.
   <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/mean_auc_roc_results.png" width="600">
 
 
+## Model details
+
+### BERT
+
+The pre-trained model that was fine-tuned for this specific task was the `bert-base-multilingual-cased`, all the details
+about this model can be found [here](https://huggingface.co/bert-base-multilingual-cased). In summary, the model was 
+trained on the top 104 languages with the largest Wikipedia using a masked language modeling (MLM) objective. See the 
+[list of languages](#list-of-languages) that the Multilingual model supports.
+
+#### Fine-tuning
+
+The model was fine-tuned for this specific task by training it on the 
+[previously](https://drive.google.com/uc?id=1LtrGndz9P766BRPf-jWkRw0_gzDuVCVo) mentioned dataset for 35 epochs. A final
+linear layer and a sigmoid activation function were added on top of the pre-trained bert model.
+
+Furthermore, a maximum sequence length of 40 tokens was used since the actual maximum length of a sequence in the dataset 
+is 33 tokens. 
+
+<p align="center">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/token_count.JPG" width="600">
+
+The model was trained for 35 epochs with early stopping (training stopped at epoch 8), a batch size of 64 and a 
+learning rate of `2e-5`. These are considered the default values for the hyperparameters. When the results for the 
+optimal hyperparameters are ready this file will be updated. 
+
+The model achieved a Mean Average Precision of 76.33%. This result is most likely explained by the fact that no 
+hyperparameter tuning was done. Since the model was stopped early at epoch 8 even though it had been set up to train for 35 
+epochs, it clearly started overfitting after that epoch.
+
+### Baseline models
+
+The `Logistic Regression`, `Support Vector Machien` and the `Random Forest` models were all trained with the default 
+hyperarameters from `scikit-learn`. Additionally, the same vectorizer with the same aprameters was used for the three 
+models. The vectorizer used was the `TfidfVectorizer` from `scikit-learn`. 
+
+## Training and testing models
+
+#### Hardware
+
+All models were trained on a server with the following characteristics. 
+```text
+2 x Intel Xeon Gold 5122 Processor @3.6Ghz (2s, 4c/s, 2t/c = 16 logical CPUs) with 128 GB RAM
+1 x Tesla V100-PCIE 32 GB GPU RAM
+```
+
+## Hyperparameter optimization
+
+### BERT
+
+### Logistic Regression
+
+### Support Vector Machine
+
+### Random Forest
+
 ## Project structure
 This project has the following structure
 ```text
@@ -460,163 +515,6 @@ The `bert_final_model_training.ipynb` and `final_model_training.py` contain the 
 The first one is a jupyter notebook, and the script version. The actual model was trained with the script version. 
 ## Pre-trained model details
 
-### Model used
-
-The pre-trained model that was fine-tuned for this specific task was the `bert-base-multilingual-cased`, all the details
-about this model can be found [here](https://huggingface.co/bert-base-multilingual-cased). In summary, the model was 
-trained on the top 104 languages with the largest Wikipedia using a masked language modeling (MLM) objective. See the 
-[list of languages](#list-of-languages) that the Multilingual model supports.
-
-### Fine-tuning
-
-The model was fine-tuned for this specific task by training it on 
-[this](https://drive.google.com/uc?id=1LtrGndz9P766BRPf-jWkRw0_gzDuVCVo) dataset for 35 epochs (around 20 hours). A final
-linear layer and a sigmoid activation function was added on top of the pre-trained bert model.
-
-Furthermore, a maximum sequence length of 40 tokens was used since the actual maximum length of a sequence in the dataset 
-is 33 tokens. 
-
-<p align="center">
-  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/token_count.JPG" width="600">
-
-The model was trained for 35 epochs with early stopping (training stopped at epoch 8), a batch size of 64 and a 
-learning rate of `2e-5`. No hyperparameter tuning was done due to the time limitations. However, a branch named 
-`hyperparam-opt` was created where a hyperparameter optimization subroutine was started to being set up. The intention 
-was to use Bayesian Optimization to tune the hyperparameters following a 10-fold cross validation scheme. 
-
-The model achieved a Mean Average Precision of 76.33%. This result is most likely explained by the fact that no 
-hyperparameter tuning was done. Since the model was stopped early at epoch 8 even though it had been set up to train for 35 
-epochs, it clearly started overfitting after that epoch. 
-
-#### Hardware
-
-The model was fine-tuned for about 5 hours on a server with the following characteristics. 
-```text
-2 x Intel Xeon Gold 5122 Processor @3.6Ghz (2s, 4c/s, 2t/c = 16 logical CPUs) with 128 GB RAM
-1 x Tesla V100-PCIE 32 GB GPU RAM
-```
-#### AUC ROC
-As a reference, after the first epoch the results for this metric were the following.
-```text
-Mean AUC ROC:0.9118656516075134
-
-AUC ROC per category:
-
-    Health:0.92984116
-    Vehicles:0.9358579
-    Hobbies & Leisure:0.8849387
-    Food & Groceries:0.94045573
-    Retailers & General Merchandise:0.8963138
-    Arts & Entertainment:0.90174246
-    Jobs & Education:0.9257699
-    Law & Government:0.91081136
-    Home & Garden:0.92352605
-    Finance:0.9282235
-    Computers & Consumer Electronics:0.9246343
-    Internet & Telecom:0.9001928
-    Sports & Fitness:0.9006619
-    Dining & Nightlife:0.9466539
-    Business & Industrial:0.8585652
-    Occasions & Gifts:0.9190705
-    Travel & Tourism:0.92542875
-    News, Media & Publications:0.8619314
-    Apparel:0.9306651
-    Beauty & Personal Care:0.91301185
-    Family & Community:0.86807954
-    Real Estate:0.9346674
-```
-
-The final results after the complete tuning for 8 epochs are the following. 
-```text
-Mean AUC ROC:0.9389623999595642
-
-AUC ROC per category:
-
-Health:0.95061696
-Vehicles:0.9570166
-Hobbies & Leisure:0.9193139
-Food & Groceries:0.9607837
-Retailers & General Merchandise:0.9425981
-Arts & Entertainment:0.924951
-Jobs & Education:0.9459585
-Law & Government:0.9363848
-Home & Garden:0.94838923
-Finance:0.95139754
-Computers & Consumer Electronics:0.9469222
-Internet & Telecom:0.9271123
-Sports & Fitness:0.93298805
-Dining & Nightlife:0.96544385
-Business & Industrial:0.89647937
-Occasions & Gifts:0.9483903
-Travel & Tourism:0.94743305
-News, Media & Publications:0.8890147
-Apparel:0.9584558
-Beauty & Personal Care:0.9441371
-Family & Community:0.9070463
-Real Estate:0.9563372
-```
-
-#### Mean Average Precision
-
-As a reference, after the first epoch the results for this metric were the following.
-```
-Mean Average Precision:0.686751127243042
-
-Average Precision per category:
-
-    Health:0.7492238
-    Vehicles:0.75872535
-    Hobbies & Leisure:0.7025987
-    Food & Groceries:0.72701
-    Retailers & General Merchandise:0.5111446
-    Arts & Entertainment:0.8015246
-    Jobs & Education:0.7462203
-    Law & Government:0.6179674
-    Home & Garden:0.7230513
-    Finance:0.64043856
-    Computers & Consumer Electronics:0.744525
-    Internet & Telecom:0.60483825
-    Sports & Fitness:0.67073786
-    Dining & Nightlife:0.694178
-    Business & Industrial:0.7201561
-    Occasions & Gifts:0.6067921
-    Travel & Tourism:0.7442349
-    News, Media & Publications:0.70804906
-    Apparel:0.7202701
-    Beauty & Personal Care:0.63098514
-    Family & Community:0.5900509
-    Real Estate:0.6958019
-```
-
-The final results after the complete tuning for 8 epochs are the following. 
-```text
-Mean Average Precision:0.7633433938026428
-
-Average Precision per category:
-
-Health:0.8023483
-Vehicles:0.8293877
-Hobbies & Leisure:0.78291553
-Food & Groceries:0.79903966
-Retailers & General Merchandise:0.65486777
-Arts & Entertainment:0.8438803
-Jobs & Education:0.7987087
-Law & Government:0.68738794
-Home & Garden:0.7966564
-Finance:0.7317461
-Computers & Consumer Electronics:0.8122689
-Internet & Telecom:0.69790566
-Sports & Fitness:0.75740767
-Dining & Nightlife:0.7746685
-Business & Industrial:0.79147625
-Occasions & Gifts:0.69419265
-Travel & Tourism:0.8009785
-News, Media & Publications:0.7586461
-Apparel:0.8092545
-Beauty & Personal Care:0.7334262
-Family & Community:0.6742519
-Real Estate:0.7621378
-```
 
 ## Training a model
 
