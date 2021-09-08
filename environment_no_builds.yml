@@ -15,7 +15,7 @@ dependencies:
   - blas=1.0
   - blinker=1.4
   - brotlipy=0.7.0
-  - ca-certificates=2021.5.30
+  - ca-certificates=2021.7.5
   - cachetools=4.2.2
   - certifi=2021.5.30
   - cffi=1.14.6
@@ -104,6 +104,7 @@ dependencies:
   - sacremoses=0.0.43
   - scikit-learn=0.22.2.post1
   - scipy=1.5.3
+  - seaborn=0.11.2
   - sentencepiece=0.1.95
   - setuptools=52.0.0
   - sip=4.19.8
