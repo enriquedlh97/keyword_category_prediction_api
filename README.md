@@ -386,6 +386,14 @@ significantly better the tests were not done.
   <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/auc_roc_results.png" width="600">
 
 <p align="center">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/class_distribution.jpg" width="600">
+
+#### Class imbalance
+
+Looking at the results a possible good course of action that could improve the results would be to add additional 
+preprocessing steps to handle the category imbalance in the dataset. 
+
+<p align="center">
   <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/mean_auc_roc_results.png" width="600">
 
 
