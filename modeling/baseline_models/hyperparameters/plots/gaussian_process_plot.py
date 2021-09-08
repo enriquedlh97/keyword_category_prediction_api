@@ -70,7 +70,7 @@ def plot_gp(optimizer, axis_color='black', fc_color='silver', ec_color='black', 
     #                   np.concatenate([mu - 1.9600 * sigma, (mu + 1.9600 * sigma)[::-1]]),
     #             alpha=.6, fc='silver', ec='k', label='95% confidence interval')
 
-    axis.set_ylabel('10-fold cross-validation avg. accuracy', fontdict={'size': 20})
+    axis.set_ylabel('5-fold cross-validation loss', fontdict={'size': 20})
     axis.set_xlabel('Principal component 1 from hyperparameter space', fontdict={'size': 20})
 
     utility_function = UtilityFunction(kind="ucb", kappa=5, xi=0)
