@@ -460,7 +460,26 @@ script. This script takes the following arguments.
 - `--w` does not receive any value. If the flag is specified then all warnings will be ignored. 
 - `--n` Receives a string indicating the name where the training execution will be saved. If nothing is specified, then a 
   folder will be created using the current datetime.
+  
+For example, if you want to train a model for one epoch using all default values you can run the following. 
+```bash
+$ training_and_testing/bert_base_multilingual_cased/train.py --e=1
+```
+When the script finishes executing, the results will be saved to the `assets/bert_final_training{specified folder name}` folder,
+where the `{specified folder name}` will be the name passed as the `--n` argument or the datetime incase nothing was 
+specified. 
 
+The testing is very similar, for this case you have execute the `training_and_testing/bert_base_multilingual_cased/test.py` 
+script. However, this script does require some arguments indicating the location of the model to be tested. The complete 
+set of arguments that this script takes are the following ones. 
+
+- `--s` corresponds to the same argument as in the `train.py` script. 
+- `--w` corresponds to the same argument as in the `train.py` script. 
+- `--n` receives string corresponding to the name of the directory of training execution where all model data is. 
+  This is a required argument.
+- `--p` receives string corresponding to the name of the `.ckpt` file of the model to be tested. 
+- `--v` receives integer corresponding to the verbosity. If it is set to `1`, then the metrics are printed at the end. 
+  Defaults to `0`. 
 
 ### Logistic Regression
 
