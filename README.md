@@ -447,19 +447,19 @@ All models were trained on a server with the following characteristics.
 
 ### BERT
 
-To fine-tune a BERT model from scratch you have to exectue the `training_and_testing/bert_base_multilingual_cased/train.py` 
+To fine-tune a BERT model from scratch you have to execute the `training_and_testing/bert_base_multilingual_cased/train.py` 
 script. This script takes the following arguments.
 
 - `--t` receives an integer that defines the max token count. The default value is `40`. 
 - `--e` receives an integer defining the number of epochs. Defaults to `20`. 
 - `--b` receives an integer defining the batch size, defaults to `64`. 
-- --l', type=float, default=2e-5, help="Set learning rate")
-- --d', type=float, default=0.12, help="Set dropout rate")
-- --s', type=float, default=1, help="Define sampling proportion for data")
-- --w', dest='w', action='store_false',
-                    default=True, help="True for ignoring warnings, False otherwise")
-- --n', type=str, default=str(datetime.now()).lower().replace(" ", "_").replace(":", "-"),
-                    help="Define name of training execution. If nothing is specified then the current datetime will be used")
+- `--l` receives a float defining the learning rate, defaults to `2e-5`. 
+- `--d` receives a float defining the dropout rate, defaults to `0.12`. 
+- `--s` receives a float defining the sampling proportion. This useful for running quick tests, and it is not necessary 
+  to use all the data. The default value is `1`, meaning 100% of the data.
+- `--w` does not receive any value. If the flag is specified then all warnings will be ignored. 
+- `--n` Receives a string indicating the name where the training execution will be saved. If nothing is specified, then a 
+  folder will be created using the current datetime.
 
 
 ### Logistic Regression
