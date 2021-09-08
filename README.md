@@ -455,6 +455,7 @@ All models were trained on a server with the following characteristics.
 
 ### Random Forest
 
+<!---
 ## Project structure
 This project has the following structure
 ```text
@@ -525,7 +526,7 @@ API.
 The `bert_final_model_training.ipynb` and `final_model_training.py` contain the logic por actually training the model. 
 The first one is a jupyter notebook, and the script version. The actual model was trained with the script version. 
 ## Pre-trained model details
-
+--->
 
 ## Training a model
 
@@ -551,10 +552,7 @@ $ python final_model_training.py --t=40 --e=20 --b=64 --l=2e-5 --d=0.12
 ```
 After each epoch, a model is going to be saved in the `assets` folder with the name structure as 
 `epoch=EPOCH-val_loss=VALIDATION_LOSS-best-checkpoint.ckpt`. To use one of these models just put the model file name in the `config.json`
-file in the `PRETRAINED_MODEL` field. The API will automatically load this model when the server is started. 
-
-## Hyper-parameter optimization
-_To be done_
+file in the `PRETRAINED_MODEL` field. The API will automatically load this model when the server is started.
 
 ## Updating environment files
 There are two environment files available, the first one is for creating an environment on Windows and the file name is 
@@ -628,7 +626,7 @@ The following is a list of some resources used to do this project.
    
 ## List of Languages
 
-The multilingual model supports the following languages. 
+The multilingual BERT model supports the following languages. 
 
 *   Afrikaans
 *   Albanian
