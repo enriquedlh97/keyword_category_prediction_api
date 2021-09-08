@@ -14,7 +14,7 @@ def train_category(pd_data, category, model, vectorizer):
     return model.fit(x_train_matrix, y_train), vectorizer
 
 
-def test_category(pd_data, category, model, vectorizer, avg_precision=True, roc_auc=False):
+def test_category(pd_data, category, model, vectorizer, avg_precision=True, roc_auc=False, params_opt=False):
     x_test, y_test = pd_data.keyword, pd_data[category]
 
     x_test_matrix = vectorizer.transform(x_test)
@@ -23,6 +23,8 @@ def test_category(pd_data, category, model, vectorizer, avg_precision=True, roc_
         return {'Average precision': [average_precision_score(model.predict(x_test_matrix), y_test)]}
     elif roc_auc:
         return {'AUC ROC': [roc_auc_score(model.predict(x_test_matrix), y_test)]}
+    elif params_opt:
+        return model.predict(x_test_matrix), y_test
 
 
 def train_models(models_and_params, model_name, verbose=1):
