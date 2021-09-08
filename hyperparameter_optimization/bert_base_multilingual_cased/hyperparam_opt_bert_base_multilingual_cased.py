@@ -31,6 +31,7 @@ init_points = args.i
 n_iter = args.n
 
 # Bounded region of parameter space
+# @TODO: Add preprocessing from baseline models
 pbounds = {
     'max_token_count': (33, 60),
     'epochs': (2, 2.1),
