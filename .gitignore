@@ -12,6 +12,7 @@ lightning_logs/
 checkpoints/
 dataset/
 # logs/
+*.ckpt
 
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
