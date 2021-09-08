@@ -408,7 +408,7 @@ Furthermore, a maximum sequence length of 40 tokens was used since the actual ma
 is 33 tokens. 
 
 <p align="center">
-  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/token_count.JPG" width="600">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/token_count.JPG" width="600">
 
 The model was trained for 35 epochs with early stopping (training stopped at epoch 8), a batch size of 64 and a 
 learning rate of `2e-5`. These are considered the default values for the hyperparameters. When the results for the 
@@ -420,8 +420,8 @@ epochs, it clearly started overfitting after that epoch.
 
 ### Baseline models
 
-The `Logistic Regression`, `Support Vector Machien` and the `Random Forest` models were all trained with the default 
-hyperarameters from `scikit-learn`. Additionally, the same vectorizer with the same aprameters was used for the three 
+The `Logistic Regression`, `Support Vector Machine` and the `Random Forest` models were all trained with the default 
+hyperarameters from `scikit-learn`. Additionally, the same vectorizer with the default parameters was used for the three 
 models. The vectorizer used was the `TfidfVectorizer` from `scikit-learn`. 
 
 ## Training and testing models
