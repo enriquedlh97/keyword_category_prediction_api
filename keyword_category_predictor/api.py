@@ -7,14 +7,54 @@ app = FastAPI()
 
 
 class KeywordRequest(BaseModel):
-    text: str
+    text: list
+    # text: str
 
 
 class KeywordResponse(BaseModel):
-    probabilities: Dict[str, float]
+    classifications: Dict
 
 
 @app.post("/predict", response_model=KeywordResponse)
 def predict(request: KeywordRequest, model: Model = Depends(get_model)):
-    _, probabilities = model.predict(request.text)
-    return KeywordResponse(probabilities=probabilities)
+    classifications = []
+    for batch in request.text:
+        _, probabilities = model.predict(request.text)
+        batch_output = {"keyword": batch}
+        category_scores = []
+        for category, score in probabilities:
+            category_scores.append({"label": category, "score": score})
+
+        batch_output["labels"] = category_scores
+
+    classifications.append(batch_output)
+
+    return KeywordResponse(classifications=classifications)
+
+
+# {
+#   “classifications”: [
+#    {
+#     “keyword”: “fried chicken”,
+#     “labels”: [
+#      {
+#       “label”: “Food & Groceries”,
+#       “score”: 0.85
+#      },
+#      {
+#       “label”: “Dining & Nightlife”,
+#       “score”: 0.65
+#      }
+#     ]
+#    },
+#    {
+#     “keyword”: “hotels”,
+#     “labels”: [
+#      {
+#       “label”: “Travel & Tourism”,
+#       “score”: 0.9
+#      }
+#     ]
+#    }
+#   ]
+# }
