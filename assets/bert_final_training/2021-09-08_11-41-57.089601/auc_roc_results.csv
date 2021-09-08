@@ -1,23 +1,23 @@
 ,BERT
-AUC ROC - Health,0.8481436967849731
-AUC ROC - Vehicles,0.8425762057304382
-AUC ROC - Hobbies & Leisure,0.7487378716468811
-AUC ROC - Food & Groceries,0.8475443720817566
-AUC ROC - Retailers & General Merchandise,0.6931543350219727
-AUC ROC - Arts & Entertainment,0.8276843428611755
-AUC ROC - Jobs & Education,0.8432193994522095
-AUC ROC - Law & Government,0.8048155307769775
-AUC ROC - Home & Garden,0.8484359979629517
-AUC ROC - Finance,0.8326101899147034
-AUC ROC - Computers & Consumer Electronics,0.8537500500679016
-AUC ROC - Internet & Telecom,0.8082436323165894
-AUC ROC - Sports & Fitness,0.7743405103683472
-AUC ROC - Dining & Nightlife,0.8603534698486328
-AUC ROC - Business & Industrial,0.7631880044937134
-AUC ROC - Occasions & Gifts,0.7396587133407593
-AUC ROC - Travel & Tourism,0.8495152592658997
-"AUC ROC - News, Media & Publications",0.7724938988685608
-AUC ROC - Apparel,0.7972427606582642
-AUC ROC - Beauty & Personal Care,0.7568442225456238
-AUC ROC - Family & Community,0.7367757558822632
-AUC ROC - Real Estate,0.8480241298675537
+AUC ROC - Health,0.95061696
+AUC ROC - Vehicles,0.9570166
+AUC ROC - Hobbies & Leisure,0.9193139
+AUC ROC - Food & Groceries,0.9607837
+AUC ROC - Retailers & General Merchandise,0.9425981
+AUC ROC - Arts & Entertainment,0.924951
+AUC ROC - Jobs & Education,0.9459585
+AUC ROC - Law & Government,0.9363848
+AUC ROC - Home & Garden,0.94838923
+AUC ROC - Finance,0.95139754
+AUC ROC - Computers & Consumer Electronics,0.9469222
+AUC ROC - Internet & Telecom,0.9271123
+AUC ROC - Sports & Fitness,0.93298805
+AUC ROC - Dining & Nightlife,0.96544385
+AUC ROC - Business & Industrial,0.89647937
+AUC ROC - Occasions & Gifts,0.9483903
+AUC ROC - Travel & Tourism,0.94743305
+"AUC ROC - News, Media & Publications",0.8890147
+AUC ROC - Apparel,0.9584558
+AUC ROC - Beauty & Personal Care,0.9441371
+AUC ROC - Family & Community,0.9070463
+AUC ROC - Real Estate,0.9563372

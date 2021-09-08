@@ -1,23 +1,23 @@
 ,BERT
-Average precision - Health,0.6012985706329346
-Average precision - Vehicles,0.5187920331954956
-Average precision - Hobbies & Leisure,0.45124828815460205
-Average precision - Food & Groceries,0.5495362877845764
-Average precision - Retailers & General Merchandise,0.11262418329715729
-Average precision - Arts & Entertainment,0.6794333457946777
-Average precision - Jobs & Education,0.6125058531761169
-Average precision - Law & Government,0.3503991663455963
-Average precision - Home & Garden,0.5220962762832642
-Average precision - Finance,0.4482426941394806
-Average precision - Computers & Consumer Electronics,0.5777262449264526
-Average precision - Internet & Telecom,0.3835006654262543
-Average precision - Sports & Fitness,0.4591621458530426
-Average precision - Dining & Nightlife,0.4786037802696228
-Average precision - Business & Industrial,0.5603370070457458
-Average precision - Occasions & Gifts,0.13942095637321472
-Average precision - Travel & Tourism,0.5688521862030029
-"Average precision - News, Media & Publications",0.5185359716415405
-Average precision - Apparel,0.460520476102829
-Average precision - Beauty & Personal Care,0.26012948155403137
-Average precision - Family & Community,0.3441649079322815
-Average precision - Real Estate,0.48704153299331665
+Average precision - Health,0.8023483
+Average precision - Vehicles,0.8293877
+Average precision - Hobbies & Leisure,0.78291553
+Average precision - Food & Groceries,0.79903966
+Average precision - Retailers & General Merchandise,0.65486777
+Average precision - Arts & Entertainment,0.8438803
+Average precision - Jobs & Education,0.7987087
+Average precision - Law & Government,0.68738794
+Average precision - Home & Garden,0.7966564
+Average precision - Finance,0.7317461
+Average precision - Computers & Consumer Electronics,0.8122689
+Average precision - Internet & Telecom,0.69790566
+Average precision - Sports & Fitness,0.75740767
+Average precision - Dining & Nightlife,0.7746685
+Average precision - Business & Industrial,0.79147625
+Average precision - Occasions & Gifts,0.69419265
+Average precision - Travel & Tourism,0.8009785
+"Average precision - News, Media & Publications",0.7586461
+Average precision - Apparel,0.8092545
+Average precision - Beauty & Personal Care,0.7334262
+Average precision - Family & Community,0.6742519
+Average precision - Real Estate,0.7621378
