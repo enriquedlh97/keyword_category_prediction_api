@@ -481,6 +481,18 @@ set of arguments that this script takes are the following ones.
 - `--v` receives integer corresponding to the verbosity. If it is set to `1`, then the metrics are printed at the end. 
   Defaults to `0`. 
 
+### Baseline models
+The training and testing of the baseline models is very simple and follows the same procedure. 
+Within the `training_and_testing` directory, there is a folder for each of the baselien models. Each
+```text
+/keyword_category_prediction_api
+|-- training_and_testing
+|   |-- logistic_regression
+|   |-- random_forest
+|   |-- support_vector_machine
+|       |--hyperparameters.json
+
+```
 ### Logistic Regression
 
 ### Support Vector Machine
