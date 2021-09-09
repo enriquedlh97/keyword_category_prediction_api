@@ -2,6 +2,23 @@
 API for predicting most likely category tags out of 22 different categories from batches of words in 104 different languages. 
 The model has a 76.33% mean average precision, and a 93.89% mean AUC ROC.
 
+Contents
+=================
+
+<!--ts-->
+   * [Getting Started](#Getting Started)
+      * [Pre-requisites](#Pre-requisites)
+      * [Getting the most recent environment](#Getting the most recent environment)
+   * [API testing](#API testing)
+   * [Setting up the PYTHONPATH](#Setting up the PYTHONPATH)
+   * [Models](#Models)
+     * [Results and Model Comparison](#Results and Model Comparison)
+   * [Model details](#Model details)
+   * [Training and testing models](#Training and testing models)
+   * [Hyperparameter optimization](#Hyperparameter optimization)
+   * [Updating environment files](#Updating environment files)
+<!--te-->
+
 ## Getting Started
 
 To set up a working project there are two possibilities. The automatic easy way and the manual way. Both of them are 
@@ -88,7 +105,7 @@ the API, otherwise you will need to first train a model. To download the pre-tra
 $ python bin/download_model.py
 ```
 
-### Getting the most recent environment. 
+### Getting the most recent environment 
 If you already have the ```keyword_api``` environment created, and you need to update it because the environment files were 
 modified all you have to do is to remove the current environment. To do this first make sure that the environment is not 
 currently active. You can just activate the base environment. 
