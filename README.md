@@ -615,7 +615,7 @@ For a sample run of the `Logistic Regression` script setting the flags to `--i=3
 visualization will look like this.
 
 <p align="center">
-  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/gaussian_process.png" width="600">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/gaussian_process.PNG" width="600">
 
 <!---
 ## Project structure
