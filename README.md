@@ -475,7 +475,7 @@ For example, for a particular datetime the directory and the model file name wil
 |-- assets
 |   |-- bert_final_model_training
 |       |-- 2021-09-08_11-41-57.089601/
-            |-- epoch=10-val_loss=0.0123-best-checkpoint.ckpt
+            |-- epoch=1-val_loss=0.0123-best-checkpoint.ckpt
 
 
 ```
@@ -495,7 +495,7 @@ set of arguments that this script takes are the following ones.
 If you wanted to test the model from the previous example  `epoch=10-val_loss=0.0123-best-checkpoint.ckpt`. You would have 
 to run the script with the following arguments. 
 ```bash
-$ training_and_testing/bert_base_multilingual_cased/test.py --n="2021-09-08_11-41-57.089601" --p="epoch=10-val_loss=0.0123-best-checkpoint.ckpt"
+$ training_and_testing/bert_base_multilingual_cased/test.py --n="2021-09-08_11-41-57.089601" --p="epoch=1-val_loss=0.0123-best-checkpoint.ckpt"
 ```
 
 ### Baseline models
