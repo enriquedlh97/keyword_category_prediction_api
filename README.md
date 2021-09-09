@@ -568,14 +568,54 @@ models) will be saved in the `assets` folder under the corresponding model name.
 |   |-- support_vector_machine
 ```
 ## Hyperparameter optimization
+A hyperparameter optimization subroutine was set up for all models using Bayesian Optimization follwoing a 5-fold cross 
+validation scheme. These subroutines find optimal hyperparameters for all the models as well as the vectorizers to use 
+and the optimal parameters for those vectorizers.  Al the scripts for finding the optimal hyperparameters are under the 
+`hyperparameter_optimization directory`. There a folder for each model can be found containing a `.py` script correpsonding 
+to the hyperparameter otimization subroutine and a `.ipynb` file that should be run after the hyperparmaetr optimization 
+subroutine is finished. This latter file will display the optimal hyperparamters as well as a visualization of the gaussian 
+process for finding the optmial hyperparmaters. 
 
-### BERT
+All hyperparameter optimizations cripts follow the same naming structure `hyperparam_opt_model_name_.py` and they receive 
+two arguments that control the Bayesian Optimization scheme. 
+- `--i` receives an integer and sets the number of steps for random exploration, defaults to `1`. 
+- `--n` receives an integer and sets the number of steps for bayesian optimization, defaults to `2`.
 
-### Logistic Regression
+In the case of the `BERT` model only the `hyperparam_opt_bert_base_multilingual_cased.py` script has to be executed. 
+However, in the case of the baseline models the `optimize_hyperparams.sh` script has to run. 
 
-### Support Vector Machine
+So, if you wanted to excetue the hyperparmater optimization subroutine for the `BERT` model with 20 random exploration 
+steps and 200 interatiosn of Bayesian Iptimization you should execute the following command. 
+```bash
+$ python hyperparameter_optimization/bert_base_multilingual_cased/hyperparam_opt_bert_base_multilingual_cased.py --i=20 --n=200
+```
+However in the case of a baseline model, for example the  `Logistic Regression` you should execute the following script. 
+```bash
+$ hyperparameter_optimization/logistic_regression/optimize_hyperparams.sh
+```
+Additionally make sure you set the `--i` and `--n` flags to what you need inside this script, they are set to `--i=20` 
+and `--n=200` by default. 
 
-### Random Forest
+After the hyperparamter optimization subroutine finishes you will find a `logs` directory containing the logs from the 
+Bayesian Optimization process. This folder is used by the `.ipynb` file to display the optimal hyperparameters and 
+visualize the gaussian process. In the case of the logistic regression the final state of the directory will look like 
+this.
+```text
+/keyword_category_prediction_api
+|-- assets
+|   |-- logistic_regression
+|       |-- logs/
+|       |-- hyperparam_opt_logistic_regression.py
+|       |-- optimal_hyperparams_logistic_regression.ipynb
+|       |-- optimize_hyperparams.sh
+|   |-- random_forest
+|   |-- support_vector_machine
+```
+For a sample run of the `Logistic Regression` script setting the flags to `--i=3` and `--n=4` the gaussian process 
+visualization will look like this.
+
+<p align="center">
+  <img src="https://github.com/enriquedlh97/keyword_category_prediction_api/blob/main/images/gaussian_process.png" width="600">
 
 <!---
 ## Project structure
