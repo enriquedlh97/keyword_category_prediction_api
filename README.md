@@ -489,12 +489,14 @@ hyperparameters.json file that specifies the specific hyperparameters used for t
 /keyword_category_prediction_api
 |-- training_and_testing
 |   |-- logistic_regression
+|   |   |--hyperparameters.json
 |   |-- random_forest
+|   |   |--hyperparameters.json
 |   |-- support_vector_machine
-|       |--hyperparameters.json
+        |--hyperparameters.json
 ```
 All models can be trained using the same `training_and_testing/train_baseline_model.py` script by specifying the 
-appropiate arguments. The available arguments are the following ones. 
+appropriate arguments. The available arguments are the following ones. 
 
 - `--d` if this flag is specified the model will be trained using the optimal hyperparameters, otherwise the default 
 values will be used. At this point it should not be used because the optimal paramaters are not available. 
@@ -515,11 +517,18 @@ $ training_and_testing/train_baseline_models.sh
 ```
 
 To test a single model once it has been trained you can do the same but this time with the `test_baseline_model.py` script. 
+This script takes following arguments (essentially the same ones as the training script). 
+- `--s` receives a float defining the sampling proportion. This useful for running quick tests, and it is not necessary 
+  to use all the data. The default value is `1`, meaning 100% of the data.
+- `--m` receives a string, `lr` will train the logistic regression, `rf` will train the random forest and `svm` the support
+  vector machine.
+- `--w` does not receive any value. If the flag is specified then all warnings will be ignored. 
+For example, to test a `Logistic Regression` model you can execute the following command. 
 ```bash
-$ python training_and_testing/test_baseline_model.py --m="lr"
+$ python training_and_testing/test_baseline_model.py --m="lr" --s=1
 ```
 
-Similarly, to test all models simultaneously you can run the follwing command. 
+Similarly to the training procedure, to test all models simultaneously you can run the following script. 
 ```bash
 $ training_and_testing/test_baseline_models.sh
 ```
@@ -532,6 +541,15 @@ script.
 At the end of the training and testing, all results and models will be found in the `assets/` direcotry under the 
 corresponding model name. For example, the results for `Logistic Regression` will be found at `assets/logistic_regression`.
 
+After each training or testing execution, all results (including AUC and Average Precision metrics as well as the trained 
+models) will be saved in the `assets` folder under the corresponding model name.
+```text
+/keyword_category_prediction_api
+|-- assets
+|   |-- logistic_regression
+|   |-- random_forest
+|   |-- support_vector_machine
+```
 ## Hyperparameter optimization
 
 ### BERT
