@@ -89,7 +89,7 @@ $ python bin/download_model.py
 ```
 
 ### Getting the most recent environment. 
-If you already have the ```keyword_api``` environment created, and you need to updated because the environment files were 
+If you already have the ```keyword_api``` environment created, and you need to update it because the environment files were 
 modified all you have to do is to remove the current environment. To do this first make sure that the environment is not 
 currently active. You can just activate the base environment. 
 ```bash
