@@ -9,14 +9,14 @@ Contents
    * [Getting Started](#Getting-Started)
       * [Pre-requisites](#Pre-requisites)
       * [Getting the most recent environment](#Getting-the-most-recent-environment)
-   * [API testing](#API testing)
-   * [Setting up the PYTHONPATH](#Setting up the PYTHONPATH)
+   * [API testing](#API-testing)
+   * [Setting up the PYTHONPATH](#Setting-up-the-PYTHONPATH)
    * [Models](#Models)
-     * [Results and Model Comparison](#Results and Model Comparison)
-   * [Model details](#Model details)
-   * [Training and testing models](#Training and testing models)
-   * [Hyperparameter optimization](#Hyperparameter optimization)
-   * [Updating environment files](#Updating environment files)
+     * [Results and Model Comparison](#Results-and-Model-Comparison)
+   * [Model details](#Model-details)
+   * [Training and testing models](#Training-and-testing-models)
+   * [Hyperparameter optimization](#Hyperparameter-optimization)
+   * [Updating environment files](#Updating-environment-files)
 <!--te-->
 
 ## Getting Started
