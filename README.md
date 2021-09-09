@@ -469,6 +469,17 @@ When the script finishes executing, the results will be saved to the `assets/ber
 where the `{specified folder name}` will be the name passed as the `--n` argument or the current datetime in case nothing was 
 specified. 
 
+For example, for a particular datetime the directory and the model file name will look like this.
+```text
+/keyword_category_prediction_api
+|-- assets
+|   |-- bert_final_model_training
+|       |-- 2021-09-08_11-41-57.089601/
+            |-- epoch=10-val_loss=0.0123-best-checkpoint.ckpt
+
+
+```
+
 The testing is very similar, for this case you have execute the `training_and_testing/bert_base_multilingual_cased/test.py` 
 script. However, this script does require some arguments indicating the location of the model to be tested. The complete 
 set of arguments that this script takes are the following ones. 
@@ -478,8 +489,14 @@ set of arguments that this script takes are the following ones.
 - `--n` receives string corresponding to the name of the directory of training execution where all model data is. 
   This is a required argument.
 - `--p` receives string corresponding to the name of the `.ckpt` file of the model to be tested. 
-- `--v` receives integer corresponding to the verbosity. If it is set to `1`, then the metrics are printed at the end. 
+- `--v` receives an integer corresponding to the verbosity. If it is set to `1`, then the metrics are printed at the end. 
   Defaults to `0`. 
+  
+If you wanted to test the model from the previous example  `epoch=10-val_loss=0.0123-best-checkpoint.ckpt`. You would have 
+to run the script with the following arguments. 
+```bash
+$ training_and_testing/bert_base_multilingual_cased/test.py --n="2021-09-08_11-41-57.089601" --p="epoch=10-val_loss=0.0123-best-checkpoint.ckpt"
+```
 
 ### Baseline models
 The training and testing of the baseline models is very simple and follows the same procedure. 
