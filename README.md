@@ -6,9 +6,9 @@ Contents
 =================
 
 <!--ts-->
-   * [Getting Started](#Getting Started)
+   * [Getting Started](#Getting-Started)
       * [Pre-requisites](#Pre-requisites)
-      * [Getting the most recent environment](#Getting the most recent environment)
+      * [Getting the most recent environment](#Getting-the-most-recent-environment)
    * [API testing](#API testing)
    * [Setting up the PYTHONPATH](#Setting up the PYTHONPATH)
    * [Models](#Models)
