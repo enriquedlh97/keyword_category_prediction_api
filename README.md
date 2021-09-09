@@ -95,7 +95,7 @@ currently active. You can just activate the base environment.
 ```bash
 $ conda activate base
 ```
-The, you can remove the ```keyword_api``` environment as follows. 
+Then, you can remove the ```keyword_api``` environment as follows. 
 ```bash
 $ conda remove --name keyword_api --all
 ```
