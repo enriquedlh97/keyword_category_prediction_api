@@ -465,7 +465,7 @@ For example, if you want to train a model for one epoch using all default values
 ```bash
 $ python training_and_testing/bert_base_multilingual_cased/train.py --e=1
 ```
-When the script finishes executing, the results will be saved to the `assets/bert_final_training{specified folder name}` folder,
+When the script finishes executing, the results will be saved to the `assets/bert_final_training/{specified folder name}` folder,
 where the `{specified folder name}` will be the name passed as the `--n` argument or the current datetime in case nothing was 
 specified. 
 
