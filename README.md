@@ -2,7 +2,7 @@
 API for predicting most likely category tags out of 22 different categories from batches of words in 104 different languages. 
 The model has a 76.33% mean average precision, and a 93.89% mean AUC ROC.
 
-Contents
+## Contents
 =================
 
 <!--ts-->
