@@ -1,5 +1,6 @@
 # Keyword Category Prediction API
-API for predicting most likely category tags out of 22 different categories from batches of words in 104 different languages. The model has a 76.33% mean average precision and a 93.89% mean AUC ROC.
+API for predicting most likely category tags out of 22 different categories from batches of words in 104 different languages. 
+The model has a 76.33% mean average precision, and a 93.89% mean AUC ROC.
 
 ## Getting Started
 
@@ -60,7 +61,7 @@ scipy 1.5.3
 nltk 3.5
 ```
 To do this you can create the conda environment and install them directly, or you can just use the .yml files. If you 
-are using windows you can just run the following.
+are using windows, then you can just run the following.
 ```bash
 $ conda env create -f environment.yml
 ```
@@ -88,8 +89,8 @@ $ python bin/download_model.py
 ```
 
 ### Getting the most recent environment. 
-If you already have the ```keyword_api``` environment created, and you need to updated ecause the environment files were 
-modified all you have to do is remove the current environment. To do this first make sure that the environment is not 
+If you already have the ```keyword_api``` environment created, and you need to updated because the environment files were 
+modified all you have to do is to remove the current environment. To do this first make sure that the environment is not 
 currently active. You can just activate the base environment. 
 ```bash
 $ conda activate base
@@ -325,7 +326,7 @@ browser.
 http://127.0.0.1:8000/docs#/default/predict_predict_post
 ```
 Then, select the `Try it out` button on the top right. Finally, substitute the `"string"` inside the `[]` by the actual 
-text you want to try and click on `Execute`. Notice that you can add multiple strings by separating them with a comma 
+text you want to try, and click on `Execute`. Notice that you can add multiple strings by separating them with a comma 
 just like in the previous example. For instance, you can try `["string 1", "string 2"]`
 
 ## Setting up the PYTHONPATH
@@ -340,7 +341,7 @@ $ echo $PYTHONPATH
 ```
 
 To set the PYTHONPATH temporarily for the current terminal session, navigate to the directory containing the repository 
-in your local computer. Once you are in the folder run the following. 
+in your local computer. Once you are in the folder, run the following. 
 ```bash
 $ export PYTHONPATH="$PWD"
 ``` 
@@ -432,7 +433,7 @@ epochs, it clearly started overfitting after that epoch.
 ### Baseline models
 
 The `Logistic Regression`, `Support Vector Machine` and the `Random Forest` models were all trained with the default 
-hyperarameters from `scikit-learn`. Additionally, the same vectorizer with the default parameters was used for the three 
+hyperparameters from `scikit-learn`. Additionally, the same vectorizer with the default parameters was used for the three 
 models. The vectorizer used was the `TfidfVectorizer` from `scikit-learn`. 
 
 ## Training and testing models
@@ -466,7 +467,7 @@ For example, if you want to train a model for one epoch using all default values
 $ python training_and_testing/bert_base_multilingual_cased/train.py --e=1
 ```
 When the script finishes executing, the results will be saved to the `assets/bert_final_training/{specified folder name}` folder,
-where the `{specified folder name}` will be the name passed as the `--n` argument or the current datetime in case nothing was 
+where the `{specified folder name}` will be the name passed as the `--n` argument, or the current datetime in case nothing was 
 specified. 
 
 For example, for a particular datetime the directory and the model file name will look like this.
@@ -480,7 +481,7 @@ For example, for a particular datetime the directory and the model file name wil
 
 ```
 
-The testing is very similar, for this case you have execute the `training_and_testing/bert_base_multilingual_cased/test.py` 
+The testing is very similar, for this case you have to execute the `training_and_testing/bert_base_multilingual_cased/test.py` 
 script. However, this script does require some arguments indicating the location of the model to be tested. The complete 
 set of arguments that this script takes are the following ones. 
 
@@ -516,7 +517,7 @@ All models can be trained using the same `training_and_testing/train_baseline_mo
 appropriate arguments. The available arguments are the following ones. 
 
 - `--d` if this flag is specified the model will be trained using the optimal hyperparameters, otherwise the default 
-values will be used. At this point it should not be used because the optimal paramaters are not available. 
+values will be used. At this point it should not be used because the optimal parameters are not available. 
 - `--s` receives a float defining the sampling proportion. This useful for running quick tests, and it is not necessary 
   to use all the data. The default value is `1`, meaning 100% of the data.
 - `--m` receives a string, `lr` will train the logistic regression, `rf` will train the random forest and `svm` the support
@@ -555,7 +556,7 @@ $ training_and_testing/test_baseline_models.sh
 To train and test all baseline models simultaneously just execute te `training_and_testing/train_test_baseline_models.sh`
 script. 
 
-At the end of the training and testing, all results and models will be found in the `assets/` direcotry under the 
+At the end of the training and testing, all results and models will be found in the `assets/` directory under the 
 corresponding model name. For example, the results for `Logistic Regression` will be found at `assets/logistic_regression`.
 
 After each training or testing execution, all results (including AUC and Average Precision metrics as well as the trained 
@@ -568,15 +569,15 @@ models) will be saved in the `assets` folder under the corresponding model name.
 |   |-- support_vector_machine
 ```
 ## Hyperparameter optimization
-A hyperparameter optimization subroutine was set up for all models using Bayesian Optimization follwoing a 5-fold cross 
+A hyperparameter optimization subroutine was set up for all models using Bayesian Optimization following a 5-fold cross 
 validation scheme. These subroutines find optimal hyperparameters for all the models as well as the vectorizers to use 
-and the optimal parameters for those vectorizers.  Al the scripts for finding the optimal hyperparameters are under the 
-`hyperparameter_optimization directory`. There a folder for each model can be found containing a `.py` script correpsonding 
-to the hyperparameter otimization subroutine and a `.ipynb` file that should be run after the hyperparmaetr optimization 
-subroutine is finished. This latter file will display the optimal hyperparamters as well as a visualization of the gaussian 
-process for finding the optmial hyperparmaters. 
+and the optimal parameters for those vectorizers.  All the scripts for finding the optimal hyperparameters are under the 
+`hyperparameter_optimization directory`. There a folder for each model can be found containing a `.py` script corresponding 
+to the hyperparameter optimization subroutine and a `.ipynb` file that should be run after the hyperparameter optimization 
+subroutine is finished. This latter file will display the optimal hyperparameters as well as a visualization of the gaussian 
+process for finding the optimal hyperparameters. 
 
-All hyperparameter optimizations cripts follow the same naming structure `hyperparam_opt_model_name_.py` and they receive 
+All hyperparameter optimization scripts follow the same naming structure `hyperparam_opt_model_name_.py` and they receive 
 two arguments that control the Bayesian Optimization scheme. 
 - `--i` receives an integer and sets the number of steps for random exploration, defaults to `1`. 
 - `--n` receives an integer and sets the number of steps for bayesian optimization, defaults to `2`.
@@ -584,19 +585,19 @@ two arguments that control the Bayesian Optimization scheme.
 In the case of the `BERT` model only the `hyperparam_opt_bert_base_multilingual_cased.py` script has to be executed. 
 However, in the case of the baseline models the `optimize_hyperparams.sh` script has to run. 
 
-So, if you wanted to excetue the hyperparmater optimization subroutine for the `BERT` model with 20 random exploration 
-steps and 200 interatiosn of Bayesian Iptimization you should execute the following command. 
+So, if you wanted to execute the hyperparameter optimization subroutine for the `BERT` model with 20 random exploration 
+steps and 200 iterations of Bayesian Optimization you should execute the following command. 
 ```bash
 $ python hyperparameter_optimization/bert_base_multilingual_cased/hyperparam_opt_bert_base_multilingual_cased.py --i=20 --n=200
 ```
-However in the case of a baseline model, for example the  `Logistic Regression` you should execute the following script. 
+However, in the case of a baseline model, for example the  `Logistic Regression` you should execute the following script. 
 ```bash
 $ hyperparameter_optimization/logistic_regression/optimize_hyperparams.sh
 ```
-Additionally make sure you set the `--i` and `--n` flags to what you need inside this script, they are set to `--i=20` 
+Additionally, make sure you set the `--i` and `--n` flags to what you need inside this script, they are set to `--i=20` 
 and `--n=200` by default. 
 
-After the hyperparamter optimization subroutine finishes you will find a `logs` directory containing the logs from the 
+After the hyperparameter optimization subroutine finishes you will find a `logs` directory containing the logs from the 
 Bayesian Optimization process. This folder is used by the `.ipynb` file to display the optimal hyperparameters and 
 visualize the gaussian process. In the case of the logistic regression the final state of the directory will look like 
 this.
