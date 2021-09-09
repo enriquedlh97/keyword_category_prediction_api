@@ -475,7 +475,7 @@ For example, for a particular datetime the directory and the model file name wil
 |-- assets
 |   |-- bert_final_model_training
 |       |-- 2021-09-08_11-41-57.089601/
-            |-- epoch=1-val_loss=0.0123-best-checkpoint.ckpt
+|           |-- epoch=1-val_loss=0.0123-best-checkpoint.ckpt
 
 
 ```
@@ -510,7 +510,7 @@ hyperparameters.json file that specifies the specific hyperparameters used for t
 |   |-- random_forest
 |   |   |--hyperparameters.json
 |   |-- support_vector_machine
-        |--hyperparameters.json
+|       |--hyperparameters.json
 ```
 All models can be trained using the same `training_and_testing/train_baseline_model.py` script by specifying the 
 appropriate arguments. The available arguments are the following ones. 
