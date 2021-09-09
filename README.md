@@ -483,7 +483,8 @@ set of arguments that this script takes are the following ones.
 
 ### Baseline models
 The training and testing of the baseline models is very simple and follows the same procedure. 
-Within the `training_and_testing` directory, there is a folder for each of the baselien models. Each
+Within the `training_and_testing` directory, there is a folder for each of the baseline models. Each these folders contains a
+hyperparameters.json file that specifies the specific hyperparameters used for that model. 
 ```text
 /keyword_category_prediction_api
 |-- training_and_testing
@@ -491,15 +492,45 @@ Within the `training_and_testing` directory, there is a folder for each of the b
 |   |-- random_forest
 |   |-- support_vector_machine
 |       |--hyperparameters.json
-
 ```
-### Logistic Regression
+All models can be trained using the same `training_and_testing/train_baseline_model.py` script by specifying the 
+appropiate arguments. The available arguments are the following ones. 
 
-### Support Vector Machine
+- `--d` if this flag is specified the model will be trained using the optimal hyperparameters, otherwise the default 
+values will be used. At this point it should not be used because the optimal paramaters are not available. 
+- `--s` receives a float defining the sampling proportion. This useful for running quick tests, and it is not necessary 
+  to use all the data. The default value is `1`, meaning 100% of the data.
+- `--m` receives a string, `lr` will train the logistic regression, `rf` will train the random forest and `svm` the support
+  vector machine.
+- `--w` does not receive any value. If the flag is specified then all warnings will be ignored. 
 
-### Random Forest
+For example, to train the `Logistic Regression` model you can execute. 
+```bash
+$ python training_and_testing/train_baseline_model.py --m="lr"
+```
 
-### Train all baseline models
+If you want to train all models at the same time (Logistic Regression, SVM and Random Forest) execute the following command.
+```bash
+$ training_and_testing/train_baseline_models.sh
+```
+
+To test a single model once it has been trained you can do the same but this time with the `test_baseline_model.py` script. 
+```bash
+$ python training_and_testing/test_baseline_model.py --m="lr"
+```
+
+Similarly, to test all models simultaneously you can run the follwing command. 
+```bash
+$ training_and_testing/test_baseline_models.sh
+```
+
+### Train and test all baseline models
+
+To train and test all baseline models simultaneously just execute te `training_and_testing/train_test_baseline_models.sh`
+script. 
+
+At the end of the training and testing, all results and models will be found in the `assets/` direcotry under the 
+corresponding model name. For example, the results for `Logistic Regression` will be found at `assets/logistic_regression`.
 
 ## Hyperparameter optimization
 
